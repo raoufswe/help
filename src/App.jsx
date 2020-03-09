@@ -1,0 +1,54 @@
+import React from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonSpinner,
+  IonReactRouter
+} from '@ionic/react'
+import PrivateRoute from 'components/PrivateRoute'
+import Home from 'pages/Home'
+import Login from 'pages/login'
+import Registration from 'pages/registration'
+import Landing from 'pages/landing'
+import NameRegistration from 'pages/registration/customRegistration/name'
+import EmailRegistration from 'pages/registration/customRegistration/email'
+import PasswordRegistration from 'pages/registration/customRegistration/password'
+import Hooray from 'pages/registration/customRegistration/hooray'
+
+const App = () => {
+  return false ? (
+    <div
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      <IonSpinner name="circles" />
+    </div>
+  ) : (
+    <IonReactRouter>
+      <IonApp>
+        <Switch>
+          <Redirect exact from="/" to="landing" />
+          <Route path="/landing" component={Landing} />
+
+          <IonRouterOutlet>
+            <Route path="/register" component={Registration} />
+            <Route path="/registerName" component={NameRegistration} />
+            <Route path="/registerEmail" component={EmailRegistration} />
+            <Route path="/registerPassword" component={PasswordRegistration} />
+            <Route path="/hooray" component={Hooray} />
+            <Route path="/login" component={Login} />
+
+            <PrivateRoute name="home" path="/home" component={Home} />
+          </IonRouterOutlet>
+        </Switch>
+      </IonApp>
+    </IonReactRouter>
+  )
+}
+
+export default App
