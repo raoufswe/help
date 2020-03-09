@@ -29,25 +29,21 @@ const App = () => {
       <IonSpinner name="circles" />
     </div>
   ) : (
-    <IonReactRouter>
-      <IonApp>
-        <Switch>
-          <Redirect exact from="/" to="landing" />
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
           <Route path="/landing" component={Landing} />
-
-          <IonRouterOutlet>
-            <Route path="/register" component={Registration} />
-            <Route path="/registerName" component={NameRegistration} />
-            <Route path="/registerEmail" component={EmailRegistration} />
-            <Route path="/registerPassword" component={PasswordRegistration} />
-            <Route path="/hooray" component={Hooray} />
-            <Route path="/login" component={Login} />
-
-            <PrivateRoute name="home" path="/home" component={Home} />
-          </IonRouterOutlet>
-        </Switch>
-      </IonApp>
-    </IonReactRouter>
+          <Route path="/register" component={Registration} />
+          <Route path="/registerName" component={NameRegistration} />
+          <Route path="/registerEmail" component={EmailRegistration} />
+          <Route path="/registerPassword" component={PasswordRegistration} />
+          <Route path="/hooray" component={Hooray} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute name="home" path="/home" component={Home} />
+          <Redirect exact from="/" to="landing" />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
   )
 }
 
