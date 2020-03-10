@@ -3,16 +3,26 @@ import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
+import { IonToast } from '@ionic/react'
 
 const CustomRegistration = ({ history }) => {
-  const [email, setEmail] = useState({})
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState(false)
+
+  /// this should come from context
   let name = 'Raouf Fathi'
 
   const onChange = e => {
     const { value } = e.target
-    setEmail({
-      [e.target.name]: value
-    })
+    setEmail(value)
+  }
+
+  const onEmailSubmit = () => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      history.push('/registerPassword')
+    } else {
+      setError(true)
+    }
   }
 
   return (
@@ -44,7 +54,15 @@ const CustomRegistration = ({ history }) => {
           color="#2676FF"
           text="Let’s set this up"
           className="register-button"
-          onClick={() => history.push('/registerPassword')}
+          onClick={onEmailSubmit}
+        />
+
+        <IonToast
+          isOpen={error}
+          onDidDismiss={() => setError(false)}
+          message="this does not look like a valid email!"
+          color="danger"
+          duration={1000}
         />
       </div>
     </Styled>

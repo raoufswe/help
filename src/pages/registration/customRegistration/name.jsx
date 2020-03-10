@@ -3,15 +3,25 @@ import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
+import { IonToast } from '@ionic/react'
 
 const CustomRegistration = ({ history }) => {
-  const [name, setName] = useState({})
+  const [fullName, setFullName] = useState('')
+  const [error, setError] = useState(false)
 
   const onChange = e => {
     const { value } = e.target
-    setName({
+    setFullName({
       [e.target.name]: value
     })
+  }
+
+  const onNameSubmit = () => {
+    if (fullName?.name?.length >= 6) {
+      history.push('/registerEmail')
+    } else {
+      setError(true)
+    }
   }
 
   return (
@@ -41,9 +51,17 @@ const CustomRegistration = ({ history }) => {
           color="#2676FF"
           text="Yes, that's me"
           className="register-button"
-          onClick={() => history.push('/registerEmail')}
+          onClick={onNameSubmit}
         />
       </div>
+
+      <IonToast
+        isOpen={error}
+        onDidDismiss={() => setError(false)}
+        message="Name must not be empty and have at least 6 letters"
+        color="danger"
+        duration={1000}
+      />
     </Styled>
   )
 }

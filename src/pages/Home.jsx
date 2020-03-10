@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Home = ({ history }) => {
-  return <div>hi</div>
+  return <div>STILL BAKING!!!!</div>
 }
 
 export default Home

@@ -10,14 +10,20 @@ const StyledButton = styled.button`
   font-weight: 500;
   font-size: 24px;
   min-height: 60px;
-  color: #ffffff;
+  color: ${props => props.textColor};
   padding: 10px;
   width: 100%;
+  outline: none;
 `
 
-const Button = ({ color, text, onClick, ...props }) => {
+const Button = ({ color, text, textColor = '#ffff', onClick, ...props }) => {
   return (
-    <StyledButton color={color} onClick={onClick} {...props}>
+    <StyledButton
+      color={color}
+      onClick={onClick}
+      textColor={textColor}
+      {...props}
+    >
       {text}
     </StyledButton>
   )

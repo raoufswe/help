@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import {
   IonApp,
   IonRouterOutlet,
@@ -40,8 +40,8 @@ const App = () => {
           <Route path="/hooray" component={Hooray} />
           <Route path="/login" component={Login} />
           <PrivateRoute name="home" path="/home" component={Home} />
-          <Redirect exact from="/" to="landing" />
         </IonRouterOutlet>
+        <Redirect exact from="/" to="landing" />
       </IonReactRouter>
     </IonApp>
   )

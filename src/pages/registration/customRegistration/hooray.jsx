@@ -1,39 +1,42 @@
 import React, { useState } from 'react'
-import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
+import styled from 'styled-components'
+const Styled = styled.div`
+  background: #2f75ff;
+  height: 100vh;
+  width: 100vw;
+  padding: 70px 40px;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-family: Fira Sans;
+    font-weight: 600;
+    font-size: 36px;
+    color: #ffffff;
+  }
+
+  .register-button {
+    margin-top: auto;
+  }
+`
 
 const CustomRegistration = ({ history }) => {
   return (
     <Styled>
-      <div className="registration-container">
-        <div
-          className="registration-back"
-          onClick={() => history.push('/landing')}
-        >
-          <LeftArrow />
-        </div>
+      <p>Hooray!! You’re secured and done setting up.</p>
+      <p> Step into a digital space of peace and positivity.</p>
+      <p>Don’t hesitate to explore the app.</p>
 
-        <main>
-          <div className="registration-top-text">
-            Hi, We're Help. What can we call you?
-          </div>
-          <input
-            type="text"
-            className="register-name-input"
-            // onChange={onChange}
-            name="name"
-            placeholder="Your Name"
-          />
-        </main>
-
-        <Button
-          color="#2676FF"
-          text="Yes, that's me"
-          className="register-name-button"
-        />
-      </div>
+      <Button
+        color="white"
+        text="Explore "
+        textColor="#2676FF"
+        className="register-button"
+        onClick={() => history.push('/home')}
+      />
     </Styled>
   )
 }

@@ -3,9 +3,11 @@ import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
+import { IonToast } from '@ionic/react'
 
 const CustomRegistration = ({ history }) => {
-  const [password, setPassword] = useState({})
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
 
   //   const registerUser = userInfo => {
   //     console.log('in registerUser')
@@ -40,9 +42,15 @@ const CustomRegistration = ({ history }) => {
 
   const onChange = e => {
     const { value } = e.target
-    setPassword({
-      [e.target.name]: value
-    })
+    setPassword(value)
+  }
+
+  const onPasswordSubmit = () => {
+    if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)) {
+      history.push('/hooray')
+    } else {
+      setError(true)
+    }
   }
 
   return (
@@ -66,16 +74,17 @@ const CustomRegistration = ({ history }) => {
             name="password"
             placeholder="*******"
           />
-
+          Must contain at least one number and one uppercase and lowercase
+          letter, and at least 8 or more characters
           <div className="password-rules">
             <div>
-              <span className="dot"></span>Use at least 8 characters
+              <span className="dot"></span>Use at least eight characters
             </div>
             <div>
-              <span className="dot"></span>Use at least 8 characters
+              <span className="dot"></span>Use at least one uppercase
             </div>
             <div>
-              <span className="dot"></span>Use at least 8 characters
+              <span className="dot"></span>Use at least one lowercase
             </div>
           </div>
         </main>
@@ -84,7 +93,15 @@ const CustomRegistration = ({ history }) => {
           color="#2676FF"
           text="Let’s keep it secure"
           className="register-button"
-          onClick={() => history.push('/hooray')}
+          onClick={onPasswordSubmit}
+        />
+
+        <IonToast
+          isOpen={error}
+          onDidDismiss={() => setError(false)}
+          message="make sure to fulfil our password policy :D"
+          color="danger"
+          duration={1000}
         />
       </div>
     </Styled>
