@@ -1,44 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
 import { IonToast } from '@ionic/react'
+import { Context } from '../../../context'
 
 const CustomRegistration = ({ history }) => {
+  const [globalContext, setGlobalContext] = useContext(Context)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
 
-  //   const registerUser = userInfo => {
-  //     console.log('in registerUser')
-  //     try {
-  //       return firebase
-  //         .auth()
-  //         .createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-  //         .then(newUser => {
-  //           const { email, firstName, lastName } = userInfo
-
-  //           return firebase
-  //             .firestore()
-  //             .collection('users')
-  //             .doc(newUser.user.uid)
-  //             .set({
-  //               email,
-  //               firstName,
-  //               lastName
-  //             })
-  //             .then(() => {
-  //               return { ...newUser, firstName, lastName }
-  //             })
-  //         })
-  //         .catch(error => {
-  //           setError(() => ({ showErrorToast: true, message: error.message }))
-  //         })
-  //     } catch (error) {
-  //       console.log(error)
-  //       setError(() => ({ showErrorToast: true, message: error.message }))
-  //     }
-  //   }
+  console.log({ globalContext })
 
   const onChange = e => {
     const { value } = e.target
@@ -47,6 +20,15 @@ const CustomRegistration = ({ history }) => {
 
   const onPasswordSubmit = () => {
     if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)) {
+      setGlobalContext(prevContext => {
+        return {
+          ...prevContext,
+          registerAccountDetails: {
+            ...prevContext.registerAccountDetails,
+            password
+          }
+        }
+      })
       history.push('/hooray')
     } else {
       setError(true)
@@ -74,8 +56,7 @@ const CustomRegistration = ({ history }) => {
             name="password"
             placeholder="*******"
           />
-          Must contain at least one number and one uppercase and lowercase
-          letter, and at least 8 or more characters
+
           <div className="password-rules">
             <div>
               <span className="dot"></span>Use at least eight characters

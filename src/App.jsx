@@ -6,6 +6,7 @@ import {
   IonSpinner,
   IonReactRouter
 } from '@ionic/react'
+import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Home from 'pages/Home'
 import Login from 'pages/login'
@@ -31,16 +32,19 @@ const App = () => {
   ) : (
     <IonApp>
       <IonReactRouter>
-        <IonRouterOutlet>
-          <Route path="/landing" component={Landing} />
-          <Route path="/register" component={Registration} />
-          <Route path="/registerName" component={NameRegistration} />
-          <Route path="/registerEmail" component={EmailRegistration} />
-          <Route path="/registerPassword" component={PasswordRegistration} />
-          <Route path="/hooray" component={Hooray} />
-          <Route path="/login" component={Login} />
-          <PrivateRoute name="home" path="/home" component={Home} />
-        </IonRouterOutlet>
+        <Provider>
+          <IonRouterOutlet>
+            <Route path="/landing" component={Landing} />
+            <Route path="/register" component={Registration} />
+            <Route path="/registerName" component={NameRegistration} />
+            <Route path="/registerEmail" component={EmailRegistration} />
+            <Route path="/registerPassword" component={PasswordRegistration} />
+            <Route path="/hooray" component={Hooray} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute name="home" path="/home" component={Home} />
+          </IonRouterOutlet>
+        </Provider>
+
         <Redirect exact from="/" to="landing" />
       </IonReactRouter>
     </IonApp>

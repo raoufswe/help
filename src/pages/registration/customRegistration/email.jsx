@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
 import { IonToast } from '@ionic/react'
+import { Context } from '../../../context'
 
 const CustomRegistration = ({ history }) => {
+  const [globalContext, setGlobalContext] = useContext(Context)
   const [email, setEmail] = useState('')
   const [error, setError] = useState(false)
-
-  /// this should come from context
-  let name = 'Raouf Fathi'
 
   const onChange = e => {
     const { value } = e.target
@@ -19,6 +18,15 @@ const CustomRegistration = ({ history }) => {
 
   const onEmailSubmit = () => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setGlobalContext(prevContext => {
+        return {
+          ...prevContext,
+          registerAccountDetails: {
+            ...prevContext.registerAccountDetails,
+            email
+          }
+        }
+      })
       history.push('/registerPassword')
     } else {
       setError(true)
@@ -38,8 +46,11 @@ const CustomRegistration = ({ history }) => {
         <main>
           <div className="registration-top-text">
             That’s a nice name,
-            <span className="registration-name">{name}</span>. Let’s set up your
-            email.
+            <span className="registration-name">
+              &nbsp;
+              {globalContext.registerAccountDetails.fullName}
+            </span>
+            . Let’s set up your email.
           </div>
           <input
             type="text"

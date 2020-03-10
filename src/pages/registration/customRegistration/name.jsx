@@ -1,23 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { Redirect } from 'react-router-dom'
 import { IonToast } from '@ionic/react'
+import { Context } from '../../../context'
 
 const CustomRegistration = ({ history }) => {
+  const [globalContext, setGlobalContext] = useContext(Context)
   const [fullName, setFullName] = useState('')
   const [error, setError] = useState(false)
 
   const onChange = e => {
     const { value } = e.target
-    setFullName({
-      [e.target.name]: value
-    })
+    setFullName(value)
   }
 
   const onNameSubmit = () => {
-    if (fullName?.name?.length >= 6) {
+    if (fullName?.length >= 6) {
+      setGlobalContext(prevContext => {
+        return {
+          ...prevContext,
+          registerAccountDetails: {
+            ...prevContext.registerAccountDetails,
+            fullName
+          }
+        }
+      })
       history.push('/registerEmail')
     } else {
       setError(true)
