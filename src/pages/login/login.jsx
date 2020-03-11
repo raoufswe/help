@@ -8,6 +8,7 @@ import { Redirect } from 'react-router-dom'
 import * as firebaseService from 'server/firebaseService'
 import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
+import Button from 'components/button.jsx'
 
 const Login = (
   {
@@ -40,81 +41,76 @@ const Login = (
     })
   }
 
-  const currentUser = firebaseService.getCurrentUser()
-  if (currentUser) {
-    return <Redirect to="/home" />
-  } else {
-    return (
-      <Styled>
-        <div className="login-container">
-          <div className="login-header">
-            <span
-              className="login-back"
-              onClick={() => history.push('/landing')}
-            >
-              <LeftArrow />
-            </span>
-            <span className="login-title">Login</span>
-          </div>
-          <div className="login-inputs">
-            <label className="login-label">Email Address</label>
-            <input
-              type="email"
-              onChange={onChange}
-              name="email"
-              className="login-input"
-            />
+  return (
+    <Styled>
+      <div className="login-container">
+        <div className="login-back" onClick={() => history.push('/landing')}>
+          <LeftArrow />
+        </div>
 
-            <label className="login-label login-password-label">Password</label>
-            <input
-              type="password"
-              className="login-input"
-              onChange={onChange}
-              name="password"
-            />
+        <main>
+          <div className="login-top-text">Let’s sign you in. </div>
+          <input
+            type="text"
+            className="login-input"
+            onChange={onChange}
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            type="text"
+            className="login-input"
+            onChange={onChange}
+            name="password"
+            placeholder="Password"
+          />
 
-            <button
-              className="login-button"
-              onClick={e => {
-                if (!e.currentTarget) {
-                  return
-                }
-                e.preventDefault()
-                signInWithEmailAndPassword(user.email, user.password)
-              }}
-            >
-              Login
-            </button>
+          <Button
+            className="login-button"
+            onClick={e => {
+              if (!e.currentTarget) {
+                return
+              }
+              e.preventDefault()
+              signInWithEmailAndPassword(user.email, user.password)
+            }}
+            color="#2676FF"
+            text="Sign me in"
+          />
+          <span className="login-or">Or</span>
+        </main>
 
-            <span className="login-or">Or</span>
-          </div>
-
-          <div className="login-methods">
-            <button
-              className="login-button login-google"
-              onClick={signInWithGoogle}
-            >
-              Google
-            </button>
-            <button
-              className="login-button login-facebook"
-              onClick={signInWithFacebook}
-            >
-              Facebook
-            </button>
-          </div>
-
-          <IonToast
-            color="danger"
-            isOpen={Error.showErrorToast}
-            onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
-            message={Error.message}
-            duration={2000}
+        <div className="login-methods">
+          <Button
+            className="login-method"
+            color="#EA4335"
+            text="Google"
+            onClick={signInWithGoogle}
+          />
+          <Button
+            className="login-method"
+            color="#2676FF"
+            text="Facebook"
+            onClick={signInWithFacebook}
+          />
+          <Button
+            className="login-method"
+            onClick={signInWithFacebook}
+            color="#000000"
+            text="Apple"
           />
         </div>
-      </Styled>
-    )
-  }
+
+        <IonToast
+          color="danger"
+          isOpen={Error.showErrorToast}
+          onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
+          message={Error.message}
+          duration={2000}
+        />
+      </div>
+    </Styled>
+  )
 }
 
 export default withFirebaseAuth({
