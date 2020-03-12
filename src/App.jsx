@@ -8,7 +8,7 @@ import {
 } from '@ionic/react'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
-import Home from 'pages/Home'
+import Home from 'pages/home'
 import Login from 'pages/login'
 import Registration from 'pages/registration'
 import Landing from 'pages/landing'
