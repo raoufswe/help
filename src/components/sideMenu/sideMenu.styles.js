@@ -5,6 +5,10 @@ const Styled = styled.div`
 
   .burger-icon {
     padding: 20px;
+    svg {
+      width: 35px;
+      height: 35px;
+    }
   }
 
   .side-menu {
@@ -23,6 +27,7 @@ const Styled = styled.div`
     transform: ${({ isOpen }) =>
       isOpen ? 'translateX(0)' : 'translateX(-100%)'};
   }
+
 
   .close-side-menu {
     align-self: flex-end;
@@ -51,7 +56,6 @@ const Styled = styled.div`
           margin-right: 20px;
         }
       }
-
 `
 
 export default Styled
