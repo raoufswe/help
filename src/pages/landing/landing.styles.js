@@ -23,7 +23,7 @@ const StyledLanding = styled.div`
       font-weight: 500;
       font-size: 24px;
       color: #b5b5b5;
-      padding-top: 20px;
+      padding-top: 30px;
     }
   }
 

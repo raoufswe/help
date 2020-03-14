@@ -8,7 +8,7 @@ import {
 } from '@ionic/react'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
-import Home from 'pages/home'
+import Dashboard from 'pages/dashboard'
 import Login from 'pages/login'
 import Registration from 'pages/registration'
 import Landing from 'pages/landing'
@@ -16,6 +16,7 @@ import NameRegistration from 'pages/registration/customRegistration/name'
 import EmailRegistration from 'pages/registration/customRegistration/email'
 import PasswordRegistration from 'pages/registration/customRegistration/password'
 import Hooray from 'pages/registration/customRegistration/hooray'
+import FAQ from 'pages/FAQ'
 
 const App = () => {
   return false ? (
@@ -41,7 +42,12 @@ const App = () => {
             <Route path="/registerPassword" component={PasswordRegistration} />
             <Route path="/hooray" component={Hooray} />
             <Route path="/login" component={Login} />
-            <PrivateRoute name="home" path="/home" component={Home} />
+            <PrivateRoute
+              name="dashboard"
+              path="/dashboard"
+              component={Dashboard}
+            />
+            <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} />
           </IonRouterOutlet>
         </Provider>
 

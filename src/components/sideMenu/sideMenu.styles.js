@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Styled = styled.div`
-  padding: 20px;
+  padding: 10px;
 
   .burger-icon {
     padding: 20px;

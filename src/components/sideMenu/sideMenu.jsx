@@ -58,7 +58,7 @@ export default function sideMenu({ isOpen, onClick }) {
 
               <div className="nav-item">
                 <NavIcon />
-                <NavLink to="/faq" exact>
+                <NavLink to="/FAQ" exact>
                   FAQ
                 </NavLink>
               </div>
