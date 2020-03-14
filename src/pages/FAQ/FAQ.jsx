@@ -1,6 +1,5 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { StyledFAQ } from './FAQ.styles'
-import SideMenu from 'components/sideMenu/sideMenu.jsx'
 import Question from './question'
 import { Questions } from './utils'
 

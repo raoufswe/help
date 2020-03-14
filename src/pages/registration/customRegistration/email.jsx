@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
-import { Redirect } from 'react-router-dom'
 import { IonToast } from '@ionic/react'
 import { Context } from '../../../context'
 

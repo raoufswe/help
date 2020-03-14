@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import LeftArrow from 'assets/left-arrow.icon'
+import React from 'react'
 import Button from 'components/button.jsx'
-import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
+
 const Styled = styled.div`
   background: #2f75ff;
   height: 100vh;
@@ -16,6 +15,8 @@ const Styled = styled.div`
     font-weight: 600;
     font-size: 36px;
     color: #ffffff;
+    margin-bottom: 30px;
+    line-height: 1.4;
   }
 
   .register-button {
@@ -35,7 +36,7 @@ const CustomRegistration = ({ history }) => {
         text="Explore "
         textColor="#2676FF"
         className="register-button"
-        onClick={() => history.push('/home')}
+        onClick={() => history.push('/dashboard')}
       />
     </Styled>
   )

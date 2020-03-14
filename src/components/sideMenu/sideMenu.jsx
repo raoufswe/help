@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import Styled from './sideMenu.styles'
 import BurgerIcon from 'assets/burger.icon.jsx'
 import CrossIcon from 'assets/cross.icon.jsx'
 import { NavLink } from 'react-router-dom'
 import NavIcon from 'assets/nav.icon.jsx'
-import Backdrop from 'components/backdrop.jsx'
 
-export default function sideMenu({ isOpen, onClick }) {
+function SideMenu({ isOpen, onClick }) {
+  const ref = useRef(null)
+  function handleClickOutside(event) {
+    if (ref.current && !ref.current.contains(event.target)) {
+      onClick()
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  })
+
   return (
     <Styled isOpen={isOpen}>
       <button className="burger-icon" onClick={onClick}>
@@ -15,7 +27,7 @@ export default function sideMenu({ isOpen, onClick }) {
 
       <div className="side-menu">
         {isOpen && (
-          <>
+          <div className="side-menu-content" ref={ref}>
             <button className="close-side-menu" onClick={onClick}>
               <CrossIcon />
             </button>
@@ -70,10 +82,12 @@ export default function sideMenu({ isOpen, onClick }) {
                 </NavLink>
               </div>
             </div>
-            <Backdrop container={'body'} onClick={onClick} />
-          </>
+            {/* <Backdrop container={'body'} onClick={onClick} /> */}
+          </div>
         )}
       </div>
     </Styled>
   )
 }
+
+export default SideMenu

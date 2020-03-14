@@ -1,11 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import {
-  IonApp,
-  IonRouterOutlet,
-  IonSpinner,
-  IonReactRouter
-} from '@ionic/react'
+import { IonApp, IonRouterOutlet, IonReactRouter } from '@ionic/react'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Dashboard from 'pages/dashboard'
@@ -19,39 +14,31 @@ import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
 
 const App = () => {
-  return false ? (
-    <div
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      <IonSpinner name="circles" />
-    </div>
-  ) : (
+  return (
     <IonApp>
       <IonReactRouter>
         <Provider>
           <IonRouterOutlet>
-            <Route path="/landing" component={Landing} />
-            <Route path="/register" component={Registration} />
-            <Route path="/registerName" component={NameRegistration} />
-            <Route path="/registerEmail" component={EmailRegistration} />
-            <Route path="/registerPassword" component={PasswordRegistration} />
-            <Route path="/hooray" component={Hooray} />
-            <Route path="/login" component={Login} />
+            <Route path="/" exact component={Landing} />
+            <Route path="/register" exact component={Registration} />
+            <Route path="/registerName" exact component={NameRegistration} />
+            <Route path="/registerEmail" exact component={EmailRegistration} />
+            <Route
+              path="/registerPassword"
+              exact
+              component={PasswordRegistration}
+            />
+            <Route path="/hooray" exact component={Hooray} />
+            <Route path="/login" exact component={Login} />
             <PrivateRoute
               name="dashboard"
               path="/dashboard"
               component={Dashboard}
+              exact
             />
-            <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} />
+            <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />
           </IonRouterOutlet>
         </Provider>
-
-        <Redirect exact from="/" to="landing" />
       </IonReactRouter>
     </IonApp>
   )

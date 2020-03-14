@@ -28,9 +28,14 @@ const Styled = styled.div`
       isOpen ? 'translateX(0)' : 'translateX(-100%)'};
   }
 
+  .side-menu-content {
+    display: flex;
+    flex-direction: column;
+  }
+
 
   .close-side-menu {
-    align-self: flex-end;
+    margin-left: auto;
     margin-bottom: 60px;
     svg {
     width: 31px;
