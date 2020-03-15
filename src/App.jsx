@@ -12,6 +12,7 @@ import EmailRegistration from 'pages/registration/customRegistration/email'
 import PasswordRegistration from 'pages/registration/customRegistration/password'
 import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
+import Hospitals from 'pages/hospitals'
 
 const App = () => {
   return (
@@ -36,6 +37,13 @@ const App = () => {
               component={Dashboard}
               exact
             />
+            <PrivateRoute
+              name="Hospitals"
+              path="/hospitals"
+              component={Hospitals}
+              exact
+            />
+
             <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />
           </IonRouterOutlet>
         </Provider>

@@ -16,8 +16,9 @@ const Home = ({ history }) => {
   return (
     <StyledFAQ>
       <h3 className="page-title">FAQ</h3>
-      {Questions.map(({ id, title, subtitle, content }) => (
+      {Questions.map(({ id, title, subtitle, content }, key) => (
         <Question
+          key={key}
           id={id}
           title={title}
           subtitle={subtitle}

@@ -77,7 +77,7 @@ function SideMenu({ isOpen, onClick }) {
 
               <div className="nav-item">
                 <NavIcon />
-                <NavLink to="/hospitalsInfo" exact>
+                <NavLink to="/hospitals" exact>
                   Hospitals info
                 </NavLink>
               </div>
