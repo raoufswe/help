@@ -5,7 +5,7 @@ import CrossIcon from 'assets/cross.icon.jsx'
 import { NavLink } from 'react-router-dom'
 import NavIcon from 'assets/nav.icon.jsx'
 
-function SideMenu({ isOpen, onClick }) {
+function SideMenu({ isOpen, onClick, addPage }) {
   const ref = useRef(null)
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {
@@ -21,9 +21,11 @@ function SideMenu({ isOpen, onClick }) {
 
   return (
     <Styled isOpen={isOpen}>
-      <button className="burger-icon" onClick={onClick}>
-        <BurgerIcon />
-      </button>
+      {!addPage && (
+        <button className="burger-icon" onClick={onClick}>
+          <BurgerIcon />
+        </button>
+      )}
 
       <div className="side-menu">
         {isOpen && (

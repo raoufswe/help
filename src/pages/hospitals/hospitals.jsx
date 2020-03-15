@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StyledHospitals } from './hospitals.styles'
 import { HospitalsInfo } from './utils'
 import Hospital from './hospital'

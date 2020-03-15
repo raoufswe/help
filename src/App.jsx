@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet, IonReactRouter } from '@ionic/react'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
@@ -13,6 +13,8 @@ import PasswordRegistration from 'pages/registration/customRegistration/password
 import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
 import Hospitals from 'pages/hospitals'
+import Grateful from 'pages/grateful'
+import AddGratefulThing from 'pages/grateful/addGratefulThing'
 
 const App = () => {
   return (
@@ -43,7 +45,18 @@ const App = () => {
               component={Hospitals}
               exact
             />
-
+            <PrivateRoute
+              name="Grateful"
+              path="/grateful"
+              component={Grateful}
+              exact
+            />
+            <PrivateRoute
+              name="AddGratefulThing"
+              path="/addGratefulThing"
+              component={AddGratefulThing}
+              exact
+            />
             <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />
           </IonRouterOutlet>
         </Provider>

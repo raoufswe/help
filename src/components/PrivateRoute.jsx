@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, useRouteMatch } from 'react-router-dom'
 import SideMenu from 'components/sideMenu/sideMenu.jsx'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  let addGratefulThingPage = useRouteMatch('/addGratefulThing')
   const [isOpen, setOpen] = useState(false)
 
   const onClick = () => {
@@ -16,7 +17,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={props =>
         active ? (
           <>
-            <SideMenu isOpen={isOpen} onClick={onClick} />
+            <SideMenu
+              isOpen={isOpen}
+              onClick={onClick}
+              addPage={addGratefulThingPage}
+            />
             <Component {...props} />
           </>
         ) : (
