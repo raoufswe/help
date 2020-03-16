@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 
 const Styled = styled.div`
-  padding: 10px;
+  .header {
+    padding: 10px;
+    }
 
   .burger-icon {
     padding: 20px;
     svg {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
     }
   }
 

@@ -12,7 +12,6 @@ const Home = ({ history }) => {
       [id]: !isOpen
     })
   }
-  console.log(openQuestion)
   return (
     <StyledFAQ>
       <h3 className="page-title">FAQ</h3>

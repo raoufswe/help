@@ -3,7 +3,10 @@ import { Route, Redirect, useRouteMatch } from 'react-router-dom'
 import SideMenu from 'components/sideMenu/sideMenu.jsx'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  let addGratefulThingPage = useRouteMatch('/addGratefulThing')
+  const addGratefulThingPage = useRouteMatch('/addGratefulThing')
+  const JournalingPage = useRouteMatch('/journaling')
+  const addJournalPage = useRouteMatch('/addJournal')
+
   const [isOpen, setOpen] = useState(false)
 
   const onClick = () => {
@@ -20,7 +23,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <SideMenu
               isOpen={isOpen}
               onClick={onClick}
-              addPage={addGratefulThingPage}
+              hide={addGratefulThingPage || JournalingPage || addJournalPage}
             />
             <Component {...props} />
           </>

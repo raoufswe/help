@@ -5,7 +5,6 @@ import TextareaAutosize from 'react-autosize-textarea'
 
 export default function AddGratefulThing({ history }) {
   const [gratefulThing, setGratefulThing] = useState({})
-  console.log(gratefulThing)
 
   const onChange = e => {
     const { value } = e.target
@@ -33,7 +32,6 @@ export default function AddGratefulThing({ history }) {
       />
 
       <TextareaAutosize
-        rows={2}
         name="content"
         placeholder="Something important to you"
         className="grateful-input"
