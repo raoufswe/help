@@ -60,8 +60,8 @@ function SideMenu({ isOpen, onClick, hide }) {
 
               <div className="nav-item">
                 <NavIcon />
-                <NavLink to="/todo" exact>
-                  My to-do list
+                <NavLink to="/tasks" exact>
+                  My Tasks
                 </NavLink>
               </div>
 

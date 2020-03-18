@@ -17,6 +17,8 @@ import Grateful from 'pages/grateful'
 import AddGratefulThing from 'pages/grateful/addGratefulThing'
 import Journaling from 'pages/journaling'
 import AddJournal from 'pages/journaling/addJournal'
+import Tasks from 'pages/tasks'
+import AddTask from 'pages/tasks/addTask'
 
 const App = () => {
   return (
@@ -69,6 +71,13 @@ const App = () => {
               name="AddGratefulThing"
               path="/addGratefulThing"
               component={AddGratefulThing}
+              exact
+            />
+            <PrivateRoute name="Tasks" path="/tasks" component={Tasks} exact />
+            <PrivateRoute
+              name="Tasks"
+              path="/addTask"
+              component={AddTask}
               exact
             />
             <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />

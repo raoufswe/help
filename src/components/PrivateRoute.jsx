@@ -6,6 +6,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const addGratefulThingPage = useRouteMatch('/addGratefulThing')
   const JournalingPage = useRouteMatch('/journaling')
   const addJournalPage = useRouteMatch('/addJournal')
+  const addTaskPage = useRouteMatch('/addTask')
 
   const [isOpen, setOpen] = useState(false)
 
@@ -23,7 +24,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <SideMenu
               isOpen={isOpen}
               onClick={onClick}
-              hide={addGratefulThingPage || JournalingPage || addJournalPage}
+              hide={
+                addGratefulThingPage ||
+                JournalingPage ||
+                addJournalPage ||
+                addTaskPage
+              }
             />
             <Component {...props} />
           </>
