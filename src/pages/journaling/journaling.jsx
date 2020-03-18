@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyledJournaling } from './journaling.styles'
 import SideMenu from 'components/sideMenu'
 import Journal from './journal'
-import { Journals } from './utils'
+import { Journals } from '__mocks__/journals.js'
 import Add from 'components/add.jsx'
 
 const Journaling = ({ history }) => {

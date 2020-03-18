@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledGrateful } from './grateful.styles'
 import GratefulThing from './gratefulThing'
-import { GratefulThings } from './utils'
+import { GratefulThings } from '__mocks__/grateful.js'
 import Add from 'components/add.jsx'
 
 export default function Grateful({ history }) {
@@ -13,8 +13,8 @@ export default function Grateful({ history }) {
         have them.
       </span>
       <main>
-        {GratefulThings.map(({ title, content }) => (
-          <GratefulThing title={title} content={content} />
+        {GratefulThings.map(({ title, content }, key) => (
+          <GratefulThing key={key} title={title} content={content} />
         ))}
       </main>
       <Add onClick={() => history.push('/addGratefulThing')} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledHospitals } from './hospitals.styles'
-import { HospitalsInfo } from './utils'
+import { HospitalsInfo } from '__mocks__/hospitals.js'
 import Hospital from './hospital'
 
 const Hospitals = ({ history }) => {

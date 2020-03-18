@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { StyledFAQ } from './FAQ.styles'
 import Question from './question'
-import { Questions } from './utils'
+import { Questions } from '__mocks__/FAQ.js'
 
-const Home = ({ history }) => {
+const FAQ = ({ history }) => {
   const [openQuestion, setOpenQuestion] = useState({})
 
   const onClick = id => {
@@ -30,4 +30,4 @@ const Home = ({ history }) => {
   )
 }
 
-export default Home
+export default FAQ

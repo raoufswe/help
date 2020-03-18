@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyledAddJournal } from './journaling.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
-import { getDate, getTime } from './utils'
+import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
 
 export default function AddJournal({ history }) {
   const [journal, setJournal] = useState({})
