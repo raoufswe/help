@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HospitalLocation(props) {
+function HospitalLocationIcon(props) {
   return (
     <svg width="1rem" height="1rem" viewBox="0 0 19 20" fill="none" {...props}>
       <path
@@ -11,4 +11,4 @@ function HospitalLocation(props) {
   )
 }
 
-export default HospitalLocation
+export default HospitalLocationIcon

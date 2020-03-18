@@ -20,7 +20,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={props =>
         active ? (
-          <>
+          <div style={{ height: '100%', ...rest.style }}>
             <SideMenu
               isOpen={isOpen}
               onClick={onClick}
@@ -32,7 +32,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
               }
             />
             <Component {...props} />
-          </>
+          </div>
         ) : (
           <Redirect
             to={{ pathname: '/landing', state: { from: props.location } }}

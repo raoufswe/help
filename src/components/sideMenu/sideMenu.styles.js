@@ -3,6 +3,8 @@ import styled from 'styled-components'
 const Styled = styled.div`
   .header {
     padding: 10px;
+    background: transparent;
+
     }
 
   .burger-icon {

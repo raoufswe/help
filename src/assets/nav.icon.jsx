@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SvgComponent(props) {
+function NavIcon(props) {
   return (
     <svg width={31} height={31} viewBox="0 0 31 31" fill="none" {...props}>
       <path fill="url(#prefix__pattern0)" d="M0 0h31v31H0z" />
@@ -24,4 +24,4 @@ function SvgComponent(props) {
   )
 }
 
-export default SvgComponent
+export default NavIcon

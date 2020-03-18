@@ -38,6 +38,7 @@ const App = () => {
             <Route path="/hooray" exact component={Hooray} />
             <Route path="/login" exact component={Login} />
             <PrivateRoute
+              style={{ background: '#F5F5FA' }}
               name="dashboard"
               path="/dashboard"
               component={Dashboard}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledHospital } from './hospitals.styles'
-import MedicalCross from 'assets/medial-cross.jsx'
-import HospitalLocation from 'assets/hospital-location.jsx'
+import MedicalCross from 'assets/medial-cross.icon.jsx'
+import HospitalLocation from 'assets/hospital-location.icon.jsx'
 
 export default function hospital({ name, tel }) {
   return (
