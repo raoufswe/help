@@ -1,5 +1,7 @@
 {
   "name": "heh",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

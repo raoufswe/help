@@ -25,10 +25,7 @@ const Registration = (
     return (
       <Styled>
         <div className="registration-container">
-          <div
-            className="registration-back"
-            onClick={() => history.push('/landing')}
-          >
+          <div className="registration-back" onClick={() => history.push('/')}>
             <LeftArrow />
           </div>
 

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@capacitor/cli": "^1.5.1",
-    "@capacitor/core": "^1.5.1",
+    "@capacitor/android": "^1.5.1",
+    "@capacitor/core": "1.5.1",
     "@capacitor/ios": "^1.5.1",
     "@firebase/app-types": "^0.5.3",
     "@firebase/util": "^0.2.42",
@@ -44,6 +44,7 @@
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
+    "@capacitor/cli": "1.5.1",
     "@cospired/eslint-config-react": "^3.1.0",
     "@hapi/eslint-plugin-hapi": "^4.3.5",
     "babel-loader": "^8.0.6",
