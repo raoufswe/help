@@ -37,56 +37,48 @@ function SideMenu({ isOpen, onClick, hide }) {
             </button>
 
             <div className="dc-nav-items">
-              <div className="nav-item">
-                <NavIcon />
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/dashboard" exact>
+                  <NavIcon />
                   Dashboard
                 </NavLink>
               </div>
 
-              <div className="nav-item">
-                <NavIcon />
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/journaling" exact>
+                  <NavIcon />
                   Journaling
                 </NavLink>
               </div>
 
-              <div className="nav-item">
-                <NavIcon />
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/grateful" exact>
+                  <NavIcon />
                   Things grateful for
                 </NavLink>
               </div>
 
-              <div className="nav-item">
-                <NavIcon />
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/tasks" exact>
+                  <NavIcon />
                   My Tasks
                 </NavLink>
               </div>
 
-              <div className="nav-item">
-                <NavIcon />
-                <NavLink to="/exercises" exact>
-                  Exercises
-                </NavLink>
-              </div>
-
-              <div className="nav-item">
-                <NavIcon />
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/FAQ" exact>
+                  <NavIcon />
                   FAQ
                 </NavLink>
               </div>
 
-              <div className="nav-item">
-                <NavIcon />
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/hospitals" exact>
+                  <NavIcon />
                   Hospitals info
                 </NavLink>
               </div>
             </div>
-            {/* <Backdrop container={'body'} onClick={onClick} /> */}
           </div>
         )}
       </div>

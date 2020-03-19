@@ -1,7 +1,6 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet } from '@ionic/react'
-import { IonReactRouter } from '@ionic/react-router'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Dashboard from 'pages/dashboard'
@@ -24,7 +23,7 @@ import AddTask from 'pages/tasks/addTask'
 const App = () => {
   return (
     <IonApp>
-      <IonReactRouter>
+      <Router>
         <Provider>
           <IonRouterOutlet>
             <Route path="/" exact component={Landing} />
@@ -85,7 +84,7 @@ const App = () => {
             <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />
           </IonRouterOutlet>
         </Provider>
-      </IonReactRouter>
+      </Router>
     </IonApp>
   )
 }
