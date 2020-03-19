@@ -9,6 +9,7 @@
     "@firebase/app-types": "^0.5.3",
     "@firebase/util": "^0.2.42",
     "@ionic/react": "^5.0.5",
+    "@ionic/react-router": "^5.0.5",
     "firebase": "^7.11.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
