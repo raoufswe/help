@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Styled from './dashboard.styles'
 import Greeting from 'components/greeting.jsx'
 import Feeling from 'components/feeling.jsx'
 import OverviewBars from 'components/overviewBars'
 import { bars } from '__mocks__/bars.js'
+import { Context } from 'context'
 
 const Dashboard = ({ history }) => {
-  const name = 'Raouf'
+  const [globalContext, setGlobalContext] = useContext(Context)
 
   return (
     <Styled>
       <div className="title">
-        <Greeting name={name} />
+        <Greeting name={globalContext.currentUser?.name} />
         <span className="sub-title">
           Remember to breathe and think positive thoughts.
         </span>

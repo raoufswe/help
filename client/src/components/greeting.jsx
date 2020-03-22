@@ -11,7 +11,7 @@ const Styled = styled.div`
     padding-bottom: 10px;
   }
 `
-export default function Greeting({ name }) {
+export default function Greeting({ name = 'Awesome soul' }) {
   const currentHour = new Date().getHours()
   let greet
 

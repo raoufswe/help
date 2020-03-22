@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import maxmin from "utils/maxmin.js"
+import maxmin from 'utils/maxmin.js'
 
 const StyledLanding = styled.div`
   display: flex;
@@ -28,10 +28,10 @@ const StyledLanding = styled.div`
   }
 
   .landing-illustrations {
-   > div {
-     width: ${maxmin(600, 200)} !important;
-     height: ${maxmin(600, 200)} !important;
-   }
+    > div {
+      width: ${maxmin(600, 200)} !important;
+      height: ${maxmin(600, 200)} !important;
+    }
   }
 
   .landing-footer {
@@ -45,10 +45,10 @@ const StyledLanding = styled.div`
       font-size: ${maxmin(24, 16)};
     }
 
-    .sign-in{
+    .sign-in {
       color: #2676ff;
-       border: 1px solid #2676ff;
-       letter-spacing: 1px;
+      border: 1px solid #2676ff;
+      letter-spacing: 1px;
     }
   }
 `

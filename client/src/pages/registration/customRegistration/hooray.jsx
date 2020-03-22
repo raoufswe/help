@@ -1,8 +1,7 @@
 import React from 'react'
 import Button from 'components/button.jsx'
 import styled from 'styled-components'
-import maxmin from "utils/maxmin.js"
-
+import maxmin from 'utils/maxmin.js'
 
 const Styled = styled.div`
   background: #2f75ff;
@@ -24,22 +23,18 @@ const Styled = styled.div`
       font-size: ${maxmin(36, 30)};
       color: #ffffff;
       line-height: 1.4;
-      letter-spacing: .4px;
+      letter-spacing: 0.4px;
     }
-}
-
-
+  }
 `
 
 const CustomRegistration = ({ history }) => {
   return (
     <Styled>
       <div className="hooray-msg">
-        
-      <p>Hooray!! You’re secured and done setting up.</p>
-      <p> Step into a digital space of peace and positivity.</p>
-      <p>Don’t hesitate to explore the app.</p>
-
+        <p>Hooray!! You’re secured and done setting up.</p>
+        <p> Step into a digital space of peace and positivity.</p>
+        <p>Don’t hesitate to explore the app.</p>
       </div>
 
       <Button

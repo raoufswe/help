@@ -4,12 +4,8 @@ export const Context = createContext()
 
 export const Provider = props => {
   const [globalContext, setGlobalContext] = useState({
-    registerAccountDetails: {
-      fullName: '',
-      email: '',
-      password: ''
-    },
-    data: []
+    registerUser: {},
+    currentUser: {}
   })
 
   return (

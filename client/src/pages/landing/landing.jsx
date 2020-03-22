@@ -3,15 +3,13 @@ import { Redirect } from 'react-router-dom'
 import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
-import LightBulb from "assets/lotties/3520-light-bulb.json"
-
+import LightBulb from 'assets/lotties/3520-light-bulb.json'
 
 const Landing = ({ history }) => {
+  let getCurrentUser = false
 
-  let getCurrentUser 
-  
   if (getCurrentUser) {
-    return <Redirect to="/home" />
+    return <Redirect to="/dashboard" />
   }
 
   const defaultOptions = {
@@ -21,7 +19,7 @@ const Landing = ({ history }) => {
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
     }
-  };
+  }
 
   return (
     <Styled>
@@ -30,15 +28,13 @@ const Landing = ({ history }) => {
         <span className="landing-subtitle">A tagline or something</span>
       </div>
 
-      <div className="landing-illustrations">   
-       <Lottie options={defaultOptions}
-        
-        />
-        </div>
+      <div className="landing-illustrations">
+        <Lottie options={defaultOptions} />
+      </div>
 
       <div className="landing-footer">
         <Button
-         className="sign-up"
+          className="sign-up"
           color="#2676FF"
           text="Get Started"
           onClick={e => {
@@ -47,7 +43,7 @@ const Landing = ({ history }) => {
           }}
         />
 
-          <Button
+        <Button
           className="sign-in"
           color="white"
           text=" I already have an account"
@@ -56,7 +52,6 @@ const Landing = ({ history }) => {
             history.push('/login')
           }}
         />
-     
       </div>
     </Styled>
   )
