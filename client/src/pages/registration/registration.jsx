@@ -1,24 +1,16 @@
 import React, { useState } from 'react'
-import * as firebase from 'firebase'
 import { IonToast } from '@ionic/react'
-import withFirebaseAuth, {
-  WrappedComponentProps
-} from 'react-with-firebase-auth'
-import { providers, firebaseAppAuth } from 'server/firebaseService'
 import { Redirect } from 'react-router-dom'
-import * as firebaseService from 'server/firebaseService'
 import Styled from './registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 
-const Registration = (
-  { history, signInWithGoogle, signInWithFacebook },
-  WrappedComponentProps
-) => {
+const Registration = ({history}) => {
   const [Error, setError] = useState({ showErrorToast: false, message: null })
   const [user, setUser] = useState({})
 
-  const currentUser = firebaseService.getCurrentUser()
+  let currentUser = true
+
   if (currentUser) {
     return <Redirect to="/home" />
   } else {
@@ -46,12 +38,12 @@ const Registration = (
               <Button
                 color="#EA4335"
                 text="Google"
-                onClick={signInWithGoogle}
+                onClick={() => console.log('Google')}
               />
               <Button
                 color="rgba(38, 118, 255, 0.9)"
                 text="Facebook"
-                onClick={signInWithFacebook}
+                onClick={() => console.log('Facebook')}
               />
               <Button
                 color="#000000"
@@ -72,7 +64,4 @@ const Registration = (
   }
 }
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth
-})(Registration)
+export default Registration

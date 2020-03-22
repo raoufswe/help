@@ -1,6 +1,5 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import * as firebaseService from 'server/firebaseService'
 import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
@@ -8,7 +7,10 @@ import LightBulb from "assets/lotties/3520-light-bulb.json"
 
 
 const Landing = ({ history }) => {
-  if (firebaseService.getCurrentUser()) {
+
+  let getCurrentUser 
+  
+  if (getCurrentUser) {
     return <Redirect to="/home" />
   }
 

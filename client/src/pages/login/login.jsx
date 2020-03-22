@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { IonToast } from '@ionic/react'
-import withFirebaseAuth, {
-  WrappedComponentProps
-} from 'react-with-firebase-auth'
-import { providers, firebaseAppAuth } from 'server/firebaseService'
 import { Redirect } from 'react-router-dom'
-import * as firebaseService from 'server/firebaseService'
 import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
 import Button from 'components/button.jsx'
 
-const Login = (
-  {
-    signInWithEmailAndPassword,
-    signInWithGoogle,
-    signInWithFacebook,
-    error,
-    history
-  },
-  WrappedComponentProps
-) => {
+const Login = ({history}) => {
   const [Error, setError] = useState({
     showErrorToast: false,
     message: null
   })
+
+  let error
 
   useEffect(() => {
     if (typeof error !== 'undefined') {
@@ -79,7 +67,7 @@ const Login = (
                 return
               }
               e.preventDefault()
-              signInWithEmailAndPassword(user.email, user.password)
+              // signInWithEmailAndPassword(user.email, user.password)
             }}
             color="#2676FF"
             text="Sign me in"
@@ -90,17 +78,17 @@ const Login = (
             className="login-method"
             color="#EA4335"
             text="Google"
-            onClick={signInWithGoogle}
+            // onClick={signInWithGoogle}
           />
           <Button
             className="login-method"
             color="#2676FF"
             text="Facebook"
-            onClick={signInWithFacebook}
+            // onClick={signInWithFacebook}
           />
           <Button
             className="login-method"
-            onClick={signInWithFacebook}
+            // onClick={signInWithFacebook}
             color="#000000"
             text="Apple"
           />
@@ -117,7 +105,4 @@ const Login = (
   )
 }
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth
-})(Login)
+export default Login
