@@ -24,16 +24,20 @@ const Registration = (
   } else {
     return (
       <Styled>
-        <div className="registration-container">
+  
+          <main>
+            
           <div className="registration-back" onClick={() => history.push('/')}>
             <LeftArrow />
           </div>
 
-          <main>
             <div className="registration-top-text">
               Let’s get you started. How would you like to set up your account?
             </div>
-            <div className="register-methods">
+
+          </main>
+
+          <div className="register-methods">
               <Button
                 color="#2676FF"
                 text="Email"
@@ -55,7 +59,6 @@ const Registration = (
                 onClick={() => console.log('Apple')}
               />
             </div>
-          </main>
 
           <IonToast
             color="danger"
@@ -64,7 +67,6 @@ const Registration = (
             message={Error.message}
             duration={2000}
           />
-        </div>
       </Styled>
     )
   }

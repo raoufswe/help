@@ -34,26 +34,29 @@ const CustomRegistration = ({ history }) => {
 
   return (
     <Styled>
-      <div className="registration-container">
+
+        <main>
+          
         <div
           className="registration-back"
           onClick={() => history.push('/register')}
         >
           <LeftArrow />
         </div>
-
-        <main>
+        
           <div className="registration-top-text">
             Hi, We're Help. What can we call you?
           </div>
-          <input
+          
+        </main>
+
+        <input
             type="text"
             className="register-input"
             onChange={onChange}
             name="name"
             placeholder="Your Name"
           />
-        </main>
 
         <Button
           color="#2676FF"
@@ -61,7 +64,6 @@ const CustomRegistration = ({ history }) => {
           className="register-button"
           onClick={onNameSubmit}
         />
-      </div>
 
       <IonToast
         isOpen={error}

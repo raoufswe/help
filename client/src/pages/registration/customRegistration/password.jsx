@@ -36,7 +36,9 @@ const CustomRegistration = ({ history }) => {
 
   return (
     <Styled>
-      <div className="registration-container">
+
+        <main>
+
         <div
           className="registration-back"
           onClick={() => history.push('/registerEmail')}
@@ -44,11 +46,14 @@ const CustomRegistration = ({ history }) => {
           <LeftArrow />
         </div>
 
-        <main>
+
           <div className="registration-top-text">
             Let’s protect you with a secure password.
           </div>
-          <input
+        </main>
+
+        <div>
+        <input
             type="password"
             className="register-input"
             onChange={onChange}
@@ -67,7 +72,8 @@ const CustomRegistration = ({ history }) => {
               <span className="dot"></span>Use at least one lowercase
             </div>
           </div>
-        </main>
+
+        </div>
 
         <Button
           color="#2676FF"
@@ -83,7 +89,6 @@ const CustomRegistration = ({ history }) => {
           color="danger"
           duration={1000}
         />
-      </div>
     </Styled>
   )
 }

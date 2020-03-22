@@ -34,7 +34,9 @@ const CustomRegistration = ({ history }) => {
 
   return (
     <Styled>
-      <div className="registration-container">
+
+        <main>
+
         <div
           className="registration-back"
           onClick={() => history.push('/registerName')}
@@ -42,7 +44,6 @@ const CustomRegistration = ({ history }) => {
           <LeftArrow />
         </div>
 
-        <main>
           <div className="registration-top-text">
             That’s a nice name,
             <span className="registration-name">
@@ -51,15 +52,17 @@ const CustomRegistration = ({ history }) => {
             </span>
             . Let’s set up your email.
           </div>
-          <input
+
+        </main>
+
+        <input
             type="text"
             className="register-input"
             onChange={onChange}
             name="email"
             placeholder="you@email.com"
           />
-        </main>
-
+          
         <Button
           color="#2676FF"
           text="Let’s set this up"
@@ -74,7 +77,6 @@ const CustomRegistration = ({ history }) => {
           color="danger"
           duration={1000}
         />
-      </div>
     </Styled>
   )
 }

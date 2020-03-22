@@ -1,71 +1,53 @@
 import styled from 'styled-components'
+import maxmin from "utils/maxmin.js"
 
 const StyledRegister = styled.div`
-  .registration-container {
+
     display: flex;
     flex-direction: column;
-    padding: 70px 40px 60px 40px;
+    padding: ${maxmin(70, 35)} ${maxmin(40, 20)};
     height: 100vh;
-  }
 
   .registration-back {
     width: 24px;
     height: 21px;
-    margin-bottom: 30px;
+    margin-bottom: ${maxmin(30, 20)};
   }
 
   main {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    justify-content: space-evenly;
+
     .registration-top-text {
-      font-style: normal;
       font-weight: 600;
-      font-size: 36px;
+      font-size: ${maxmin(36, 30)};
+      letter-spacing: 0.4px;
+      line-height: 1.2;
     }
 
-    .register-methods {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 60px;
-      > button {
-        margin-bottom: 30px;
-      }
-    }
+  }
 
-    .register-input {
-      margin: 55px auto auto;
-      border: 0;
-      outline: 0;
-      max-width: 100%;
-      border-bottom: 2px solid black;
-      font-family: Fira Sans;
-      font-weight: 600;
-      font-size: 36px;
-      color: black;
-      padding-bottom: 10px;
 
-      ::placeholder {
-        color: #d9d9d9;
-      }
-    }
-
-    .registration-name {
+  .registration-name {
       display: inline-block;
       color: #2676ff;
-      font-size: 36px;
+      font-size: ${maxmin(36, 24)};;
     }
 
-    .password-rules {
-      margin-top: 75px;
+  .password-rules {
+      margin-top: ${maxmin(75, 40)};
       > div {
         font-family: Fira Sans;
         font-weight: 500;
         font-size: 18px;
-        padding-bottom: 30px;
+        padding-bottom: ${maxmin(30, 20)};
         display: flex;
         align-items: center;
         .dot {
-          width: 30px;
-          height: 30px;
+          width: ${maxmin(30, 20)};
+          height: ${maxmin(30, 20)};
           background-color: #bbb;
           border-radius: 50%;
           display: inline-block;
@@ -73,7 +55,30 @@ const StyledRegister = styled.div`
         }
       }
     }
-  }
+
+  .register-input {
+      margin: ${maxmin(55, 20)} auto auto;
+      border: 0;
+      outline: 0;
+      max-width: 100%;
+      border-bottom: 2px solid black;
+      font-family: Fira Sans;
+      font-weight: 600;
+      font-size: ${maxmin(36, 24)};;
+      color: black;
+      padding-bottom: 10px;
+      width: 100%;
+
+      ::placeholder {
+        color: #d9d9d9;
+      }
+    }
+  .register-methods {
+      padding-top: ${maxmin(60, 30)};
+      > button {
+        margin-bottom: ${maxmin(30, 20)};
+      }
+    }
 
   .register-button {
     margin-top: auto;

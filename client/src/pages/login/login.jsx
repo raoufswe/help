@@ -43,14 +43,18 @@ const Login = (
 
   return (
     <Styled>
-      <div className="login-container">
-        <div className="login-back" onClick={() => history.push('/landing')}>
+      
+        <main>
+
+        <div className="login-back" onClick={() => history.push('/')}>
           <LeftArrow />
         </div>
 
-        <main>
           <div className="login-top-text">Let’s sign you in. </div>
-          <input
+        </main>
+
+        <div className="login-inputs">
+        <input
             type="text"
             className="login-input"
             onChange={onChange}
@@ -64,8 +68,11 @@ const Login = (
             name="password"
             placeholder="Password"
           />
+        </div>
 
-          <Button
+
+        <div className="login-methods">
+        <Button
             className="login-button"
             onClick={e => {
               if (!e.currentTarget) {
@@ -77,10 +84,8 @@ const Login = (
             color="#2676FF"
             text="Sign me in"
           />
-          <span className="login-or">Or</span>
-        </main>
+        <div className="login-or">OR</div>
 
-        <div className="login-methods">
           <Button
             className="login-method"
             color="#EA4335"
@@ -108,7 +113,6 @@ const Login = (
           message={Error.message}
           duration={2000}
         />
-      </div>
     </Styled>
   )
 }

@@ -1,57 +1,76 @@
 import styled from 'styled-components'
+import maxmin from "utils/maxmin.js"
+
 
 const StyledLogin = styled.div`
-  .login-container {
     display: flex;
     flex-direction: column;
-    padding: 70px 40px 60px 40px;
+    padding: ${maxmin(70, 35)} ${maxmin(40, 20)};
     height: 100vh;
-  }
 
-  .login-back {
-    width: 24px;
-    height: 21px;
-    margin-bottom: 30px;
-  }
 
   main {
-    .login-top-text {
-      font-style: normal;
-      font-weight: 600;
-      font-size: 36px;
-    }
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    justify-content: space-evenly;
+    height: 20%;
 
+    .login-back {
+    width: 24px;
+    height: 21px;
+    margin-bottom: ${maxmin(30, 20)};
+  }
+
+    .login-top-text {
+      font-weight: 600;
+      font-size: ${maxmin(60, 30)};
+      letter-spacing: 0.4px;
+      line-height: 1.2;
+    }
+  }
+
+  .login-inputs{
     .login-input {
-      margin: 55px auto auto;
+      margin: ${maxmin(55, 20)} auto auto;
       border: 0;
       outline: 0;
       max-width: 100%;
       border-bottom: 2px solid black;
       font-family: Fira Sans;
       font-weight: 600;
-      font-size: 36px;
+      font-size: ${maxmin(60, 26)};
       color: black;
       padding-bottom: 10px;
+      width: 100%;
 
       ::placeholder {
         color: #d9d9d9;
       }
     }
-    > button {
-      margin: 30px 0 20px 0;
-    }
-
-    .login-or {
-      font-weight: 600;
-      font-size: 18px;
-    }
   }
 
   .login-methods {
+    margin-top: ${maxmin(90, 50)};
+    .login-or {
+      margin: 10px;
+     text-align: center;
+     font-weight: 400;
+    }
     > button {
-      margin-top: 20px;
+      margin-top: ${maxmin(20, 10)};
+      font-size: ${maxmin(24, 20)};
     }
   }
+
+  @media  (max-width: 320px) {
+ .login-methods {
+   margin-top: 10px;
+   .login-or {
+    margin: 5px;
+   }
+ }
+}
 `
 
 export default StyledLogin
