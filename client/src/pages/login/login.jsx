@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState } from 'react'
 import { IonToast } from '@ionic/react'
 import { Redirect } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
 import Button from 'components/button.jsx'
-import { Context } from 'context'
 
 const Login = ({ history }) => {
   const [error, setError] = useState({
     showErrorToast: false,
     message: []
   })
-
-  const [globalContext, setGlobalContext] = useContext(Context)
   const [user, setUser] = useState({})
+
+  const token = Cookies.get('token')
+  if (token) return <Redirect to="/dashboard" />
 
   const onChange = e => {
     const { value } = e.target
@@ -42,10 +43,12 @@ const Login = ({ history }) => {
     if (data.success === false) {
       setError({
         showErrorToast: true,
-        message: data.errors
+        message: "Email or password is invalid. Please try again"
       })
     } else {
-      setGlobalContext({ ...globalContext, currentUser: data })
+      const { token, user } = data.data
+      Cookies.set('token', token, { expires: 7 })
+      Cookies.set('userName', user.name, { expires: 7 })
       history.push('/dashboard')
     }
   }

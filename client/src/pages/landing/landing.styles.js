@@ -5,8 +5,9 @@ const StyledLanding = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100%;
+  height: 100vh;
   font-family: Fira Sans;
+
 
   .header-items {
     display: flex;

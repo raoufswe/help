@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledGrateful = styled.div`
-  min-height: 100%;
+  height: 100vh;
   padding: 0 30px;
   font-family: Fira Sans;
 

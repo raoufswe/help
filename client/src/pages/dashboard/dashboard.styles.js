@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const StyledDashboard = styled.div`
-  height: 100%;
+  height: 100vh;
   font-family: Fira Sans;
 
   .title {

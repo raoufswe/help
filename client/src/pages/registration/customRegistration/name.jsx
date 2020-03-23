@@ -16,7 +16,7 @@ const CustomRegistration = ({ history }) => {
   }
 
   const onNameSubmit = () => {
-    if (name?.length >= 6) {
+    if (name?.length > 0) {
       setGlobalContext({
         registerUser: {
           ...globalContext.registerUser,
@@ -62,7 +62,7 @@ const CustomRegistration = ({ history }) => {
       <IonToast
         isOpen={error}
         onDidDismiss={() => setError(false)}
-        message="Name must not be empty and have at least 6 letters"
+        message="Name must not be empty"
         color="danger"
         duration={1000}
       />

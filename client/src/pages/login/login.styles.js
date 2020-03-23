@@ -5,7 +5,7 @@ const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${maxmin(70, 35)} ${maxmin(40, 20)};
-  height: 100vh;
+  height: 100vh;  
 
   main {
     display: flex;

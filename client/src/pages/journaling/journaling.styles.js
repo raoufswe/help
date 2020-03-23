@@ -86,7 +86,7 @@ export const StyledJournal = styled.div`
 `
 
 export const StyledAddJournal = styled.div`
-  height: 100%;
+  height: 100vh;
   padding: 60px 40px;
   font-family: Fira Sans;
 

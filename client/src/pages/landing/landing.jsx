@@ -1,16 +1,14 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
 import LightBulb from 'assets/lotties/3520-light-bulb.json'
 
 const Landing = ({ history }) => {
-  let getCurrentUser = false
-
-  if (getCurrentUser) {
-    return <Redirect to="/dashboard" />
-  }
+  const token = Cookies.get('token')
+  if (token) return <Redirect to="/dashboard" />
 
   const defaultOptions = {
     loop: true,
