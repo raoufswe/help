@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import Cookies from 'js-cookie'
 import Styled from './dashboard.styles'
 import Greeting from 'components/greeting.jsx'
 import Feeling from 'components/feeling.jsx'
@@ -9,13 +8,11 @@ import { Context } from 'context'
 
 const Dashboard = ({ history }) => {
   const [globalContext, setGlobalContext] = useContext(Context)
-  
+
   return (
     <Styled>
       <div className="title">
-        <Greeting
-          name={globalContext.currentUser?.name ?? Cookies.get('userName')}
-        />
+        <Greeting name={globalContext.currentUser?.name} />
         <span className="sub-title">
           Remember to breathe and think positive thoughts.
         </span>

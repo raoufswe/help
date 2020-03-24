@@ -42,7 +42,7 @@ const CustomRegistration = ({ history }) => {
         text="Explore "
         textColor="#2676FF"
         className="register-button"
-        onClick={() => history.push('/dashboard')}
+        onClick={() => history.push('/login')}
       />
     </Styled>
   )

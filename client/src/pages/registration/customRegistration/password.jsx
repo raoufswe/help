@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
+import Cookies from 'js-cookie'
 import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { IonToast } from '@ionic/react'
-import { Context } from '../../../context'
+import { Context } from 'context'
 
 const CustomRegistration = ({ history }) => {
   const [globalContext, setGlobalContext] = useContext(Context)
@@ -53,7 +54,17 @@ const CustomRegistration = ({ history }) => {
               : 'Something went wrong!'
         })
       } else {
-        setGlobalContext({ ...globalContext, currentUser: data })
+        const { result } = data
+        const [userData] = result
+        const { _id, email, name } = userData
+        setGlobalContext({
+          currentUser: {
+            ...globalContext.currentUser,
+            _id,
+            name,
+            email
+          }
+        })
         history.push('/hooray')
       }
     }
