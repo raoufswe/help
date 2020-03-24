@@ -5,7 +5,7 @@ import maxmin from 'utils/maxmin.js'
 
 const Styled = styled.div`
   background: #2f75ff;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   padding: ${maxmin(70, 30)} ${maxmin(30, 20)};
   display: flex;
