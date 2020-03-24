@@ -59,6 +59,7 @@ const Login = ({ history }) => {
         }
       })
       Cookies.set('token', token, { expires: 7 })
+      Cookies.set('userName', name, { expires: 7 })
       history.push('/dashboard')
     }
   }
