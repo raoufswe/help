@@ -5,7 +5,8 @@ import Cookies from 'js-cookie'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const addGratefulThingPage = useRouteMatch('/addGratefulThing')
-  const JournalingPage = useRouteMatch('/journaling')
+  const updateGratefulThingPage = useRouteMatch('/updateGratefulThing')
+  const journalingPage = useRouteMatch('/journaling')
   const addJournalPage = useRouteMatch('/addJournal')
   const addTaskPage = useRouteMatch('/addTask')
   const [isOpen, setOpen] = useState(false)
@@ -25,9 +26,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
               isOpen={isOpen}
               onClick={onClick}
               hide={
-                addGratefulThingPage ||
-                JournalingPage ||
-                addJournalPage ||
+                addGratefulThingPage ??
+                updateGratefulThingPage ??
+                journalingPage ??
+                addJournalPage ??
                 addTaskPage
               }
             />

@@ -1,6 +1,7 @@
 import React from 'react'
 import AddIcon from 'assets/add.icon.jsx'
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 export const Styled = styled.div`
   button {
@@ -9,7 +10,7 @@ export const Styled = styled.div`
     bottom: 20px;
     border-radius: 50px;
     background: #2676ff;
-    padding: 15px;
+    padding: ${maxmin(15, 10)};;
   }
 `
 

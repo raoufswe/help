@@ -16,6 +16,7 @@ import FAQ from 'pages/FAQ'
 import Hospitals from 'pages/hospitals'
 import Grateful from 'pages/grateful'
 import AddGratefulThing from 'pages/grateful/addGratefulThing'
+import UpdateGratefulThing from 'pages/grateful/updateGratefulThing.jsx'
 import Journaling from 'pages/journaling'
 import AddJournal from 'pages/journaling/addJournal'
 import Tasks from 'pages/tasks'
@@ -26,94 +27,101 @@ const App = () => {
     <IonApp>
       <Router>
         <Provider>
-            <Route
-              render={({ location }) => (
-                <TransitionGroup>
-                  <CSSTransition
-                    key={location.key}
-                    timeout={350}
-                    classNames="fade"
-                  >
-                    <Switch location={location}>
-                      <Route path="/" exact component={Landing} />
-                      <Route path="/register" exact component={Registration} />
-                      <Route
-                        path="/registerName"
-                        exact
-                        component={NameRegistration}
-                      />
-                      <Route
-                        path="/registerEmail"
-                        exact
-                        component={EmailRegistration}
-                      />
-                      <Route
-                        path="/registerPassword"
-                        exact
-                        component={PasswordRegistration}
-                      />
-                      <Route path="/hooray" exact component={Hooray} />
-                      <Route path="/login" exact component={Login} />
-                      <PrivateRoute
-                        style={{ background: '#F5F5FA' }}
-                        name="dashboard"
-                        path="/dashboard"
-                        component={Dashboard}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="Hospitals"
-                        path="/hospitals"
-                        component={Hospitals}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="Journaling"
-                        path="/journaling"
-                        component={Journaling}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="AddJournal"
-                        path="/addJournal"
-                        component={AddJournal}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="Grateful"
-                        path="/grateful"
-                        component={Grateful}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="AddGratefulThing"
-                        path="/addGratefulThing"
-                        component={AddGratefulThing}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="Tasks"
-                        path="/tasks"
-                        component={Tasks}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="Tasks"
-                        path="/addTask"
-                        component={AddTask}
-                        exact
-                      />
-                      <PrivateRoute
-                        name="FAQ"
-                        path="/FAQ"
-                        component={FAQ}
-                        exact
-                      />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
-              )}
-            />
+          <Route
+            render={({ location }) => (
+              <TransitionGroup>
+                <CSSTransition
+                  key={location.key}
+                  timeout={350}
+                  classNames="fade"
+                >
+                  <Switch location={location}>
+                    <Route path="/" exact component={Landing} />
+                    <Route path="/register" exact component={Registration} />
+                    <Route
+                      path="/registerName"
+                      exact
+                      component={NameRegistration}
+                    />
+                    <Route
+                      path="/registerEmail"
+                      exact
+                      component={EmailRegistration}
+                    />
+                    <Route
+                      path="/registerPassword"
+                      exact
+                      component={PasswordRegistration}
+                    />
+                    <Route path="/hooray" exact component={Hooray} />
+                    <Route path="/login" exact component={Login} />
+                    <PrivateRoute
+                      style={{ background: '#F5F5FA' }}
+                      name="dashboard"
+                      path="/dashboard"
+                      component={Dashboard}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="Hospitals"
+                      path="/hospitals"
+                      component={Hospitals}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="Journaling"
+                      path="/journaling"
+                      component={Journaling}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="AddJournal"
+                      path="/addJournal"
+                      component={AddJournal}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="Grateful"
+                      path="/grateful"
+                      component={Grateful}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="AddGratefulThing"
+                      path="/addGratefulThing"
+                      component={AddGratefulThing}
+                      exact
+                    />
+
+                    <PrivateRoute
+                      name="UpdateGratefulThing"
+                      path="/updateGratefulThing/:id/:title"
+                      component={UpdateGratefulThing}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="Tasks"
+                      path="/tasks"
+                      component={Tasks}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="Tasks"
+                      path="/addTask"
+                      component={AddTask}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="FAQ"
+                      path="/FAQ"
+                      component={FAQ}
+                      exact
+                    />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
+            )}
+          />
         </Provider>
       </Router>
     </IonApp>

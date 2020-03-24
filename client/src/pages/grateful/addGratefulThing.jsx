@@ -23,16 +23,8 @@ export default function AddGratefulThing({ history }) {
         It’s good to be grateful for something.
       </span>
 
-      <input
-        type="text"
-        className="grateful-input"
-        onChange={onChange}
-        name="Title"
-        placeholder="title"
-      />
-
       <TextareaAutosize
-        name="content"
+        name="title"
         placeholder="Something important to you"
         className="grateful-input"
         onChange={onChange}

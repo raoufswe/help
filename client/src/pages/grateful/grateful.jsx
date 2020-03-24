@@ -13,8 +13,8 @@ export default function Grateful({ history }) {
         have them.
       </span>
       <main>
-        {GratefulThings.map(({ title, content }, key) => (
-          <GratefulThing key={key} title={title} content={content} />
+        {GratefulThings.map(({ title, id }) => (
+          <GratefulThing key={id} id={id} title={title} />
         ))}
       </main>
       <Add onClick={() => history.push('/addGratefulThing')} />
