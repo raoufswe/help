@@ -27,7 +27,15 @@ const StyledLanding = styled.div`
       padding-top: 30px;
     }
   }
-
+  .landing-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+  }
   .landing-illustrations {
     > div {
       width: ${maxmin(600, 200)} !important;
