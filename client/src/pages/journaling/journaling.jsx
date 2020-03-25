@@ -1,16 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { StyledJournaling } from './journaling.styles'
 import SideMenu from 'components/sideMenu'
 import Journal from './journal'
 import { Journals } from '__mocks__/journals.js'
 import Add from 'components/add.jsx'
+import Cookies from 'js-cookie'
+import PencilIcon from 'assets/pencil.icon.jsx'
+import { Context } from 'context'
 
 const Journaling = ({ history }) => {
-  const name = 'Raouf'
+  const [globalContext, setGlobalContext] = useContext(Context)
+  const name = Cookies.get('userName')
   const [isOpen, setOpen] = useState(false)
 
   const onClick = () => {
     setOpen(!isOpen)
+  }
+
+  const onPencilClick = journal => {
+    setGlobalContext({
+      ...globalContext,
+      journal
+    })
+    history.push(`/updateJournal/${journal.id}`)
   }
 
   return (
@@ -30,8 +42,17 @@ const Journaling = ({ history }) => {
       </div>
 
       <main>
-        {Journals.map(({ date, time, content }, key) => (
-          <Journal key={key} date={date} time={time} content={content} />
+        {Journals.map((journal, key) => (
+          <div className="journal-entry" key={key}>
+            <Journal
+              date={journal.date}
+              time={journal.time}
+              content={journal.content}
+            />
+            <button onClick={() => onPencilClick(journal)}>
+              <PencilIcon />
+            </button>
+          </div>
         ))}
       </main>
 

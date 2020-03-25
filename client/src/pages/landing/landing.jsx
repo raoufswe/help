@@ -5,7 +5,7 @@ import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
 import LightBulb from 'assets/lotties/3520-light-bulb.json'
-import Background from "assets/landing-background.icon.jsx"
+import Background from 'assets/landing-background.icon.jsx'
 
 const Landing = ({ history }) => {
   const token = Cookies.get('token')
@@ -27,7 +27,7 @@ const Landing = ({ history }) => {
         <span className="landing-subtitle">A tagline or something</span>
       </div>
 
-      <Background className="landing-background"/>
+      <Background className="landing-background" />
 
       <div className="landing-illustrations">
         <Lottie options={defaultOptions} />

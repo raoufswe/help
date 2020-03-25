@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { StyledAddGratefulThing } from './grateful.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
+import Button from 'components/button'
 
 export default function AddGratefulThing({ history }) {
   const [gratefulThing, setGratefulThing] = useState({})
@@ -11,6 +12,10 @@ export default function AddGratefulThing({ history }) {
     setGratefulThing({
       [e.target.name]: value
     })
+  }
+
+  const handleSave = () => {
+    console.log('saving...', gratefulThing)
   }
 
   return (
@@ -28,6 +33,13 @@ export default function AddGratefulThing({ history }) {
         placeholder="Something important to you"
         className="grateful-input"
         onChange={onChange}
+      />
+
+      <Button
+        color="#2676FF"
+        text="Save"
+        onClick={handleSave}
+        className="update-button"
       />
     </StyledAddGratefulThing>
   )

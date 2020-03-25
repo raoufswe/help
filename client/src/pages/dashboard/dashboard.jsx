@@ -1,18 +1,18 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import Cookies from 'js-cookie'
 import Styled from './dashboard.styles'
 import Greeting from 'components/greeting.jsx'
 import Feeling from 'components/feeling.jsx'
 import OverviewBars from 'components/overviewBars'
 import { bars } from '__mocks__/bars.js'
-import { Context } from 'context'
 
 const Dashboard = ({ history }) => {
-  const [globalContext, setGlobalContext] = useContext(Context)
+  const name = Cookies.get('userName')
 
   return (
     <Styled>
       <div className="title">
-        <Greeting name={globalContext.currentUser?.name} />
+        <Greeting name={name} />
         <span className="sub-title">
           Remember to breathe and think positive thoughts.
         </span>

@@ -8,6 +8,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const updateGratefulThingPage = useRouteMatch('/updateGratefulThing')
   const journalingPage = useRouteMatch('/journaling')
   const addJournalPage = useRouteMatch('/addJournal')
+  const updateJournal = useRouteMatch('/updateJournal')
   const addTaskPage = useRouteMatch('/addTask')
   const [isOpen, setOpen] = useState(false)
   const token = Cookies.get('token')
@@ -30,6 +31,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 updateGratefulThingPage ??
                 journalingPage ??
                 addJournalPage ??
+                updateJournal ??
                 addTaskPage
               }
             />

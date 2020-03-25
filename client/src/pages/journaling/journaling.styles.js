@@ -4,7 +4,7 @@ export const StyledJournaling = styled.div`
   display: flex;
   font-family: Fira Sans;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 
   .header {
     padding: 0;
@@ -51,16 +51,21 @@ export const StyledJournaling = styled.div`
   }
 
   main {
-    min-height: 290px;
-    max-height: 490px;
     overflow: auto;
+    .journal-entry {
+      display: flex;
+      align-items: flex-start;
+      margin: 20px 30px;
+      border-bottom: 1px solid #edecec;
+      button {
+        padding: 0;
+      }
+    }
   }
 `
 
 export const StyledJournal = styled.div`
   font-family: Fira Sans;
-  margin: 20px 30px;
-  border-bottom: 1px solid #edecec;
 
   .date {
     display: inline-block;
@@ -89,17 +94,26 @@ export const StyledAddJournal = styled.div`
   height: 100vh;
   padding: 60px 40px;
   font-family: Fira Sans;
+  display: flex;
+  flex-direction: column;
 
-  .login-back {
-    width: 24px;
-    height: 21px;
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    .back-arrow {
+      padding: 0;
+      svg {
+        width: 24px;
+        height: 21px;
+      }
+    }
+
+    .journal-date {
+      font-weight: 600;
+      font-size: 18px;
+      color: #000000;
+    }
     margin-bottom: 30px;
-  }
-
-  .page-title {
-    display: block;
-    font-weight: 600;
-    font-size: 36px;
   }
 
   .journal-input {
@@ -107,8 +121,6 @@ export const StyledAddJournal = styled.div`
     border: 0;
     outline: 0;
     min-width: 100%;
-    border-bottom: 2px solid black;
-    font-weight: 600;
     font-size: 24px;
     color: black;
     padding-bottom: 10px;
@@ -116,6 +128,67 @@ export const StyledAddJournal = styled.div`
 
     ::placeholder {
       color: #d9d9d9;
+    }
+  }
+
+  button {
+    margin-top: auto;
+  }
+`
+
+export const StyledUpdateJournal = styled.div`
+  padding: 60px 30px 40px 40px;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Fira Sans;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    .back-arrow {
+      padding: 0;
+      svg {
+        width: 24px;
+        height: 21px;
+      }
+    }
+
+    .journal-date {
+      font-weight: 600;
+      font-size: 18px;
+      color: #000000;
+    }
+    margin-bottom: 30px;
+  }
+
+  .journal-input {
+    margin: 55px auto auto;
+    border: 0;
+    outline: 0;
+    min-width: 100%;
+    font-size: 24px;
+    color: black;
+    padding-bottom: 10px;
+    resize: none;
+
+    ::placeholder {
+      color: #d9d9d9;
+    }
+  }
+
+  footer {
+    margin-top: auto;
+    display: flex;
+    .update-button {
+      font-size: 18px;
+      min-height: 56px;
+    }
+
+    .delete-button {
+      padding: 0;
+      margin-right: 35px;
     }
   }
 `

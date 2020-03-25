@@ -50,6 +50,8 @@ export const StyledAddGratefulThing = styled.div`
   height: 100vh;
   padding: 60px 40px;
   font-family: Fira Sans;
+  display: flex;
+  flex-direction: column;
 
   .login-back {
     width: 24px;
@@ -79,6 +81,10 @@ export const StyledAddGratefulThing = styled.div`
     ::placeholder {
       color: #d9d9d9;
     }
+  }
+
+  button {
+    margin-top: auto;
   }
 `
 

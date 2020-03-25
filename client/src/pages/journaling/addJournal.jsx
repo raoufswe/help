@@ -3,6 +3,7 @@ import { StyledAddJournal } from './journaling.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
 import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
+import Button from 'components/button'
 
 export default function AddJournal({ history }) {
   const [journal, setJournal] = useState({})
@@ -15,19 +16,34 @@ export default function AddJournal({ history }) {
     })
   }
 
+  const handleSave = () => {
+    console.log('saving...', journal)
+  }
+
   return (
     <StyledAddJournal>
-      <div className="login-back" onClick={() => history.push('/journaling')}>
-        <LeftArrow />
+      <div className="page-header">
+        <button
+          className="back-arrow"
+          onClick={() => history.push('/journaling')}
+        >
+          <LeftArrow />
+        </button>
+        <span className="journal-date">{getDate}</span>
       </div>
-
-      <span className="page-title">Let’s add a journal for {getDate}</span>
 
       <TextareaAutosize
         name="content"
-        placeholder="Start writing your story"
+        placeholder="Dear Journal..."
         className="journal-input"
         onChange={onChange}
+      />
+
+      <Button
+        color="#2676FF"
+        text="Save"
+        onClick={handleSave}
+        className="update-button"
       />
     </StyledAddJournal>
   )

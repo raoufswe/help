@@ -19,6 +19,7 @@ import AddGratefulThing from 'pages/grateful/addGratefulThing'
 import UpdateGratefulThing from 'pages/grateful/updateGratefulThing.jsx'
 import Journaling from 'pages/journaling'
 import AddJournal from 'pages/journaling/addJournal'
+import UpdateJournal from 'pages/journaling/updateJournal'
 import Tasks from 'pages/tasks'
 import AddTask from 'pages/tasks/addTask'
 
@@ -78,6 +79,12 @@ const App = () => {
                       name="AddJournal"
                       path="/addJournal"
                       component={AddJournal}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="UpdateJournal"
+                      path="/updateJournal/:id"
+                      component={UpdateJournal}
                       exact
                     />
                     <PrivateRoute
