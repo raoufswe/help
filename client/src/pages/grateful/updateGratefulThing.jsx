@@ -5,12 +5,13 @@ import { StyledUpdateGratefulThing } from './grateful.styles.js'
 import DeleteIcon from 'assets/delete.icon.jsx'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button'
+import DeleteModal from 'components/deleteModal.jsx'
 
 export default function UpdateGratefulThing() {
   let history = useHistory()
   let { id, title } = useParams()
-
   const [updatedGratefulThing, setUpdatedGratefulThing] = useState(title)
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
   const onChange = e => {
     const { value } = e.target
@@ -23,8 +24,10 @@ export default function UpdateGratefulThing() {
   }
 
   const handleDelete = () => {
-    console.log(id, 'deleting')
+    console.log('deleting...')
+    setOpenDeleteModal(false)
   }
+
   return (
     <StyledUpdateGratefulThing>
       <div className="login-back" onClick={() => history.push('/grateful')}>
@@ -39,9 +42,17 @@ export default function UpdateGratefulThing() {
         onChange={onChange}
       />
 
+      {openDeleteModal && (
+        <DeleteModal
+          title="Do you want to delete the journal entry?"
+          onDiscard={() => setOpenDeleteModal(false)}
+          onDelete={handleDelete}
+        />
+      )}
+
       <footer>
         <button className="delete-button">
-          <DeleteIcon onClick={handleDelete} />
+          <DeleteIcon onClick={() => setOpenDeleteModal(true)} />
         </button>
         <Button
           color="#2676FF"

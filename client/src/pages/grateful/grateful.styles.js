@@ -47,7 +47,7 @@ export const StyledGratefulThing = styled.div`
 `
 
 export const StyledAddGratefulThing = styled.div`
-  height: 100%;
+  height: 100vh;
   padding: 60px 40px;
   font-family: Fira Sans;
 
@@ -74,6 +74,7 @@ export const StyledAddGratefulThing = styled.div`
     color: black;
     padding-bottom: 10px;
     resize: none;
+    min-height: 65px;
 
     ::placeholder {
       color: #d9d9d9;
@@ -105,7 +106,7 @@ export const StyledUpdateGratefulThing = styled.div`
     color: black;
     padding-bottom: 10px;
     resize: none;
-    min-height: 64px;
+    min-height: 65px;
 
     ::placeholder {
       color: #d9d9d9;
@@ -117,6 +118,7 @@ export const StyledUpdateGratefulThing = styled.div`
     display: flex;
     .update-button {
       font-size: 18px;
+      min-height: 56px;
     }
 
     .delete-button {
