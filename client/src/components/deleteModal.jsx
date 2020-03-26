@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import Button from 'components/button'
 
@@ -36,8 +36,22 @@ const Styled = styled.div`
 `
 
 export default function DeleteModal({ title, onDiscard, onDelete }) {
+  const ref = useRef(null)
+
+  function handleClickOutside(event) {
+    if (ref.current && !ref.current.contains(event.target)) {
+      onDiscard()
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  })
+
   return (
-    <Styled>
+    <Styled ref={ref}>
       <div className="modal-title">{title}</div>
       <div className="modal-actions">
         <Button

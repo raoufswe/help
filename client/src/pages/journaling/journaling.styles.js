@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 export const StyledJournaling = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ export const StyledJournaling = styled.div`
   .page-header {
     display: block;
     font-weight: 600;
-    font-size: 36px;
+    font-size: ${maxmin(36, 30)};
     padding: 20px 0 10px 0;
   }
 
@@ -34,20 +35,41 @@ export const StyledJournaling = styled.div`
     font-size: 18px;
   }
 
-  .journaling-streak {
-    background: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 15px 35px;
-    max-height: 50px;
-    margin: -25px auto 20px;
+  .journaling-cta {
     display: flex;
-    align-items: center;
-    .streak-message {
-      display: block;
-      font-size: 14px;
-      color: #000000;
+    justify-content: center;
+    margin: -25px 20px 0 20px;
+    .journaling-streak {
+      background: #ffffff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 15px 20px;
+      max-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .streak-message {
+        display: inline-block;
+        font-size: 14px;
+        color: #000000;
+        text-align: center;
+      }
     }
+
+    .journaling-calendar {
+      padding: 0;
+    }
+  }
+
+  .calendar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
   }
 
   main {
@@ -55,6 +77,7 @@ export const StyledJournaling = styled.div`
     .journal-entry {
       display: flex;
       align-items: flex-start;
+      justify-content: space-around;
       margin: 20px 30px;
       border-bottom: 1px solid #edecec;
       button {
@@ -92,7 +115,7 @@ export const StyledJournal = styled.div`
 
 export const StyledAddJournal = styled.div`
   height: 100vh;
-  padding: 60px 40px;
+  padding: 50px 30px 30px;
   font-family: Fira Sans;
   display: flex;
   flex-direction: column;
@@ -137,7 +160,7 @@ export const StyledAddJournal = styled.div`
 `
 
 export const StyledUpdateJournal = styled.div`
-  padding: 60px 30px 40px 40px;
+  padding: 50px 30px 30px;
   height: 100vh;
   width: 100%;
   display: flex;

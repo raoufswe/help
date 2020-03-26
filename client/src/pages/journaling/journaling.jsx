@@ -1,17 +1,21 @@
 import React, { useState, useContext } from 'react'
+import Cookies from 'js-cookie'
+import 'react-day-picker/lib/style.css'
 import { StyledJournaling } from './journaling.styles'
 import SideMenu from 'components/sideMenu'
 import Journal from './journal'
 import { Journals } from '__mocks__/journals.js'
 import Add from 'components/add.jsx'
-import Cookies from 'js-cookie'
 import PencilIcon from 'assets/pencil.icon.jsx'
+import Calendar from 'assets/calendar.icon.jsx'
+import DatePicker from 'components/datePicker.jsx'
 import { Context } from 'context'
 
 const Journaling = ({ history }) => {
   const [globalContext, setGlobalContext] = useContext(Context)
   const name = Cookies.get('userName')
   const [isOpen, setOpen] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false)
 
   const onClick = () => {
     setOpen(!isOpen)
@@ -35,11 +39,27 @@ const Journaling = ({ history }) => {
         </span>
       </div>
 
-      <div className="journaling-streak">
-        <span className="streak-message">
-          🔥 great work, keep the streak going!
-        </span>
+      <div className="journaling-cta">
+        <div className="journaling-streak">
+          <span className="streak-message">
+            🔥 great work, keep the streak going!
+          </span>
+        </div>
+
+        <button
+          onClick={() => setShowCalendar(true)}
+          className="journaling-calendar"
+        >
+          <Calendar />
+        </button>
       </div>
+
+      {showCalendar && (
+        <DatePicker
+          onOutsideClick={() => setShowCalendar(false)}
+          onDayChange={day => console.log(day)}
+        />
+      )}
 
       <main>
         {Journals.map((journal, key) => (

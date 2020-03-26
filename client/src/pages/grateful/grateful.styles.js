@@ -48,7 +48,7 @@ export const StyledGratefulThing = styled.div`
 
 export const StyledAddGratefulThing = styled.div`
   height: 100vh;
-  padding: 60px 40px;
+  padding: 50px 30px 30px;
   font-family: Fira Sans;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ export const StyledAddGratefulThing = styled.div`
 `
 
 export const StyledUpdateGratefulThing = styled.div`
-  padding: 60px 30px 40px 40px;
+  padding: 50px 30px 30px;
   height: 100vh;
   width: 100%;
   display: flex;
