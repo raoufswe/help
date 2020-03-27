@@ -80,6 +80,7 @@ exports.journal_delete = (req, res) => {
 
 exports.journals_get = (req, res) => {
   Journal.find({})
+    .sort({ createdAt: -1 })
     .then(data => {
       res.send({ success: "success", data: data, errors: [] })
       console.log(data)
