@@ -70,6 +70,7 @@ export const StyledJournaling = styled.div`
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    z-index: 1;
   }
 
   main {
@@ -83,6 +84,17 @@ export const StyledJournaling = styled.div`
       button {
         padding: 0;
       }
+    }
+
+    .no-data {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 30px 30px;
+      font-weight: 500;
+      color: #ff7348;
+      font-style: italic;
     }
   }
 `

@@ -2,11 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import DayPicker from 'react-day-picker'
 import Cookies from 'js-cookie'
 
-const birthdayStyle = `.DayPicker-Day--highlighted {
-  background-color: orange;
-  color: white;
-}`
-
 export default function DatePicker({ onOutsideClick, onDayChange }) {
   const ref = useRef(null)
   const [selectedDay, setSelectedDay] = useState(Cookies.get('selectedDay'))
@@ -28,6 +23,7 @@ export default function DatePicker({ onOutsideClick, onDayChange }) {
     Cookies.set('selectedDay', day)
     setSelectedDay(day)
     onDayChange(day)
+    onOutsideClick(false)
   }
 
   useEffect(() => {

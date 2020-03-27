@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from 'react-query'
-import axios from 'axios'
 import { StyledUpdateJournal } from './journaling.styles'
 import TextareaAutosize from 'react-autosize-textarea'
 import Button from 'components/button'
@@ -11,83 +9,83 @@ import DeleteIcon from 'assets/delete.icon.jsx'
 import { getDate } from 'utils/dataHelpers/dataHelpers.js'
 
 export default function UpdateJournal({ history }) {
-  const getJournal = async () => {
-    const { data } = await axios.get(`http://localhost:3000/journals/${id}`)
-    return data.data
-  }
-  const { status, data, error, isFetching } = useQuery('journals', getJournal)
-  const [updatedJournal, setUpdatedJournal] = useState(data)
-  const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const { id } = useParams()
+  const [data, setData] = useState([])
+  const [content, setContent] = useState('')
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
+
+  const fetchJournal = async () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    }
+    const response = await fetch(
+      `http://localhost:3000/journals/${id}`,
+      requestOptions
+    )
+    const data = await response.json()
+    setData(data.data)
+    setContent(data.data.content)
+  }
 
   useEffect(() => {
-    setUpdatedJournal(data)
-  }, [data])
+    fetchJournal()
+  }, [])
 
   const onChange = e => {
     const { value } = e.target
-    setUpdatedJournal({
-      ...updatedJournal,
-      content: value
-    })
+    setContent(value)
   }
 
-  const handleUpdate = () => {
-    axios
-      .put(`http://localhost:3000/journals/${id}`, {
-        content: updatedJournal.content
+  const handleUpdate = async () => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content
       })
-      .then(function(response) {
-        console.log(response)
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+    }
+    const response = await fetch(
+      `http://localhost:3000/journals/${id}`,
+      requestOptions
+    )
+    const data = await response.json()
+    console.log(data)
   }
 
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3000/journals/${id}`, {
-        content: updatedJournal.content
-      })
-      .then(function(response) {
-        console.log(response)
-        history.push('/journaling')
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+  const handleDelete = async () => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    }
+    const response = await fetch(
+      `http://localhost:3000/journals/${id}`,
+      requestOptions
+    )
+    const data = await response.json()
+    console.log(data)
+    history.push('/journaling')
   }
 
   return (
     <StyledUpdateJournal>
-      {status === 'loading' ? (
-        'Loading...'
-      ) : status === 'error' ? (
-        <span>Error: {error.message}</span>
-      ) : (
-        <>
-          <div className="page-header">
-            <button
-              className="back-arrow"
-              onClick={() => history.push('/journaling')}
-            >
-              <LeftArrow />
-            </button>
-            <span className="journal-date">
-              {getDate(updatedJournal?.createdAt)}
-            </span>
-          </div>
+      <div className="page-header">
+        <button
+          className="back-arrow"
+          onClick={() => history.push('/journaling')}
+        >
+          <LeftArrow />
+        </button>
+        <span className="journal-date">{getDate(data?.createdAt)}</span>
+      </div>
 
-          <TextareaAutosize
-            name="content"
-            value={updatedJournal?.content}
-            placeholder="Dear Journal..."
-            className="journal-input"
-            onChange={onChange}
-          />
-        </>
-      )}
+      <TextareaAutosize
+        name="content"
+        value={content}
+        placeholder="Dear Journal..."
+        className="journal-input"
+        onChange={onChange}
+      />
 
       {openDeleteModal && (
         <DeleteModal
