@@ -20,21 +20,22 @@ app.set('secretKey', 'server');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(jwt({
-  secret: 'server',
-  getToken: function fromHeaderOrQuerystring(req) {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-      return req.headers.authorization.split(' ')[1];
-    } else if (req.query && req.query.token) {
-      return req.query.token;
-    }
-    return null;
-  }
-}).unless({path: ['/', '/user/auth', '/user/register']}), function (err, req, res, next) {
-  if (err) {
-    res.sendStatus(401);
-  }
-});
+// app.use(jwt({
+//   secret: 'server',
+//   getToken: function fromHeaderOrQuerystring(req) {
+//     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+//       return req.headers.authorization.split(' ')[1];
+//     } else if (req.query && req.query.token) {
+//       return req.query.token;
+//     }
+//     return null;
+//   }
+// }).unless({path: ['/', '/user/auth', '/user/register']}), function (err, req, res, next) {
+//   if (err) {
+//     res.sendStatus(401);
+//   }
+// });
 app.get('/', (req, res) => res.send('Hello World!'));
 app.use('/user', require('./routes/user'));
+app.use('/journals', require('./routes/journal'));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
