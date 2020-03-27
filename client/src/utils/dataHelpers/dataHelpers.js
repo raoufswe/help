@@ -1,12 +1,16 @@
-export const getDate = new Date().toLocaleDateString('en-GB', {
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
-  weekday: 'long'
-})
+export const getDate = date => {
+  return new Date(date).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    weekday: 'long'
+  })
+}
 
-export const getTime = new Date().toLocaleString('en-US', {
-  hour: 'numeric',
-  minute: 'numeric',
-  hour12: true
-})
+export const getTime = date => {
+  return new Date(date).toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  })
+}

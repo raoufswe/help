@@ -1,18 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
+import { useQuery } from 'react-query'
+import axios from 'axios'
 import 'react-day-picker/lib/style.css'
 import { StyledJournaling } from './journaling.styles'
 import SideMenu from 'components/sideMenu'
 import Journal from './journal'
-import { Journals } from '__mocks__/journals.js'
 import Add from 'components/add.jsx'
 import PencilIcon from 'assets/pencil.icon.jsx'
 import Calendar from 'assets/calendar.icon.jsx'
 import DatePicker from 'components/datePicker.jsx'
-import { Context } from 'context'
 
 const Journaling = ({ history }) => {
-  const [globalContext, setGlobalContext] = useContext(Context)
   const name = Cookies.get('userName')
   const [isOpen, setOpen] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -21,13 +20,16 @@ const Journaling = ({ history }) => {
     setOpen(!isOpen)
   }
 
-  const onPencilClick = journal => {
-    setGlobalContext({
-      ...globalContext,
-      journal
-    })
-    history.push(`/updateJournal/${journal.id}`)
+  const onPencilClick = id => {
+    history.push(`/updateJournal/${id}`)
   }
+
+  const getJournals = async () => {
+    const { data } = await axios.get('http://localhost:3000/journals')
+    return data.data
+  }
+
+  const { status, data, error, isFetching } = useQuery('journals', getJournals)
 
   return (
     <StyledJournaling>
@@ -62,18 +64,22 @@ const Journaling = ({ history }) => {
       )}
 
       <main>
-        {Journals.map((journal, key) => (
-          <div className="journal-entry" key={key}>
-            <Journal
-              date={journal.date}
-              time={journal.time}
-              content={journal.content}
-            />
-            <button onClick={() => onPencilClick(journal)}>
-              <PencilIcon />
-            </button>
-          </div>
-        ))}
+        {status === 'loading' ? (
+          'Loading...'
+        ) : status === 'error' ? (
+          <span>Error: {error.message}</span>
+        ) : (
+          <>
+            {data?.map(({ _id, content, createdAt }, key) => (
+              <div className="journal-entry" key={key}>
+                <Journal createdAt={createdAt} content={content} />
+                <button onClick={() => onPencilClick(_id)}>
+                  <PencilIcon />
+                </button>
+              </div>
+            ))}
+          </>
+        )}
       </main>
 
       <Add onClick={() => history.push('/addJournal')} />

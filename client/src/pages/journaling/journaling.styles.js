@@ -77,7 +77,7 @@ export const StyledJournaling = styled.div`
     .journal-entry {
       display: flex;
       align-items: flex-start;
-      justify-content: space-around;
+      justify-content: space-between;
       margin: 20px 30px;
       border-bottom: 1px solid #edecec;
       button {
@@ -99,7 +99,7 @@ export const StyledJournal = styled.div`
   .time {
     display: inline-block;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 15px;
     margin-left: 10px;
   }
 
@@ -107,7 +107,7 @@ export const StyledJournal = styled.div`
     display: block;
     padding-top: 10px;
     font-weight: 300;
-    font-size: 11px;
+    font-size: 14px;
     line-height: 13px;
     padding-bottom: 20px;
   }

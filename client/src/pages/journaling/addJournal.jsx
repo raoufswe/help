@@ -4,20 +4,29 @@ import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
 import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
 import Button from 'components/button'
+import axios from 'axios'
 
 export default function AddJournal({ history }) {
   const [journal, setJournal] = useState({})
   const onChange = e => {
     const { value } = e.target
     setJournal({
-      date: getDate,
-      time: getTime,
-      [e.target.name]: value
+      content: value
     })
   }
 
   const handleSave = () => {
-    console.log('saving...', journal)
+    axios
+      .post(`http://localhost:3000/journals/`, {
+        content: journal.content
+      })
+      .then(function(response) {
+        console.log(response)
+        history.push('/journaling')
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   return (

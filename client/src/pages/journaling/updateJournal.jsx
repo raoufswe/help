@@ -1,52 +1,93 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import axios from 'axios'
 import { StyledUpdateJournal } from './journaling.styles'
 import TextareaAutosize from 'react-autosize-textarea'
 import Button from 'components/button'
 import DeleteModal from 'components/deleteModal.jsx'
-import { Context } from 'context'
 import LeftArrow from 'assets/left-arrow.icon'
 import DeleteIcon from 'assets/delete.icon.jsx'
+import { getDate } from 'utils/dataHelpers/dataHelpers.js'
 
 export default function UpdateJournal({ history }) {
-  const [globalContext, setGlobalContext] = useContext(Context)
-  const { date, time, content, id } = globalContext.journal
-  const [updatedJournal, setUpdatedJournal] = useState(content)
+  const getJournal = async () => {
+    const { data } = await axios.get(`http://localhost:3000/journals/${id}`)
+    return data.data
+  }
+  const { status, data, error, isFetching } = useQuery('journals', getJournal)
+  const [updatedJournal, setUpdatedJournal] = useState(data)
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const { id } = useParams()
+
+  useEffect(() => {
+    setUpdatedJournal(data)
+  }, [data])
 
   const onChange = e => {
     const { value } = e.target
-    setUpdatedJournal(value)
+    setUpdatedJournal({
+      ...updatedJournal,
+      content: value
+    })
   }
 
   const handleUpdate = () => {
-    console.log(content, 'updating')
-    console.log(updatedJournal, 'updated value')
+    axios
+      .put(`http://localhost:3000/journals/${id}`, {
+        content: updatedJournal.content
+      })
+      .then(function(response) {
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   const handleDelete = () => {
-    console.log('deleting...')
-    setOpenDeleteModal(false)
+    axios
+      .delete(`http://localhost:3000/journals/${id}`, {
+        content: updatedJournal.content
+      })
+      .then(function(response) {
+        console.log(response)
+        history.push('/journaling')
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   return (
     <StyledUpdateJournal>
-      <div className="page-header">
-        <button
-          className="back-arrow"
-          onClick={() => history.push('/journaling')}
-        >
-          <LeftArrow />
-        </button>
-        <span className="journal-date">{date}</span>
-      </div>
+      {status === 'loading' ? (
+        'Loading...'
+      ) : status === 'error' ? (
+        <span>Error: {error.message}</span>
+      ) : (
+        <>
+          <div className="page-header">
+            <button
+              className="back-arrow"
+              onClick={() => history.push('/journaling')}
+            >
+              <LeftArrow />
+            </button>
+            <span className="journal-date">
+              {getDate(updatedJournal?.createdAt)}
+            </span>
+          </div>
 
-      <TextareaAutosize
-        name="content"
-        value={updatedJournal}
-        placeholder="Dear Journal..."
-        className="journal-input"
-        onChange={onChange}
-      />
+          <TextareaAutosize
+            name="content"
+            value={updatedJournal?.content}
+            placeholder="Dear Journal..."
+            className="journal-input"
+            onChange={onChange}
+          />
+        </>
+      )}
 
       {openDeleteModal && (
         <DeleteModal
