@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { useParams } from 'react-router-dom'
 import { StyledUpdateJournal } from './journaling.styles'
 import TextareaAutosize from 'react-autosize-textarea'
@@ -33,7 +34,10 @@ export default function UpdateJournal({ history }) {
   const fetchJournal = async () => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      }
     }
 
     try {
@@ -69,7 +73,10 @@ export default function UpdateJournal({ history }) {
   const handleUpdate = async () => {
     const requestOptions = {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      },
       body: JSON.stringify({
         content
       })
@@ -83,7 +90,7 @@ export default function UpdateJournal({ history }) {
       if (!response.status === 200) {
         setSavingError(true)
       } else {
-        history.push('/grateful')
+        history.push('/journaling')
       }
     } catch (error) {
       setSavingError(true)
@@ -94,7 +101,10 @@ export default function UpdateJournal({ history }) {
   const handleDelete = async () => {
     const requestOptions = {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      }
     }
 
     try {

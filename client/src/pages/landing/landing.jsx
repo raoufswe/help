@@ -1,16 +1,13 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import Cookies from 'js-cookie'
+import { verifyToken } from 'utils/verifyToken.js'
 import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
 import LightBulb from 'assets/lotties/3520-light-bulb.json'
 import Background from 'assets/landing-background.icon.jsx'
 
-const Landing = ({ history }) => {
-  const token = Cookies.get('token')
-  if (token) return <Redirect to="/dashboard" />
-
+const Landing = ({ history, validToken }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -19,6 +16,8 @@ const Landing = ({ history }) => {
       preserveAspectRatio: 'xMidYMid slice'
     }
   }
+
+  if (verifyToken()) return <Redirect to="/dashboard" />
 
   return (
     <Styled>

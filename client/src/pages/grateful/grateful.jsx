@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { StyledGrateful } from './grateful.styles'
 import GratefulThing from './gratefulThing'
-import { GratefulThings } from '__mocks__/grateful.js'
 import Add from 'components/add.jsx'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
@@ -14,7 +14,10 @@ export default function Grateful({ history }) {
   const fetchGrateful = async () => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      }
     }
 
     try {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { IonApp, IonRouterOutlet } from '@ionic/react'
+import { IonApp } from '@ionic/react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'

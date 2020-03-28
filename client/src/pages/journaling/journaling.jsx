@@ -24,7 +24,10 @@ const Journaling = ({ history }) => {
   const fetchJournals = async () => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      }
     }
 
     try {
@@ -51,8 +54,8 @@ const Journaling = ({ history }) => {
     fetchJournals()
   }, [])
 
-  const todayJournals = data?.map(journal =>
-    getDate(journal?.createdAt) === getDate(selectedDate) ? journal : null
+  const todayJournals = data?.filter(
+    journal => getDate(journal?.createdAt) === getDate(selectedDate)
   )
   const recentJournals = data?.slice(0, 3)
 
@@ -99,7 +102,7 @@ const Journaling = ({ history }) => {
         <main>
           {
             <>
-              {todayJournals[0] ? (
+              {todayJournals.length ? (
                 todayJournals?.map(({ _id, content, createdAt }, key) => (
                   <div className="journal-entry" key={key}>
                     <Journal createdAt={createdAt} content={content} />

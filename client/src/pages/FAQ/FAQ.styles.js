@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledFAQ = styled.div`
   height: 100vh;
-  padding: 0 20px 0 30px;
+  padding: 0 20px;
   font-family: Fira Sans;
 
   .page-title {

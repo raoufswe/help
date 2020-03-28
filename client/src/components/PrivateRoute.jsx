@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Route, Redirect, useRouteMatch } from 'react-router-dom'
 import SideMenu from 'components/sideMenu/sideMenu.jsx'
-import Cookies from 'js-cookie'
+import { verifyToken } from 'utils/verifyToken.js'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const addGratefulThingPage = useRouteMatch('/addGratefulThing')
@@ -11,17 +11,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const updateJournal = useRouteMatch('/updateJournal')
   const addTaskPage = useRouteMatch('/addTask')
   const [isOpen, setOpen] = useState(false)
-  const token = Cookies.get('token')
 
   const onClick = () => {
     setOpen(!isOpen)
   }
 
+  const isValidToken = verifyToken()
+
   return (
     <Route
       {...rest}
       render={props =>
-        token ? (
+        isValidToken ? (
           <div style={{ height: '100%', ...rest.style }}>
             <SideMenu
               isOpen={isOpen}

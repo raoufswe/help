@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { IonToast } from '@ionic/react'
 import { Redirect } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { verifyToken } from 'utils/verifyToken.js'
 import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
 import Button from 'components/button.jsx'
@@ -14,9 +15,6 @@ const Login = ({ history }) => {
     message: []
   })
   const [user, setUser] = useState({})
-
-  const token = Cookies.get('token')
-  if (token) return <Redirect to="/dashboard" />
 
   const onChange = e => {
     const { value } = e.target
@@ -63,6 +61,8 @@ const Login = ({ history }) => {
       history.push('/dashboard')
     }
   }
+
+  if (verifyToken()) return <Redirect to="/dashboard" />
 
   return (
     <Styled>

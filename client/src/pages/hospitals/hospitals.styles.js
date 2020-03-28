@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledHospitals = styled.div`
   height: 100vh;
   font-family: Fira Sans;
-  padding: 0 20px 0 30px;
+  padding: 0 20px;
 
   .page-title {
     font-weight: 600;

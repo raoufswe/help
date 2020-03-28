@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { StyledAddGratefulThing } from './grateful.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
@@ -26,7 +27,10 @@ export default function AddGratefulThing({ history }) {
   const handleSave = async () => {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      },
       body: JSON.stringify({
         content
       })

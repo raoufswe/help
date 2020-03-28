@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 import { IonToast } from '@ionic/react'
 import { Redirect } from 'react-router-dom'
-import Cookies from 'js-cookie'
+import { verifyToken } from 'utils/verifyToken.js'
 import Styled from './registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 
 const Registration = ({ history }) => {
   const [Error, setError] = useState({ showErrorToast: false, message: null })
-  const [user, setUser] = useState({})
 
-  const token = Cookies.get('token')
-  if (token) return <Redirect to="/dashboard" />
+  if (verifyToken()) return <Redirect to="/dashboard" />
 
   return (
     <Styled>

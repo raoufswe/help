@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { StyledAddJournal } from './journaling.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
-import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
+import { getDate } from 'utils/dataHelpers/dataHelpers.js'
 import Button from 'components/button'
 import ErrorIcon from 'components/error.jsx'
 
@@ -28,7 +29,10 @@ export default function AddJournal({ history }) {
   const handleSave = async () => {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${Cookies.get('token')}`
+      },
       body: JSON.stringify({
         content
       })
