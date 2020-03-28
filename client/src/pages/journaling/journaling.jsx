@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import Lottie from 'react-lottie'
 import 'react-day-picker/lib/style.css'
 import { StyledJournaling } from './journaling.styles'
 import SideMenu from 'components/sideMenu'
@@ -10,38 +9,42 @@ import PencilIcon from 'assets/pencil.icon.jsx'
 import Calendar from 'assets/calendar.icon.jsx'
 import DatePicker from 'components/datePicker.jsx'
 import { getDate } from 'utils/dataHelpers/dataHelpers.js'
-import NoData from 'assets/lotties/5066-meeting-and-stuff.json'
+import LoadingUI from 'components/loading.jsx'
+import SomethingWrong from 'components/someThingWrong.jsx'
 
 const Journaling = ({ history }) => {
   const name = Cookies.get('userName')
-  const [isOpen, setOpen] = useState(false)
+  const [showSideMenu, setSideMenu] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [data, setData] = useState([])
-
-  const onClick = () => {
-    setOpen(!isOpen)
-  }
-
-  const onPencilClick = id => {
-    history.push(`/updateJournal/${id}`)
-  }
-
-  const handleDateChange = day => {
-    setSelectedDate(day)
-  }
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   const fetchJournals = async () => {
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }
-    const response = await fetch(
-      'http://localhost:3000/journals',
-      requestOptions
-    )
-    const data = await response.json()
-    setData(data.data)
+
+    try {
+      const response = await fetch(
+        'http://localhost:3000/journals',
+        requestOptions
+      )
+      if (response.status === 200) {
+        const data = await response.json()
+        setData(data.data)
+        setLoading(false)
+      } else {
+        setError(true)
+        setLoading(false)
+      }
+    } catch (error) {
+      setError(true)
+      setLoading(false)
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -53,19 +56,13 @@ const Journaling = ({ history }) => {
   )
   const recentJournals = data?.slice(0, 3)
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: NoData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  }
-
   return (
     <StyledJournaling>
       <div className="top-page">
-        <SideMenu isOpen={isOpen} onClick={onClick} />
+        <SideMenu
+          isOpen={showSideMenu}
+          onClick={() => setSideMenu(!showSideMenu)}
+        />
         <span className="page-header">Great Journaling, {name} </span>
         <span className="page-subheader">
           Journals help you reflect and improve ourselves.
@@ -90,49 +87,59 @@ const Journaling = ({ history }) => {
       {showCalendar && (
         <DatePicker
           onOutsideClick={() => setShowCalendar(false)}
-          onDayChange={handleDateChange}
+          onDayChange={day => setSelectedDate(day)}
         />
       )}
 
-      <main>
-        {
-          <>
-            {todayJournals[0] ? (
-              todayJournals?.map(({ _id, content, createdAt }, key) => (
-                <div className="journal-entry" key={key}>
-                  <Journal createdAt={createdAt} content={content} />
-                  <button onClick={() => onPencilClick(_id)}>
-                    <PencilIcon />
-                  </button>
-                </div>
-              ))
-            ) : recentJournals.length ? (
-              <>
-                <div className="no-data">
-                  <Lottie options={defaultOptions} />
-                  it looks you don't have data at this date. here is your recent
-                  ones
-                </div>
-
-                {recentJournals?.map(({ _id, content, createdAt }, key) => (
+      {loading ? (
+        <LoadingUI style={{ position: 'absolute', top: '50%' }} />
+      ) : error ? (
+        <SomethingWrong />
+      ) : (
+        <main>
+          {
+            <>
+              {todayJournals[0] ? (
+                todayJournals?.map(({ _id, content, createdAt }, key) => (
                   <div className="journal-entry" key={key}>
                     <Journal createdAt={createdAt} content={content} />
-                    <button onClick={() => onPencilClick(_id)}>
+                    <button
+                      onClick={() => history.push(`/updateJournal/${_id}`)}
+                    >
                       <PencilIcon />
                     </button>
                   </div>
-                ))}
-              </>
-            ) : (
-              <div className="no-data">
-                <Lottie options={defaultOptions} />
-                Journals helps you to understand yourself better. start your
-                first!
-              </div>
-            )}
-          </>
-        }
-      </main>
+                ))
+              ) : recentJournals.length ? (
+                <>
+                  <div className="no-data">
+                    <LoadingUI />
+                    it looks you don't have data at this date. here is your
+                    recent ones
+                  </div>
+
+                  {recentJournals?.map(({ _id, content, createdAt }, key) => (
+                    <div className="journal-entry" key={key}>
+                      <Journal createdAt={createdAt} content={content} />
+                      <button
+                        onClick={() => history.push(`/updateJournal/${_id}`)}
+                      >
+                        <PencilIcon />
+                      </button>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <div className="no-data">
+                  <LoadingUI />
+                  Journals helps you to understand yourself better. start your
+                  first!
+                </div>
+              )}
+            </>
+          }
+        </main>
+      )}
 
       <Add onClick={() => history.push('/addJournal')} />
     </StyledJournaling>

@@ -1,21 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyledAddGratefulThing } from './grateful.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
 import Button from 'components/button'
 
 export default function AddGratefulThing({ history }) {
-  const [gratefulThing, setGratefulThing] = useState({})
+  const [content, setContent] = useState('')
+  const [savingError, setSavingError] = useState(false)
 
   const onChange = e => {
     const { value } = e.target
-    setGratefulThing({
-      [e.target.name]: value
-    })
+    setContent(value)
   }
 
-  const handleSave = () => {
-    console.log('saving...', gratefulThing)
+  useEffect(() => {
+    if (savingError)
+      setTimeout(() => {
+        setSavingError(false)
+      }, 2000)
+    return () => {
+      clearTimeout()
+    }
+  }, [savingError])
+
+  const handleSave = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content
+      })
+    }
+    try {
+      const response = await fetch(
+        `http://localhost:3000/grateful`,
+        requestOptions
+      )
+      if (!response.status === 200) {
+        setSavingError(true)
+      } else {
+        history.push('/grateful')
+      }
+    } catch (error) {
+      setSavingError(true)
+      console.log(error)
+    }
   }
 
   return (

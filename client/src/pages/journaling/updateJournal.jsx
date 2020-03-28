@@ -7,25 +7,54 @@ import DeleteModal from 'components/deleteModal.jsx'
 import LeftArrow from 'assets/left-arrow.icon'
 import DeleteIcon from 'assets/delete.icon.jsx'
 import { getDate } from 'utils/dataHelpers/dataHelpers.js'
+import LoadingUI from 'components/loading.jsx'
+import SomethingWrong from 'components/someThingWrong.jsx'
+import ErrorIcon from 'components/error.jsx'
 
 export default function UpdateJournal({ history }) {
   const { id } = useParams()
   const [data, setData] = useState([])
   const [content, setContent] = useState('')
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [savingError, setSavingError] = useState(false)
+
+  useEffect(() => {
+    if (savingError)
+      setTimeout(() => {
+        setSavingError(false)
+      }, 2000)
+    return () => {
+      clearTimeout()
+    }
+  }, [savingError])
 
   const fetchJournal = async () => {
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }
-    const response = await fetch(
-      `http://localhost:3000/journals/${id}`,
-      requestOptions
-    )
-    const data = await response.json()
-    setData(data.data)
-    setContent(data.data.content)
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/journals/${id}`,
+        requestOptions
+      )
+      if (response.status === 200) {
+        const data = await response.json()
+        setData(data.data)
+        setContent(data.data.content)
+        setLoading(false)
+      } else {
+        setError(true)
+        setLoading(false)
+      }
+    } catch (error) {
+      setError(true)
+      setLoading(false)
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -45,12 +74,21 @@ export default function UpdateJournal({ history }) {
         content
       })
     }
-    const response = await fetch(
-      `http://localhost:3000/journals/${id}`,
-      requestOptions
-    )
-    const data = await response.json()
-    console.log(data)
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/journals/${id}`,
+        requestOptions
+      )
+      if (!response.status === 200) {
+        setSavingError(true)
+      } else {
+        history.push('/grateful')
+      }
+    } catch (error) {
+      setSavingError(true)
+      console.log(error)
+    }
   }
 
   const handleDelete = async () => {
@@ -58,54 +96,91 @@ export default function UpdateJournal({ history }) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     }
-    const response = await fetch(
-      `http://localhost:3000/journals/${id}`,
-      requestOptions
-    )
-    const data = await response.json()
-    console.log(data)
-    history.push('/journaling')
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/journals/${id}`,
+        requestOptions
+      )
+      if (!response.status === 200) {
+        setSavingError(true)
+      } else {
+        history.push('/journaling')
+      }
+    } catch (error) {
+      setSavingError(true)
+      console.log(error)
+    }
   }
 
   return (
     <StyledUpdateJournal>
-      <div className="page-header">
-        <button
-          className="back-arrow"
-          onClick={() => history.push('/journaling')}
-        >
-          <LeftArrow />
-        </button>
-        <span className="journal-date">{getDate(data?.createdAt)}</span>
-      </div>
+      {loading ? (
+        <LoadingUI style={{ margin: 'auto' }} />
+      ) : error ? (
+        <>
+          <div className="page-header">
+            <button
+              className="back-arrow"
+              onClick={() => history.push('/journaling')}
+            >
+              <LeftArrow />
+            </button>
+          </div>
+          <SomethingWrong style={{ margin: 'auto  0' }} />
+        </>
+      ) : (
+        <>
+          <div className="page-header">
+            <button
+              className="back-arrow"
+              onClick={() => history.push('/journaling')}
+            >
+              <LeftArrow />
+            </button>
+            <span className="journal-date">{getDate(data?.createdAt)}</span>
+          </div>
 
-      <TextareaAutosize
-        name="content"
-        value={content}
-        placeholder="Dear Journal..."
-        className="journal-input"
-        onChange={onChange}
-      />
+          <TextareaAutosize
+            name="content"
+            value={content}
+            placeholder="Dear Journal..."
+            className="journal-input"
+            onChange={onChange}
+          />
 
-      {openDeleteModal && (
-        <DeleteModal
-          title="Do you want to delete the journal entry?"
-          onDiscard={() => setOpenDeleteModal(false)}
-          onDelete={handleDelete}
-        />
+          {savingError && (
+            <ErrorIcon
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
+              }}
+            />
+          )}
+
+          {openDeleteModal && (
+            <DeleteModal
+              title="Do you want to delete the journal entry?"
+              onDiscard={() => setOpenDeleteModal(false)}
+              onDelete={handleDelete}
+            />
+          )}
+
+          <footer>
+            <button className="delete-button">
+              <DeleteIcon onClick={() => setOpenDeleteModal(true)} />
+            </button>
+            <Button
+              color="#2676FF"
+              text="Update"
+              onClick={handleUpdate}
+              className="update-button"
+            />
+          </footer>
+        </>
       )}
-
-      <footer>
-        <button className="delete-button">
-          <DeleteIcon onClick={() => setOpenDeleteModal(true)} />
-        </button>
-        <Button
-          color="#2676FF"
-          text="Update"
-          onClick={handleUpdate}
-          className="update-button"
-        />
-      </footer>
     </StyledUpdateJournal>
   )
 }

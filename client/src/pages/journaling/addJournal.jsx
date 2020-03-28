@@ -1,32 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyledAddJournal } from './journaling.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
 import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
 import Button from 'components/button'
-import axios from 'axios'
+import ErrorIcon from 'components/error.jsx'
 
 export default function AddJournal({ history }) {
-  const [journal, setJournal] = useState({})
+  const [content, setContent] = useState('')
+  const [savingError, setSavingError] = useState(false)
+
   const onChange = e => {
     const { value } = e.target
-    setJournal({
-      content: value
-    })
+    setContent(value)
   }
 
-  const handleSave = () => {
-    axios
-      .post(`http://localhost:3000/journals/`, {
-        content: journal.content
+  useEffect(() => {
+    if (savingError)
+      setTimeout(() => {
+        setSavingError(false)
+      }, 2000)
+    return () => {
+      clearTimeout()
+    }
+  }, [savingError])
+
+  const handleSave = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content
       })
-      .then(function(response) {
-        console.log(response)
+    }
+    try {
+      const response = await fetch(
+        `http://localhost:3000/journals`,
+        requestOptions
+      )
+      if (!response.status === 200) {
+        setSavingError(true)
+      } else {
         history.push('/journaling')
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+      }
+    } catch (error) {
+      setSavingError(true)
+      console.log(error)
+    }
   }
 
   return (
@@ -47,6 +67,17 @@ export default function AddJournal({ history }) {
         className="journal-input"
         onChange={onChange}
       />
+
+      {savingError && (
+        <ErrorIcon
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)'
+          }}
+        />
+      )}
 
       <Button
         color="#2676FF"

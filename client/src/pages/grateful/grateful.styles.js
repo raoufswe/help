@@ -30,6 +30,10 @@ export const StyledGrateful = styled.div`
     max-height: 490px;
     overflow: auto;
   }
+
+  .no-data {
+    margin-top: 10%;
+  }
 `
 
 export const StyledGratefulThing = styled.div`

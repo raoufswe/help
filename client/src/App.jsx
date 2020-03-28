@@ -102,7 +102,7 @@ const App = () => {
 
                     <PrivateRoute
                       name="UpdateGratefulThing"
-                      path="/updateGratefulThing/:id/:title"
+                      path="/updateGratefulThing/:id"
                       component={UpdateGratefulThing}
                       exact
                     />
