@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controllers/journal")
+const controller = require("../controllers/journal.controller")
 
 router.post("/", controller.journal_create)
 router.get("/:id", controller.journal_get)
