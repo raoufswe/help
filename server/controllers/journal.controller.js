@@ -2,14 +2,13 @@ const Journal = require("../schemas/journal")
 
 exports.journal_create = (req, res, next) => {
   let journal = new Journal({
-    content: req.body.content,
-    date: req.body.date
+    content: req.body.content
   })
 
   journal
     .save()
     .then(data => {
-      res.send({ success: "success", data: [data], error: [] })
+      res.send({ success: "success", data: data, error: [] })
       console.log(data)
     })
     .catch(err => {
@@ -43,7 +42,7 @@ exports.journal_update = (req, res) => {
   Journal.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
     .then(docs => {
       if (docs) {
-        res.send({ success: "success", data: [docs], errors: [] })
+        res.send({ success: "success", data: docs, errors: [] })
       } else {
         res.send({
           success: false,
@@ -62,7 +61,7 @@ exports.journal_delete = (req, res) => {
   Journal.findOneAndRemove({ _id: req.params.id })
     .then(docs => {
       if (docs) {
-        res.send({ success: "success", data: [docs], errors: [] })
+        res.send({ success: "success", data: docs, errors: [] })
       } else {
         res.send({
           success: false,

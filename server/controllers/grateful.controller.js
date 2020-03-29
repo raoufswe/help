@@ -2,14 +2,13 @@ const Grateful = require("../schemas/grateful")
 
 exports.grateful_create = (req, res, next) => {
   let grateful = new Grateful({
-    content: req.body.content,
-    date: req.body.date
+    content: req.body.content
   })
 
   grateful
     .save()
     .then(data => {
-      res.send({ success: "success", data: [data], error: [] })
+      res.send({ success: "success", data: data, error: [] })
       console.log(data)
     })
     .catch(err => {
