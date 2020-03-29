@@ -22,7 +22,7 @@ const Dashboard = ({ history }) => {
         <Feeling />
       </div>
 
-      <OverviewBars bars={bars} />
+      <OverviewBars />
 
       <div className="relax"></div>
     </Styled>

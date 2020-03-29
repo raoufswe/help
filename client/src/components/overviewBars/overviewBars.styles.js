@@ -20,12 +20,24 @@ export const StyledOverviewBars = styled.div`
 `
 
 export const StyledBar = styled.div`
-  background: #ebe9f6;
-  border-radius: 20px;
-  width: 10px;
-  height: 64px;
-  border: 1px solid transparent;
-  transform: rotate(180deg);
+  display: flex;
+  flex-direction: column;
+  min-height: 104px;
+  .bar {
+    background: #ebe9f6;
+    border-radius: 20px;
+    width: 10px;
+    height: 64px;
+    border: 1px solid transparent;
+    transform: rotate(180deg);
+    align-self: center;
+  }
+
+  svg {
+    height: 30px;
+    width: 35px;
+    margin-top: 10px;
+  }
 `
 
 export const StyledFiller = styled.div`
