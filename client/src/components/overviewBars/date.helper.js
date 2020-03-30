@@ -16,7 +16,6 @@ export function getRange(startDate, endDate, type) {
 }
 
 export function evaluateRange(range, lastSevenDates) {
-  console.log({ range, lastSevenDates })
   if (range.length) {
     return [...range, ...lastSevenDates].sort(
       (a, b) => new Date(a._id) - new Date(b._id)

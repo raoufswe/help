@@ -99,22 +99,24 @@ const Login = ({ history }) => {
           text="Sign me in"
         />
         <div className="login-or">OR</div>
-
         <Button
           className="login-method"
           color="#EA4335"
           text="Google"
-          // onClick={signInWithGoogle}
+          as="a"
+          href="http://localhost:3000/user/google"
         />
         <Button
           className="login-method"
           color="#2676FF"
           text="Facebook"
-          // onClick={signInWithFacebook}
+          as="a"
+          href="http://localhost:3000/user/facebook"
         />
         <Button
           className="login-method"
-          // onClick={signInWithFacebook}
+          as="a"
+          // href="http://localhost:3000/user/google"
           color="#000000"
           text="Apple"
         />

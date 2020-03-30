@@ -59,7 +59,6 @@ export default function OverviewBars() {
     weekFeelings = evaluateRange(range, [])
   }
 
-  console.log(weekFeelings)
   return (
     <StyledOverviewBars>
       <span>

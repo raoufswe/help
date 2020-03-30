@@ -11,17 +11,30 @@ const StyledButton = styled.button`
   font-size: 24px;
   min-height: 60px;
   color: ${props => props.textColor};
-  padding: 10px;
+  padding: 20px;
   width: 100%;
   outline: none;
+  display: block;
+  text-decoration: none;
+  text-align: center;
 `
 
-const Button = ({ color, text, textColor = '#ffff', onClick, ...props }) => {
+const Button = ({
+  color,
+  text,
+  textColor = '#ffff',
+  onClick,
+  href,
+  as = 'button',
+  ...props
+}) => {
   return (
     <StyledButton
       color={color}
       onClick={onClick}
       textColor={textColor}
+      as={as}
+      href={href}
       {...props}
     >
       {text}

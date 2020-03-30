@@ -5,7 +5,7 @@ const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${maxmin(70, 35)} ${maxmin(40, 20)};
-  height: 100vh;  
+  height: 100vh;
 
   main {
     display: flex;
@@ -55,7 +55,7 @@ const StyledLogin = styled.div`
       text-align: center;
       font-weight: 400;
     }
-    > button {
+    .login-method {
       margin-top: ${maxmin(20, 10)};
       font-size: ${maxmin(24, 20)};
     }
