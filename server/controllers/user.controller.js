@@ -53,3 +53,28 @@ exports.readOne = function(req, res, next) {
     res.send({ success: false, result: [], errors: [err] })
   }
 }
+
+exports.users_get = (req, res) => {
+  User.find({})
+    .sort({ createdAt: -1 })
+    .then(data => {
+      res.send({ success: "success", data: data, errors: [] })
+      console.log(data)
+    })
+    .catch(err => {
+      res.send({ success: false, data: [], errors: [err] })
+      console.log(err)
+    })
+}
+
+exports.users_delete = (req, res) => {
+  User.remove({})
+    .then(data => {
+      res.send({ success: "success", data: [], errors: [] })
+      console.log(data)
+    })
+    .catch(err => {
+      res.send({ success: false, data: [], errors: [err] })
+      console.log(err)
+    })
+}
