@@ -11,14 +11,13 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/user/google/redirect"
+      callbackURL: "http://localhost:3000/user/google/redirect"
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile, "you")
-
       User.findOne({ googleId: profile.id }).then(currentUser => {
+        console.log("profile.id", profile.id)
+
         if (currentUser) {
-          console.log("user is: ", currentUser)
           done(null, currentUser)
         } else {
           new User({

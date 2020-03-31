@@ -14,11 +14,12 @@ const schema = new Schema(
   { timestamps: true }
 )
 
-if (schema.password) {
-  schema.pre("save", function(next) {
+schema.pre("save", function(next) {
+  if (this.password) {
     this.password = bcrypt.hashSync(this.password, saltRounds)
     next()
-  })
-}
+  }
+  next()
+})
 
 module.exports = mongoose.model("User", schema)

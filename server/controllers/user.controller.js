@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 exports.create = function(req, res) {
-  console.log(req.body)
   let user = {
     email: req.body.email,
     password: req.body.password,
@@ -11,7 +10,7 @@ exports.create = function(req, res) {
   }
   User.create(user)
     .then(User => {
-      res.send({ success: true, result: [User], errors: [] })
+      res.send({ success: true, result: User, errors: [] })
       console.log("saved to db")
     })
     .catch(err => {
@@ -33,7 +32,8 @@ exports.readOne = function(req, res, next) {
           if (bcrypt.compareSync(req.body.password, userInfo.password)) {
             const token = jwt.sign(
               {
-                id: userInfo._id
+                id: userInfo._id,
+                name: userInfo.name
               },
               req.app.get("secretKey"),
               { expiresIn: "24h" }

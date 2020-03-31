@@ -2,7 +2,8 @@ const Journal = require("../schemas/journal")
 
 exports.journal_create = (req, res, next) => {
   let journal = new Journal({
-    content: req.body.content
+    content: req.body.content,
+    userID: req.body.userID
   })
 
   journal
@@ -18,7 +19,7 @@ exports.journal_create = (req, res, next) => {
 }
 
 exports.journal_get = (req, res) => {
-  Journal.findOne({ _id: req.params.id })
+  Journal.findOne({ _id: req.params.id, userID: req.params.userID })
     .then(doc => {
       if (doc) {
         res.send({ success: "success", data: doc, error: [] })
@@ -39,7 +40,10 @@ exports.journal_get = (req, res) => {
 }
 
 exports.journal_update = (req, res) => {
-  Journal.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
+  Journal.findOneAndUpdate(
+    { _id: req.params.id, userID: req.params.userID },
+    { $set: req.body }
+  )
     .then(docs => {
       if (docs) {
         res.send({ success: "success", data: docs, errors: [] })
@@ -58,7 +62,7 @@ exports.journal_update = (req, res) => {
 }
 
 exports.journal_delete = (req, res) => {
-  Journal.findOneAndRemove({ _id: req.params.id })
+  Journal.findOneAndRemove({ _id: req.params.id, userID: req.params.userID })
     .then(docs => {
       if (docs) {
         res.send({ success: "success", data: docs, errors: [] })
@@ -78,7 +82,7 @@ exports.journal_delete = (req, res) => {
 }
 
 exports.journals_get = (req, res) => {
-  Journal.find({})
+  Journal.find({ userID: req.params.userID })
     .sort({ createdAt: -1 })
     .then(data => {
       res.send({ success: "success", data: data, errors: [] })
@@ -91,7 +95,7 @@ exports.journals_get = (req, res) => {
 }
 
 exports.journals_delete = (req, res) => {
-  Journal.remove({})
+  Journal.remove({ userID: req.params.userID })
     .then(data => {
       res.send({ success: "success", data: [], errors: [] })
       console.log(data)

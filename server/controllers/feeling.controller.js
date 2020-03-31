@@ -3,7 +3,8 @@ const Feeling = require("../schemas/feeling")
 exports.feeling_create = (req, res, next) => {
   let feeling = new Feeling({
     feeling: req.body.feeling,
-    _id: req.body._id
+    _id: req.body._id,
+    userID: req.body.userID
   })
   feeling
     .save()
@@ -18,7 +19,10 @@ exports.feeling_create = (req, res, next) => {
 }
 
 exports.feeling_update = (req, res) => {
-  Feeling.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
+  Feeling.findOneAndUpdate(
+    { _id: req.params.id, userID: req.params.userID },
+    { $set: req.body }
+  )
     .then(docs => {
       if (docs) {
         res.send({ success: "success", data: docs, errors: [] })
@@ -37,7 +41,7 @@ exports.feeling_update = (req, res) => {
 }
 
 exports.feelings_delete = (req, res) => {
-  Feeling.remove({})
+  Feeling.remove({ userID: req.params.userID })
     .then(data => {
       res.send({ success: "success", data: [], errors: [] })
       console.log(data)
@@ -49,7 +53,7 @@ exports.feelings_delete = (req, res) => {
 }
 
 exports.feelings_get = (req, res) => {
-  Feeling.find({})
+  Feeling.find({ userID: req.params.userID })
     .sort({ createdAt: -1 })
     .then(data => {
       res.send({ success: "success", data: data, errors: [] })

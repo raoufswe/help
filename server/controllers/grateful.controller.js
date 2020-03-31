@@ -2,7 +2,8 @@ const Grateful = require("../schemas/grateful")
 
 exports.grateful_create = (req, res, next) => {
   let grateful = new Grateful({
-    content: req.body.content
+    content: req.body.content,
+    userID: req.body.userID
   })
 
   grateful
@@ -18,7 +19,7 @@ exports.grateful_create = (req, res, next) => {
 }
 
 exports.grateful_get = (req, res) => {
-  Grateful.findOne({ _id: req.params.id })
+  Grateful.findOne({ _id: req.params.id, userID: req.params.userID })
     .then(doc => {
       if (doc) {
         res.send({ success: "success", data: doc, error: [] })
@@ -27,7 +28,7 @@ exports.grateful_get = (req, res) => {
         res.send({
           success: false,
           data: [],
-          errors: "no data exist for this id"
+          errors: "no data exist for this id and user"
         })
         console.log(doc)
       }
@@ -39,7 +40,10 @@ exports.grateful_get = (req, res) => {
 }
 
 exports.grateful_update = (req, res) => {
-  Grateful.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
+  Grateful.findOneAndUpdate(
+    { _id: req.params.id, userID: req.params.userID },
+    { $set: req.body }
+  )
     .then(docs => {
       if (docs) {
         res.send({ success: "success", data: [docs], errors: [] })
@@ -47,7 +51,7 @@ exports.grateful_update = (req, res) => {
         res.send({
           success: false,
           data: [],
-          errors: "no data exist for this id"
+          errors: "no data exist for this id or user"
         })
       }
     })
@@ -58,7 +62,7 @@ exports.grateful_update = (req, res) => {
 }
 
 exports.grateful_delete = (req, res) => {
-  Grateful.findOneAndRemove({ _id: req.params.id })
+  Grateful.findOneAndRemove({ _id: req.params.id, userID: req.params.userID })
     .then(docs => {
       if (docs) {
         res.send({ success: "success", data: [docs], errors: [] })
@@ -66,7 +70,7 @@ exports.grateful_delete = (req, res) => {
         res.send({
           success: false,
           data: [],
-          errors: "no data exist for this id"
+          errors: "no data exist for this id or user"
         })
         console.log(err)
       }
@@ -78,7 +82,7 @@ exports.grateful_delete = (req, res) => {
 }
 
 exports.grateful_getAll = (req, res) => {
-  Grateful.find({})
+  Grateful.find({ userID: req.params.userID })
     .sort({ createdAt: -1 })
     .then(data => {
       res.send({ success: "success", data: data, errors: [] })
@@ -91,7 +95,7 @@ exports.grateful_getAll = (req, res) => {
 }
 
 exports.grateful_deleteAll = (req, res) => {
-  Grateful.remove({})
+  Grateful.remove({ userID: req.params.userID })
     .then(data => {
       res.send({ success: "success", data: [], errors: [] })
       console.log(data)

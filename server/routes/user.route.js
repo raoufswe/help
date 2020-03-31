@@ -34,7 +34,8 @@ router.get(
         "token",
         jwt.sign(
           {
-            id: req.user.id
+            id: req.user.id,
+            name: req.user.name
           },
           req.app.get("secretKey"),
           { expiresIn: "24h" }
@@ -64,7 +65,8 @@ router.get(
         "token",
         jwt.sign(
           {
-            id: req.user.id
+            id: req.user.id,
+            name: req.user.name
           },
           req.app.get("secretKey"),
           { expiresIn: "24h" }

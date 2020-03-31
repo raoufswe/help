@@ -3,10 +3,10 @@ const router = express.Router()
 const controller = require("../controllers/grateful.controller")
 
 router.post("/", controller.grateful_create)
-router.get("/:id", controller.grateful_get)
-router.put("/:id", controller.grateful_update)
-router.delete("/:id", controller.grateful_delete)
-router.get("/", controller.grateful_getAll)
-router.delete("/", controller.grateful_deleteAll) // use with caution, it's gonna delete everything
+router.get("/:userID/:id", controller.grateful_get)
+router.put("/:userID/:id", controller.grateful_update)
+router.delete("/:userID/:id", controller.grateful_delete)
+router.get("/:userID", controller.grateful_getAll)
+router.delete("/:userID", controller.grateful_deleteAll) // use with caution, it's gonna delete everything
 
 module.exports = router
