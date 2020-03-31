@@ -11,6 +11,7 @@ import DatePicker from 'components/datePicker.jsx'
 import { getDate } from 'utils/dataHelpers/dataHelpers.js'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 const Journaling = ({ history }) => {
   const name = Cookies.get('userName')
@@ -22,6 +23,7 @@ const Journaling = ({ history }) => {
   const [error, setError] = useState(false)
 
   const fetchJournals = async () => {
+    const { id } = getUserDetails()
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -32,7 +34,7 @@ const Journaling = ({ history }) => {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/journals',
+        `http://localhost:3000/journals/${id}`,
         requestOptions
       )
       if (response.status === 200) {

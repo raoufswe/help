@@ -10,6 +10,7 @@ import DeleteModal from 'components/deleteModal.jsx'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
 import ErrorIcon from 'components/error.jsx'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 export default function UpdateGratefulThing() {
   let history = useHistory()
@@ -19,6 +20,7 @@ export default function UpdateGratefulThing() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [savingError, setSavingError] = useState(false)
+  const { id: userID } = getUserDetails()
 
   useEffect(() => {
     if (savingError)
@@ -41,7 +43,7 @@ export default function UpdateGratefulThing() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/grateful/${id}`,
+        `http://localhost:3000/grateful/${userID}/${id}`,
         requestOptions
       )
       if (response.status === 200) {
@@ -78,7 +80,7 @@ export default function UpdateGratefulThing() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/grateful/${id}`,
+        `http://localhost:3000/grateful/${userID}/${id}`,
         requestOptions
       )
       if (!response.status === 200) {
@@ -103,7 +105,7 @@ export default function UpdateGratefulThing() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/grateful/${id}`,
+        `http://localhost:3000/grateful/${userID}/${id}`,
         requestOptions
       )
       if (!response.status === 200) {

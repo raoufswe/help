@@ -7,6 +7,7 @@ import Confused from 'assets/confused.icon.jsx'
 import Unhappy from 'assets/unhappy.icon.jsx'
 import Mad from 'assets/mad.icon.jsx'
 import moment from 'moment'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 const Styled = styled.div`
   background: white;
@@ -37,11 +38,12 @@ const Styled = styled.div`
   }
 `
 
-export default function Feeling() {
+export default function Feeling({ onChange }) {
   const [feeling, setFeeling] = useState(null)
   const [response, setResponse] = useState(null)
   const [savingError, setSavingError] = useState(false)
   const currentDate = moment().format('YYYY-MM-DD')
+  const { id: userID } = getUserDetails()
 
   const addFeeling = async () => {
     const requestOptions = {
@@ -52,12 +54,13 @@ export default function Feeling() {
       },
       body: JSON.stringify({
         _id: currentDate,
-        feeling
+        feeling,
+        userID
       })
     }
     try {
       const response = await fetch(
-        `http://localhost:3000/feeling`,
+        'http://localhost:3000/feeling',
         requestOptions
       )
       if (!response.status === 200) {
@@ -87,7 +90,7 @@ export default function Feeling() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/feeling/${currentDate}`,
+        `http://localhost:3000/feeling/${userID}/${currentDate}`,
         requestOptions
       )
       if (!response.status === 200) {
@@ -101,11 +104,13 @@ export default function Feeling() {
 
   useEffect(() => {
     if (feeling !== null) addFeeling()
+    onChange(feeling)
   }, [feeling])
 
   useEffect(() => {
     if (response?.errors?.code === 11000) updateFeeling()
-  }, [response])
+    onChange(feeling)
+  }, [response, feeling])
 
   return (
     <Styled>

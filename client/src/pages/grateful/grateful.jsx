@@ -5,6 +5,7 @@ import GratefulThing from './gratefulThing'
 import Add from 'components/add.jsx'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 export default function Grateful({ history }) {
   const [data, setData] = useState([])
@@ -12,6 +13,8 @@ export default function Grateful({ history }) {
   const [error, setError] = useState(false)
 
   const fetchGrateful = async () => {
+    const { id } = getUserDetails()
+
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -22,7 +25,7 @@ export default function Grateful({ history }) {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/grateful',
+        `http://localhost:3000/grateful/${id}`,
         requestOptions
       )
       if (response.status === 200) {

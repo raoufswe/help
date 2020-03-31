@@ -11,6 +11,7 @@ import { getDate } from 'utils/dataHelpers/dataHelpers.js'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
 import ErrorIcon from 'components/error.jsx'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 export default function UpdateJournal({ history }) {
   const { id } = useParams()
@@ -20,6 +21,7 @@ export default function UpdateJournal({ history }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [savingError, setSavingError] = useState(false)
+  const { id: userID } = getUserDetails()
 
   useEffect(() => {
     if (savingError)
@@ -42,7 +44,7 @@ export default function UpdateJournal({ history }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/journals/${id}`,
+        `http://localhost:3000/journals/${userID}/${id}`,
         requestOptions
       )
       if (response.status === 200) {
@@ -84,7 +86,7 @@ export default function UpdateJournal({ history }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/journals/${id}`,
+        `http://localhost:3000/journals/${userID}/${id}`,
         requestOptions
       )
       if (!response.status === 200) {
@@ -109,7 +111,7 @@ export default function UpdateJournal({ history }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/journals/${id}`,
+        `http://localhost:3000/journals/${userID}/${id}`,
         requestOptions
       )
       if (!response.status === 200) {

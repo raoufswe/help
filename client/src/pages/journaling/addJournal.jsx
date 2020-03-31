@@ -6,6 +6,7 @@ import TextareaAutosize from 'react-autosize-textarea'
 import { getDate } from 'utils/dataHelpers/dataHelpers.js'
 import Button from 'components/button'
 import ErrorIcon from 'components/error.jsx'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 export default function AddJournal({ history }) {
   const [content, setContent] = useState('')
@@ -27,6 +28,7 @@ export default function AddJournal({ history }) {
   }, [savingError])
 
   const handleSave = async () => {
+    const { id: userID } = getUserDetails()
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -34,7 +36,8 @@ export default function AddJournal({ history }) {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        content
+        content,
+        userID
       })
     }
     try {

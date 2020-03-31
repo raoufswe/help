@@ -6,14 +6,17 @@ import Bar from './bar'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
 import { getRange, evaluateRange } from './date.helper'
+import { getUserDetails } from 'utils/verifyToken.js'
 
-export default function OverviewBars() {
+export default function OverviewBars({ feeling }) {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const currentDate = moment().format('YYYY-MM-DD')
+  console.log(feeling, 'from the overview bar')
 
   const fetchFeeling = async () => {
+    const { id } = getUserDetails()
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -24,7 +27,7 @@ export default function OverviewBars() {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/feeling',
+        `http://localhost:3000/feeling/${id}`,
         requestOptions
       )
       if (response.status === 200) {
@@ -44,7 +47,7 @@ export default function OverviewBars() {
 
   useEffect(() => {
     fetchFeeling()
-  }, [])
+  }, [feeling])
 
   let weekFeelings
   let lastSevenDates = data.slice(-7)

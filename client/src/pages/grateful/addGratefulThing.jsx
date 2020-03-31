@@ -4,6 +4,7 @@ import { StyledAddGratefulThing } from './grateful.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
 import Button from 'components/button'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 export default function AddGratefulThing({ history }) {
   const [content, setContent] = useState('')
@@ -25,6 +26,7 @@ export default function AddGratefulThing({ history }) {
   }, [savingError])
 
   const handleSave = async () => {
+    const { id: userID } = getUserDetails()
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -32,7 +34,8 @@ export default function AddGratefulThing({ history }) {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        content
+        content,
+        userID
       })
     }
     try {

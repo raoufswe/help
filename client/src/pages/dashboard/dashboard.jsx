@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Cookies from 'js-cookie'
 import Styled from './dashboard.styles'
 import Greeting from 'components/greeting.jsx'
 import Feeling from 'components/feeling.jsx'
 import OverviewBars from 'components/overviewBars'
 import { bars } from '__mocks__/bars.js'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 const Dashboard = ({ history }) => {
-  const name = Cookies.get('userName')
+  const [feeling, setFeeling] = useState(null)
+  const { name } = getUserDetails()
+
+  const onFeelingChange = feeling => {
+    return setFeeling(feeling)
+  }
 
   return (
     <Styled>
@@ -19,10 +25,10 @@ const Dashboard = ({ history }) => {
       </div>
 
       <div className="feeling">
-        <Feeling />
+        <Feeling onChange={onFeelingChange} />
       </div>
 
-      <OverviewBars />
+      <OverviewBars feeling={feeling} />
 
       <div className="relax"></div>
     </Styled>

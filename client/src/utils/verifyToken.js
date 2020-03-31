@@ -14,3 +14,12 @@ export const verifyToken = () => {
   }
   return token
 }
+
+export const getUserDetails = () => {
+  const decoded = jwt.decode(Cookies.get('token'))
+  const { name, id } = decoded
+  return {
+    name,
+    id
+  }
+}
