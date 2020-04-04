@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 export const StyledFAQ = styled.div`
   height: 100vh;
@@ -7,19 +8,20 @@ export const StyledFAQ = styled.div`
 
   .page-title {
     font-weight: 600;
-    font-size: 36px;
-    padding-bottom: 20px;
+    font-size: ${maxmin(36, 30)};
+    padding-bottom: ${maxmin(20, 10)};
   }
 `
 
 export const StyledQuestion = styled.div`
   border-bottom: 1px solid #edecec;
   margin-bottom: 15px;
+  letter-spacing: 0.2px;
 
   .question-title {
     display: block;
     font-weight: 600;
-    font-size: 24px;
+    font-size: ${maxmin(24, 22)};
     padding-bottom: 15px;
   }
 

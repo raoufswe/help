@@ -37,8 +37,8 @@ const StyledLanding = styled.div`
   }
   .landing-illustrations {
     > div {
-      width: ${maxmin(600, 200)} !important;
-      height: ${maxmin(600, 200)} !important;
+      /* width: ${maxmin(800, 200)} !important; */
+      /* height: ${maxmin(800, 200)} !important; */
     }
   }
 

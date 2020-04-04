@@ -93,8 +93,9 @@ export const StyledJournaling = styled.div`
       align-items: center;
       margin: 10px 30px 30px;
       font-weight: 500;
-      color: #ff7348;
-      font-style: italic;
+      color: #000000;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
     }
   }
 `

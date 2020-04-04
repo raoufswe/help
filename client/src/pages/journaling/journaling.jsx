@@ -96,16 +96,31 @@ const Journaling = ({ history }) => {
         />
       )}
 
-      {loading ? (
-        <LoadingUI style={{ position: 'absolute', top: '50%' }} />
-      ) : error ? (
-        <SomethingWrong />
-      ) : (
-        <main>
-          {
-            <>
-              {todayJournals.length ? (
-                todayJournals?.map(({ _id, content, createdAt }, key) => (
+      <main>
+        {
+          <>
+            {loading ? (
+              <LoadingUI style={{ marginTop: 10 }} />
+            ) : error ? (
+              <SomethingWrong />
+            ) : todayJournals.length ? (
+              todayJournals?.map(({ _id, content, createdAt }, key) => (
+                <div className="journal-entry" key={key}>
+                  <Journal createdAt={createdAt} content={content} />
+                  <button onClick={() => history.push(`/updateJournal/${_id}`)}>
+                    <PencilIcon />
+                  </button>
+                </div>
+              ))
+            ) : recentJournals.length ? (
+              <>
+                <LoadingUI style={{ marginTop: 10 }} />
+                <div className="no-data">
+                  it looks you don't have data at this date. here is your recent
+                  ones
+                </div>
+
+                {recentJournals?.map(({ _id, content, createdAt }, key) => (
                   <div className="journal-entry" key={key}>
                     <Journal createdAt={createdAt} content={content} />
                     <button
@@ -114,37 +129,20 @@ const Journaling = ({ history }) => {
                       <PencilIcon />
                     </button>
                   </div>
-                ))
-              ) : recentJournals.length ? (
-                <>
-                  <div className="no-data">
-                    <LoadingUI />
-                    it looks you don't have data at this date. here is your
-                    recent ones
-                  </div>
-
-                  {recentJournals?.map(({ _id, content, createdAt }, key) => (
-                    <div className="journal-entry" key={key}>
-                      <Journal createdAt={createdAt} content={content} />
-                      <button
-                        onClick={() => history.push(`/updateJournal/${_id}`)}
-                      >
-                        <PencilIcon />
-                      </button>
-                    </div>
-                  ))}
-                </>
-              ) : (
+                ))}
+              </>
+            ) : (
+              <>
+                <LoadingUI style={{ marginTop: 10 }} />
                 <div className="no-data">
-                  <LoadingUI />
                   Journals helps you to understand yourself better. start your
                   first!
                 </div>
-              )}
-            </>
-          }
-        </main>
-      )}
+              </>
+            )}
+          </>
+        }
+      </main>
 
       <Add onClick={() => history.push('/addJournal')} />
     </StyledJournaling>

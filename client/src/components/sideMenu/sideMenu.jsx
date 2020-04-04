@@ -2,10 +2,20 @@ import React, { useRef, useEffect } from 'react'
 import Styled from './sideMenu.styles'
 import BurgerIcon from 'assets/burger.icon.jsx'
 import CrossIcon from 'assets/cross.icon.jsx'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import NavIcon from 'assets/nav.icon.jsx'
+import JournalIcon from 'assets/journals.icon.jsx'
+import DashboardIcon from 'assets/dashboard.icon.jsx'
+import GratefulIcon from 'assets/grateful.icon.jsx'
+import TasksIcon from 'assets/tasks.icon.jsx'
+import ExercisesIcon from 'assets/exercises.icon.jsx'
+import FAQIcon from 'assets/FAQ.icon.jsx'
+import HospitalsIcon from 'assets/hospitals.icon.jsx'
+import LogoutIcon from 'assets/logout.icon.jsx'
 
 function SideMenu({ isOpen, onClick, hide }) {
+  let history = useHistory()
   const ref = useRef(null)
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {
@@ -18,6 +28,11 @@ function SideMenu({ isOpen, onClick, hide }) {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   })
+
+  const onLogout = () => {
+    Cookies.remove('token')
+    history.push('/landing')
+  }
 
   return (
     <Styled isOpen={isOpen}>
@@ -39,52 +54,57 @@ function SideMenu({ isOpen, onClick, hide }) {
             <div className="dc-nav-items">
               <div className="nav-item" onClick={onClick}>
                 <NavLink to="/dashboard" exact>
-                  <NavIcon />
+                  <DashboardIcon />
                   Dashboard
                 </NavLink>
               </div>
 
               <div className="nav-item" onClick={onClick}>
                 <NavLink to="/journaling" exact>
-                  <NavIcon />
+                  <JournalIcon />
                   Journaling
                 </NavLink>
               </div>
 
               <div className="nav-item" onClick={onClick}>
-                <NavLink to="/grateful" exact>
-                  <NavIcon />
-                  Things grateful for
+                <NavLink to="/tasks" exact>
+                  <TasksIcon />
+                  Tasks
                 </NavLink>
               </div>
 
               <div className="nav-item" onClick={onClick}>
-                <NavLink to="/tasks" exact>
-                  <NavIcon />
-                  My Tasks
+                <NavLink to="/grateful" exact>
+                  <GratefulIcon />
+                  Grateful
                 </NavLink>
               </div>
 
               <div className="nav-item" onClick={onClick}>
                 <NavLink to="/exercises" exact>
-                  <NavIcon />
+                  <ExercisesIcon />
                   Exercises
                 </NavLink>
               </div>
 
               <div className="nav-item" onClick={onClick}>
                 <NavLink to="/FAQ" exact>
-                  <NavIcon />
+                  <FAQIcon />
                   FAQ
                 </NavLink>
               </div>
 
               <div className="nav-item" onClick={onClick}>
                 <NavLink to="/hospitals" exact>
-                  <NavIcon />
+                  <HospitalsIcon />
                   Hospitals info
                 </NavLink>
               </div>
+            </div>
+
+            <div className="logout" onClick={onLogout}>
+              <LogoutIcon />
+              Logout
             </div>
           </div>
         )}

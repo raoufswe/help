@@ -1,29 +1,39 @@
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 export const StyledHospitals = styled.div`
   height: 100vh;
   font-family: Fira Sans;
   padding: 0 20px;
+  line-height: 1.3;
+  letter-spacing: 0.2px;
 
   .page-title {
     font-weight: 600;
-    font-size: 36px;
+    font-size: ${maxmin(36, 30)};
     border-bottom: 1px solid #edecec;
-    padding-bottom: 20px;
+    padding-bottom: ${maxmin(20, 10)};
   }
 
   .page-subtitle {
     display: inline-block;
-    padding: 20px 0;
-    font-weight: 600;
-    font-size: 24px;
+    padding: ${maxmin(20, 10)} 0;
+    font-size: ${maxmin(24, 20)};
+    margin-bottom: 10px;
+  }
+
+  @media only screen and (max-width: 320px) {
+    h3,
+    .page-subtitle {
+      margin: 0;
+    }
   }
 `
 export const StyledHospital = styled.div`
   background: #2676ff;
   border-radius: 20px;
   font-family: Fira Sans;
-  margin-bottom: 20px;
+  margin-bottom: ${maxmin(20, 10)};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,7 +49,7 @@ export const StyledHospital = styled.div`
       display: block;
       padding-bottom: 5px;
       font-weight: 600;
-      font-size: 24px;
+      font-size: ${maxmin(24, 20)};
       color: white;
     }
     .hospital-tel {

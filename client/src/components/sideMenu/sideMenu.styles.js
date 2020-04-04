@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 const Styled = styled.div`
   .header {
@@ -35,33 +36,42 @@ const Styled = styled.div`
   .side-menu-content {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .close-side-menu {
     margin-left: auto;
-    margin-bottom: 60px;
+    margin-bottom: ${maxmin(60, 30)};
     svg {
-      width: 31px;
-      height: 31px;
+      width: ${maxmin(31, 20)};
+      height: ${maxmin(31, 20)};
       color: white;
     }
   }
 
   .nav-item {
-    padding: 20px 0;
+    padding: ${maxmin(20, 10)} 0;
     border-bottom: 1px solid white;
     a {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-
-      font-size: 18px;
+      font-size: ${maxmin(18, 16)};
       font-weight: 500;
       color: #ffff;
       text-decoration: none;
       svg {
         margin-right: 20px;
       }
+    }
+  }
+
+  .logout {
+    margin: auto 0 60px;
+    display: flex;
+    place-items: center;
+    svg {
+      margin-right: 20px;
     }
   }
 `

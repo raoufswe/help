@@ -56,7 +56,7 @@ export default function Grateful({ history }) {
       </span>
 
       {loading ? (
-        <LoadingUI style={{ position: 'absolute', top: '50%' }} />
+        <LoadingUI style={{ marginTop: 20 }} />
       ) : error ? (
         <SomethingWrong />
       ) : data.length ? (
@@ -66,10 +66,12 @@ export default function Grateful({ history }) {
           ))}
         </main>
       ) : (
-        <div className="no-data">
-          <LoadingUI />
-          Adding things you are grateful for makes you feel better!
-        </div>
+        <>
+          <LoadingUI style={{ marginTop: 20 }} />
+          <div className="no-data">
+            Start adding things you are grateful for!
+          </div>
+        </>
       )}
 
       <Add onClick={() => history.push('/addGratefulThing')} />

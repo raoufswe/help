@@ -4,7 +4,7 @@ import { verifyToken } from 'utils/verifyToken.js'
 import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
-import LightBulb from 'assets/lotties/3520-light-bulb.json'
+import LightBulb from 'assets/lotties/15193-como-funciona-01.json'
 import Background from 'assets/landing-background.icon.jsx'
 
 const Landing = ({ history, validToken }) => {
@@ -26,7 +26,7 @@ const Landing = ({ history, validToken }) => {
         <span className="landing-subtitle">A tagline or something</span>
       </div>
 
-      <Background className="landing-background" />
+      {/* <Background className="landing-background" /> */}
 
       <div className="landing-illustrations">
         <Lottie options={defaultOptions} />

@@ -32,7 +32,10 @@ export const StyledGrateful = styled.div`
   }
 
   .no-data {
-    margin-top: 10%;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
   }
 `
 
