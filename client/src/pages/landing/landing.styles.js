@@ -8,7 +8,6 @@ const StyledLanding = styled.div`
   height: 100vh;
   font-family: Fira Sans;
 
-
   .header-items {
     display: flex;
     flex-direction: column;
@@ -58,6 +57,12 @@ const StyledLanding = styled.div`
       color: #2676ff;
       border: 1px solid #2676ff;
       letter-spacing: 1px;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .landing-background {
+      display: none;
     }
   }
 `

@@ -113,13 +113,6 @@ const Login = ({ history }) => {
           as="a"
           href="http://localhost:3000/user/facebook"
         />
-        <Button
-          className="login-method"
-          as="a"
-          // href="http://localhost:3000/user/google"
-          color="#000000"
-          text="Apple"
-        />
       </div>
 
       <IonToast

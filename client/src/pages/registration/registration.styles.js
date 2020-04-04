@@ -41,14 +41,11 @@ const StyledRegister = styled.div`
       font-size: 18px;
       padding-bottom: ${maxmin(30, 20)};
       display: flex;
-      align-items: center;
-      .dot {
-        width: ${maxmin(30, 20)};
-        height: ${maxmin(30, 20)};
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
+      align-items: flex-end;
+      > svg {
         margin-right: 10px;
+        width: 30px;
+        height: 30px;
       }
     }
   }
@@ -72,7 +69,7 @@ const StyledRegister = styled.div`
   }
   .register-methods {
     padding-top: ${maxmin(60, 30)};
-    > button {
+    .register-method {
       margin-bottom: ${maxmin(30, 20)};
     }
   }

@@ -1,14 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import Styled from '../registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
 import { IonToast } from '@ionic/react'
 import { Context } from 'context'
+import ValidPassword from 'assets/validPassword.icon.jsx'
+import InvalidPassword from 'assets/invalidPassword.icon.jsx'
 
 const CustomRegistration = ({ history }) => {
   const [globalContext, setGlobalContext] = useContext(Context)
   const [password, setPassword] = useState('')
+
   const [error, setError] = useState({
     showErrorToast: false,
     message: null
@@ -19,13 +22,12 @@ const CustomRegistration = ({ history }) => {
     setPassword(value)
   }
 
+  const longEnough = password.length > 8
+  const hasNumber = /\d/.test(password)
+
   const onPasswordSubmit = async () => {
     const { name, email } = globalContext.registerUser
-    if (
-      !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password) ||
-      !name ||
-      !email
-    ) {
+    if (!longEnough || !hasNumber || !name || !email) {
       setError({
         showErrorToast: true,
         message: 'make sure to fulfil our password policy :D'
@@ -46,10 +48,11 @@ const CustomRegistration = ({ history }) => {
       )
       const data = await response.json()
       if (data.success === false) {
+        console.log(data.errors)
         setError({
           showErrorToast: true,
           message:
-            data.errors[0].code === '11000'
+            data.errors[0].code === 11000
               ? 'the used email address exists'
               : 'Something went wrong!'
         })
@@ -95,14 +98,13 @@ const CustomRegistration = ({ history }) => {
         />
 
         <div className="password-rules">
-          <div>
-            <span className="dot"></span>Use at least eight characters
+          <div className="password-rule">
+            {longEnough ? <ValidPassword /> : <InvalidPassword />}
+            Use at least eight characters
           </div>
-          <div>
-            <span className="dot"></span>Use at least one uppercase
-          </div>
-          <div>
-            <span className="dot"></span>Use at least one lowercase
+          <div className="password-rule">
+            {hasNumber ? <ValidPassword /> : <InvalidPassword />}
+            Use at least one number
           </div>
         </div>
       </div>
@@ -119,7 +121,7 @@ const CustomRegistration = ({ history }) => {
         onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
         message={error.message}
         color="danger"
-        duration={1000}
+        duration={5000}
       />
     </Styled>
   )

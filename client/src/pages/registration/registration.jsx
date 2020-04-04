@@ -26,23 +26,23 @@ const Registration = ({ history }) => {
       <div className="register-methods">
         <Button
           color="#2676FF"
+          className="register-method"
           text="Email"
           onClick={() => history.push('/registerName')}
         />
         <Button
           color="#EA4335"
+          className="register-method"
           text="Google"
-          onClick={() => console.log('Google')}
+          as="a"
+          href="http://localhost:3000/user/google"
         />
         <Button
           color="rgba(38, 118, 255, 0.9)"
+          className="register-method"
           text="Facebook"
-          onClick={() => console.log('Facebook')}
-        />
-        <Button
-          color="#000000"
-          text="Apple"
-          onClick={() => console.log('Apple')}
+          as="a"
+          href="http://localhost:3000/user/facebook"
         />
       </div>
 
