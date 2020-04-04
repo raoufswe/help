@@ -66,6 +66,13 @@ function SideMenu({ isOpen, onClick, hide }) {
               </div>
 
               <div className="nav-item" onClick={onClick}>
+                <NavLink to="/exercises" exact>
+                  <NavIcon />
+                  Exercises
+                </NavLink>
+              </div>
+
+              <div className="nav-item" onClick={onClick}>
                 <NavLink to="/FAQ" exact>
                   <NavIcon />
                   FAQ

@@ -10,6 +10,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const addJournalPage = useRouteMatch('/addJournal')
   const updateJournal = useRouteMatch('/updateJournal')
   const addTaskPage = useRouteMatch('/addTask')
+  const PLayerPage = useRouteMatch('/player')
+
   const [isOpen, setOpen] = useState(false)
 
   const onClick = () => {
@@ -33,7 +35,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 journalingPage ??
                 addJournalPage ??
                 updateJournal ??
-                addTaskPage
+                addTaskPage ??
+                PLayerPage
               }
             />
             <Component {...props} />

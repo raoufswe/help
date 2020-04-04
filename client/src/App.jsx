@@ -22,6 +22,8 @@ import AddJournal from 'pages/journaling/addJournal'
 import UpdateJournal from 'pages/journaling/updateJournal'
 import Tasks from 'pages/tasks'
 import AddTask from 'pages/tasks/addTask'
+import Player from 'pages/player'
+import Exercises from "pages/exercises"
 
 const App = () => {
   return (
@@ -122,6 +124,18 @@ const App = () => {
                       name="FAQ"
                       path="/FAQ"
                       component={FAQ}
+                      exact
+                    />
+                    <PrivateRoute
+                      name="Player"
+                      path="/player"
+                      component={Player}
+                      exact
+                    />
+                       <PrivateRoute
+                      name="Exercises"
+                      path="/exercises"
+                      component={Exercises}
                       exact
                     />
                   </Switch>

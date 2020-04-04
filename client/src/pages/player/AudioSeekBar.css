@@ -1,0 +1,17 @@
+.audioSeekBar {
+  cursor: pointer;
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+}
+
+.audioSeekBar__tick {
+  background-color: #2676ff;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
