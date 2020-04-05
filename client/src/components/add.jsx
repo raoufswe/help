@@ -10,7 +10,7 @@ export const Styled = styled.div`
     bottom: 20px;
     border-radius: 50px;
     background: #2676ff;
-    padding: ${maxmin(15, 10)};;
+    padding: ${maxmin(15, 10)};
   }
 `
 

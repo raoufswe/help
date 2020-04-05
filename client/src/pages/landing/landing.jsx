@@ -29,7 +29,7 @@ const Landing = ({ history, validToken }) => {
       {/* <Background className="landing-background" /> */}
 
       <div className="landing-illustrations">
-        <Lottie options={defaultOptions} />
+        <Lottie options={defaultOptions} isClickToPauseDisabled={true} />
       </div>
 
       <div className="landing-footer">

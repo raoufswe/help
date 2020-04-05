@@ -14,7 +14,7 @@ export default function Loading(props) {
 
   return (
     <div {...props}>
-      <Lottie options={defaultOptions} />
+      <Lottie options={defaultOptions} isClickToPauseDisabled={true} />
     </div>
   )
 }
