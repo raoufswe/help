@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Cookies from 'js-cookie'
 import moment from 'moment'
 import { StyledOverviewBars } from './overviewBars.styles'
 import Bar from './bar'
 import LoadingUI from 'components/loading.jsx'
 import SomethingWrong from 'components/someThingWrong.jsx'
-import { getRange, evaluateRange } from './date.helper'
+import { getRange } from './date.helper'
 import { getUserDetails } from 'utils/verifyToken.js'
 
-export default function OverviewBars({ feeling }) {
+export default function OverviewBars({ feeling, onFeelingChange }) {
   const [data, setData] = useState([])
+  const [weekFeelings, setWeekFeelings] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const currentDate = moment().format('YYYY-MM-DD')
-  console.log(feeling, 'from the overview bar')
 
   const fetchFeeling = async () => {
     const { id } = getUserDetails()
@@ -33,6 +33,7 @@ export default function OverviewBars({ feeling }) {
       if (response.status === 200) {
         const data = await response.json()
         setData(data.data)
+        setWeekFeelings(data.data.slice(-7))
         setLoading(false)
       } else {
         setError(true)
@@ -45,39 +46,37 @@ export default function OverviewBars({ feeling }) {
     }
   }
 
+  let lastDate = weekFeelings.slice(-1)[0]
+
+  const evaluatedDates = useMemo(() => getRange(lastDate?._id, weekFeelings), [
+    weekFeelings
+  ])
+
   useEffect(() => {
     fetchFeeling()
   }, [feeling])
 
-  let weekFeelings
-  let lastSevenDates = data.slice(-7)
-  const [lastDate] = lastSevenDates.slice(-1)
-
-  const sameWeek = moment(lastDate?._id).isSame(currentDate, 'week')
-  if (sameWeek) {
-    const range = getRange(lastDate?._id, currentDate, 'days')
-    weekFeelings = evaluateRange(range, lastSevenDates)
-  } else {
-    const range = getRange(moment().startOf('week'), currentDate, 'days')
-    weekFeelings = evaluateRange(range, [])
-  }
+  console.log({ evaluatedDates })
 
   return (
-    <StyledOverviewBars>
-      <span>
-        Here’s an overview of how your week has been so far. You’re doing great!
-      </span>
+    <>
       {loading ? (
         <LoadingUI style={{ position: 'absolute', top: '50%' }} />
       ) : error ? (
         <SomethingWrong />
-      ) : (
-        <div className="bars">
-          {weekFeelings.map(({ feeling }, key) => {
-            return key <= 7 ? <Bar key={key} value={feeling} /> : null
-          })}
-        </div>
-      )}
-    </StyledOverviewBars>
+      ) : data.length ? (
+        <StyledOverviewBars>
+          <span>
+            Here’s an overview of how your week has been so far. You’re doing
+            great!
+          </span>
+          <div className="bars">
+            {evaluatedDates?.map(({ feeling }, key) => {
+              return key <= 7 ? <Bar key={key} value={feeling} /> : null
+            })}
+          </div>
+        </StyledOverviewBars>
+      ) : null}
+    </>
   )
 }

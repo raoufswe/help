@@ -103,14 +103,16 @@ export default function Feeling({ onChange }) {
   }
 
   useEffect(() => {
-    if (feeling !== null) addFeeling()
-    onChange(feeling)
+    if (feeling !== null) {
+      updateFeeling()
+      onChange(feeling)
+    }
   }, [feeling])
 
   useEffect(() => {
-    if (response?.errors?.code === 11000) updateFeeling()
+    addFeeling()
     onChange(feeling)
-  }, [response, feeling])
+  }, [feeling])
 
   return (
     <Styled>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import Styled from './dashboard.styles'
 import Greeting from 'components/greeting.jsx'

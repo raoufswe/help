@@ -1,28 +1,35 @@
 import moment from 'moment'
 
-export function getRange(startDate, endDate, type) {
-  let diff = moment(endDate).diff(moment(startDate), type)
-  let range = []
-  for (let i = 0; i < diff; i++) {
-    range.push({
-      _id: moment(startDate)
-        .add(i, type)
-        .format('YYYY-MM-DD'),
-      feeling: '0'
-    })
-  }
+export function getRange(lastDate, lastSevenDates) {
+  const filledInDates = lastSevenDates.reduce(
+    (newArray, currentModel, index, originalArray) => {
+      const nextModel = originalArray[index + 1]
 
-  return range
-}
+      if (nextModel) {
+        const currentDate = moment(currentModel._id)
+        const daysBetween = moment(nextModel._id).diff(currentDate, 'days')
 
-export function evaluateRange(range, lastSevenDates) {
-  if (range.length) {
-    return [...range, ...lastSevenDates].sort(
-      (a, b) => new Date(a._id) - new Date(b._id)
-    )
-  } else if (lastSevenDates.length) {
-    return lastSevenDates
-  } else {
-    return []
-  }
+        const fillerDates = Array.from(
+          { length: daysBetween - 1 },
+          (value, dayIndex) => {
+            return {
+              _id: moment(currentDate)
+                .add(dayIndex + 1, 'days')
+                .format('YYYY-MM-DD'),
+              feeling: 0
+            }
+          }
+        )
+
+        newArray.push(currentModel, ...fillerDates)
+      } else {
+        newArray.push(currentModel)
+      }
+
+      return newArray
+    },
+    []
+  )
+
+  return filledInDates
 }
