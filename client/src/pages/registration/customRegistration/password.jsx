@@ -58,8 +58,7 @@ const CustomRegistration = ({ history }) => {
         })
       } else {
         const { result } = data
-        const [userData] = result
-        const { _id, email, name } = userData
+        const { _id, email, name } = result
         setGlobalContext({
           currentUser: {
             ...globalContext.currentUser,
