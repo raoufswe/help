@@ -17,7 +17,7 @@ const Styled = styled.div`
 
   .side-menu {
     z-index: 1;
-    background: #2676ff;
+    background: #0056ea;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -51,7 +51,6 @@ const Styled = styled.div`
 
   .nav-item {
     padding: ${maxmin(20, 10)} 0;
-    border-bottom: 1px solid white;
     a {
       display: flex;
       align-items: center;
