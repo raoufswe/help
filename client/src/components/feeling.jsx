@@ -6,8 +6,9 @@ import Happy from 'assets/happy.icon.jsx'
 import Confused from 'assets/confused.icon.jsx'
 import Unhappy from 'assets/unhappy.icon.jsx'
 import Mad from 'assets/mad.icon.jsx'
-import moment from 'moment'
+import { getDay } from 'utils/dataHelpers/dataHelpers.js'
 import { getUserDetails } from 'utils/verifyToken.js'
+import moment from 'moment'
 
 const Styled = styled.div`
   background: white;
@@ -40,9 +41,12 @@ const Styled = styled.div`
 
 export default function Feeling({ onChange }) {
   const [feeling, setFeeling] = useState(null)
-  const [response, setResponse] = useState(null)
+  const [response, setResponse] = useState({ errors: { code: null } })
   const [savingError, setSavingError] = useState(false)
-  const currentDate = moment().format('YYYY-MM-DD')
+  const currentWeek = moment()
+    .startOf('week')
+    .format('YYYY-MM-DD')
+  const currentDay = getDay()
   const { id: userID } = getUserDetails()
 
   const addFeeling = async () => {
@@ -53,8 +57,8 @@ export default function Feeling({ onChange }) {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        _id: currentDate,
-        feeling,
+        _id: currentWeek,
+        Thu: feeling,
         userID
       })
     }
@@ -83,14 +87,13 @@ export default function Feeling({ onChange }) {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        _id: currentDate,
-        feeling
+        Wed: feeling
       })
     }
 
     try {
       const response = await fetch(
-        `http://localhost:3000/feeling/${userID}/${currentDate}`,
+        `http://localhost:3000/feeling/${userID}/${currentWeek}`,
         requestOptions
       )
       if (!response.status === 200) {
@@ -103,38 +106,34 @@ export default function Feeling({ onChange }) {
   }
 
   useEffect(() => {
-    if (feeling !== null) {
-      updateFeeling()
-      onChange(feeling)
-    }
+    if (feeling !== null) addFeeling()
+    onChange(feeling)
   }, [feeling])
 
   useEffect(() => {
-    addFeeling()
+    if (response?.errors?.code === 11000) {
+      updateFeeling()
+    }
     onChange(feeling)
-  }, [feeling])
+  }, [response, feeling])
 
   return (
     <Styled>
       <span>How are you feeling today?</span>
       <div className="feelings-icons">
-        <button onClick={() => setFeeling('100%')}>
+        <button onClick={() => setFeeling({ emoji: '😬', weight: 100 })}>
           <SuperHappyIcon />
         </button>
-
-        <button onClick={() => setFeeling('75%')}>
+        <button onClick={() => setFeeling({ emoji: '🙂', weight: 75 })}>
           <Happy />
         </button>
-
-        <button onClick={() => setFeeling('50%')}>
+        <button onClick={() => setFeeling({ emoji: '😐', weight: 50 })}>
           <Confused />
         </button>
-
-        <button onClick={() => setFeeling('25%')}>
+        <button onClick={() => setFeeling({ emoji: '😢', weight: 25 })}>
           <Unhappy />
         </button>
-
-        <button onClick={() => setFeeling('0%')}>
+        <button onClick={() => setFeeling({ emoji: '😠', weight: 0 })}>
           <Mad />
         </button>
       </div>

@@ -18,39 +18,13 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-const feelings = [{}]
-
-const data = [
-  { name: 'Sat', uv: 100 },
-  { name: 'Sun', uv: 50 },
-  { name: 'Mon', uv: 100 },
-  { name: 'Tue', uv: 75 },
-  { name: 'Wed', uv: 25 },
-  { name: 'Thu', uv: 0 },
-  { name: 'Fri', uv: 100 }
-]
-
-const DataFormater = number => {
-  if (number === 100) {
-    return '😬'
-  } else if (number === 75) {
-    return '🙂'
-  } else if (number === 50) {
-    return '😐'
-  } else if (number === 25) {
-    return '😢'
-  } else if (number === 0) {
-    return '😠'
-  } else {
-    return '🙄'
-  }
-}
-
 export default function OverviewBars({ feeling, onFeelingChange }) {
-  // const [data, setData] = useState([])
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const currentDate = moment().format('YYYY-MM-DD')
+  const currentWeek = moment()
+    .startOf('week')
+    .format('YYYY-MM-DD')
 
   const fetchFeeling = async () => {
     const { id } = getUserDetails()
@@ -64,12 +38,12 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/feeling/${id}`,
+        `http://localhost:3000/feeling/${id}/${currentWeek}`,
         requestOptions
       )
       if (response.status === 200) {
         const data = await response.json()
-        // setData(data.data)
+        setData(data.data)
         setLoading(false)
       } else {
         setError(true)
@@ -81,6 +55,34 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    fetchFeeling()
+  }, [feeling])
+
+  const { _id, __v, userID, ...feelings } = data
+  const LinChartData = Object.entries(feelings).map(e => ({
+    name: e[0],
+    uv: e[1].emoji,
+    weight: e[1].weight
+  }))
+  // .sort((a, b) => a.weight - b.weight)
+
+  const DataFormater = emoji => {
+    if (emoji === '😬') {
+      return '😬'
+    } else if (emoji === '🙂') {
+      return '🙂'
+    } else if (emoji === '😐') {
+      return '😐'
+    } else if (emoji === '😢') {
+      return '😢'
+    } else if (emoji === '😠') {
+      return '😠'
+    }
+  }
+
+  console.log({ LinChartData })
   return (
     <>
       {loading ? (
@@ -96,12 +98,12 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
 
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
-              data={data}
+              data={LinChartData}
               margin={{ top: 10, right: 30, left: -10, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis tickFormatter={DataFormater} />
+              <XAxis dataKey="name" interval={0} type="category" />
+              <YAxis type="category" tickFormatter={DataFormater} />
               <Tooltip />
               <Line
                 type="monotone"

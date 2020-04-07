@@ -14,3 +14,7 @@ export const getTime = date => {
     hour12: true
   })
 }
+
+export const getDay = date => {
+  return new Date().toLocaleString('en-us', { weekday: 'short' })
+}
