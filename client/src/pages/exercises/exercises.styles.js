@@ -16,6 +16,20 @@ const Styled = styled.div`
     font-weight: 600;
     font-size: 24px;
   }
+
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 210px);
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
 `
 
 export default Styled

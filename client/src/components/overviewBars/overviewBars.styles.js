@@ -2,47 +2,20 @@ import styled from 'styled-components'
 
 export const StyledOverviewBars = styled.div`
   background: white;
-  padding-bottom: 50px;
-  border-bottom: 1px solid #edecec;
 
   span {
     display: block;
-    font-weight: normal;
     font-size: 18px;
-    padding: 20px 50px 20px 30px;
+    padding: 20px 50px 20px 20px;
+    line-height: 1.1;
+    letter-spacing: 0.1px;
   }
 
-  .bars {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  .recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
+    font-size: 20px;
   }
-`
-
-export const StyledBar = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 104px;
-  .bar {
-    background: #ebe9f6;
-    border-radius: 20px;
-    width: 10px;
-    height: 64px;
-    border: 1px solid transparent;
-    transform: rotate(180deg);
-    align-self: center;
+  .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis {
+    font-family: Fira Sans;
+    color: black;
   }
-
-  svg {
-    height: 30px;
-    width: 35px;
-    margin-top: 10px;
-  }
-`
-
-export const StyledFiller = styled.div`
-  background: #2676ff;
-  height: 100%;
-  border-radius: inherit;
-  height: ${({ value }) => value};
 `

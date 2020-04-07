@@ -36,7 +36,7 @@ const App = () => {
                 <CSSTransition
                   key={location.key}
                   timeout={350}
-                  classNames="fade"
+                  // classNames="fade"
                 >
                   <Switch location={location}>
                     <Route path="/" exact component={Landing} />

@@ -4,6 +4,7 @@ import { AudioSeekBar } from './AudioSeekBar'
 import PauseIcon from 'assets/pause.icon.jsx'
 import PlayIcon from 'assets/play.icon.jsx'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 const Styled = styled.div`
   font-family: Fira Sans;
@@ -40,6 +41,7 @@ const Styled = styled.div`
 `
 
 export default function PlayBar({ src, title, by }) {
+  const history = useHistory()
   const { togglePlayPause, playing, ready, load, loading } = useAudioPlayer({
     src,
     autoplay: false

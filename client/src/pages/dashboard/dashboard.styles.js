@@ -6,10 +6,12 @@ const StyledDashboard = styled.div`
 
   .title {
     background: #f5f5fa;
-    padding: 10px 50px 30px 30px;
+    padding: 0 30px 20px 20px;
     .sub-title {
       display: block;
       font-size: 18px;
+      letter-spacing: 0.2px;
+      line-height: 1.1;
     }
   }
 

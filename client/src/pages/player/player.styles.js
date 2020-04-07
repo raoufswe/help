@@ -15,6 +15,15 @@ const StyledLogin = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  .back-arrow {
+    padding: 0;
+    margin: 50px auto auto 30px;
+    svg {
+      width: 24px;
+      height: 21px;
+      fill: white;
+    }
+  }
 `
 
 export default StyledLogin

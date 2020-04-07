@@ -8,7 +8,7 @@ const Styled = styled.div`
   }
 
   .burger-icon {
-    padding: 20px;
+    padding: 10px;
     svg {
       width: 30px;
       height: 30px;

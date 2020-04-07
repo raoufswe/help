@@ -1,14 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 const Styled = styled.div`
   font-family: Fira Sans;
   span {
     display: block;
     font-weight: 600;
-    font-size: 36px;
+    font-size: ${maxmin(36, 30)};
     color: #000000;
     padding-bottom: 10px;
+    letter-spacing: 0.2px;
+    line-height: 1.1;
   }
 `
 export default function Greeting({ name = 'Awesome soul' }) {

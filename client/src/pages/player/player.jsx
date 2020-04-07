@@ -5,6 +5,7 @@ import PlayBar from './playBar'
 import Styled from './player.styles'
 import Wrapper from 'components/exerciseWrapper.jsx'
 import { useRouteMatch, Redirect, useHistory } from 'react-router-dom'
+import LeftArrow from 'assets/left-arrow.icon'
 
 const Player = ({ history }) => {
   const path = useRouteMatch('/player')
@@ -16,6 +17,12 @@ const Player = ({ history }) => {
   return (
     <AudioPlayerProvider>
       <Styled>
+        <button
+          className="back-arrow"
+          onClick={() => history.push('/exercises')}
+        >
+          <LeftArrow />
+        </button>
         <PlayBar title={title} by={by} src={src} />
       </Styled>
     </AudioPlayerProvider>

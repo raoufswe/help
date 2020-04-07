@@ -12,7 +12,7 @@ import { getUserDetails } from 'utils/verifyToken.js'
 const Styled = styled.div`
   background: white;
   font-family: Fira Sans;
-  padding: 15px 51px 10px 30px;
+  padding: 15px 51px 0 20px;
   border-bottom: 1px solid #edecec;
 
   span {
@@ -30,10 +30,10 @@ const Styled = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    padding: 15px 0;
+    padding: 10px 0;
     svg {
       height: 30px;
-      width: 35px;
+      width: 30px;
     }
   }
 `
