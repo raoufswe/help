@@ -96,7 +96,7 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
               data={LinChartData}
-              margin={{ top: 10, right: 30, left: -10, bottom: 10 }}
+              margin={{ top: 15, right: 30, left: -10, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" type="category" />
