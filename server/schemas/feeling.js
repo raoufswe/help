@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const FeelingSchema = new Schema({
-  _id: String,
+  week: { type: String },
   Sat: {
     weight: Number,
     emoji: String,

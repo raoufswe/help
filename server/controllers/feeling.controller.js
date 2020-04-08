@@ -2,8 +2,7 @@ const Feeling = require("../schemas/feeling")
 
 exports.feeling_create = (req, res, next) => {
   let feeling = new Feeling({
-    feeling: req.body.feeling,
-    _id: req.body._id,
+    week: req.body.week,
     Sat: req.body.Sat,
     Sun: req.body.Sun,
     Mon: req.body.Mon,
@@ -25,7 +24,7 @@ exports.feeling_create = (req, res, next) => {
 }
 
 exports.feeling_get = (req, res) => {
-  Feeling.findOne({ _id: req.params.id, userID: req.params.userID })
+  Feeling.findOne({ week: req.params.week, userID: req.params.userID })
     .then((doc) => {
       if (doc) {
         res.send({ success: "success", data: doc, error: [] })
@@ -47,7 +46,7 @@ exports.feeling_get = (req, res) => {
 
 exports.feeling_update = (req, res) => {
   Feeling.findOneAndUpdate(
-    { _id: req.params.id, userID: req.params.userID },
+    { week: req.params.week, userID: req.params.userID },
     { $set: req.body }
   )
     .then((docs) => {
@@ -68,7 +67,7 @@ exports.feeling_update = (req, res) => {
 }
 
 exports.feeling_delete = (req, res) => {
-  Feeling.findOneAndRemove({ _id: req.params.id, userID: req.params.userID })
+  Feeling.findOneAndRemove({ week: req.params.week, userID: req.params.userID })
     .then((docs) => {
       if (docs) {
         res.send({ success: "success", data: [docs], errors: [] })
@@ -101,7 +100,6 @@ exports.feelings_delete = (req, res) => {
 
 exports.feelings_get = (req, res) => {
   Feeling.find({ userID: req.params.userID })
-    .sort({ createdAt: -1 })
     .then((data) => {
       res.send({ success: "success", data: data, errors: [] })
       console.log(data)
