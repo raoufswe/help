@@ -26,6 +26,7 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
     .startOf('week')
     .format('YYYY-MM-DD')
 
+
   const fetchFeeling = async () => {
     const { id } = getUserDetails()
     const requestOptions = {
@@ -58,7 +59,8 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
 
   useEffect(() => {
     fetchFeeling()
-  }, [feeling])
+  }, [feeling, JSON.stringify(data)])
+
 
   const { _id, __v, userID, ...feelings } = data
   const LinChartData = Object.entries(feelings).map(e => ({
@@ -66,18 +68,17 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
     uv: e[1].emoji,
     weight: e[1].weight
   }))
-  // .sort((a, b) => a.weight - b.weight)
 
-  const DataFormater = emoji => {
-    if (emoji === '😬') {
+  const DataFormater = weight => {
+    if (weight === 100) {
       return '😬'
-    } else if (emoji === '🙂') {
+    } else if (weight === 75) {
       return '🙂'
-    } else if (emoji === '😐') {
+    } else if (weight === 50) {
       return '😐'
-    } else if (emoji === '😢') {
+    } else if (weight === 25) {
       return '😢'
-    } else if (emoji === '😠') {
+    } else if (weight === 0) {
       return '😠'
     }
   }
@@ -102,12 +103,12 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
               margin={{ top: 10, right: 30, left: -10, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" interval={0} type="category" />
-              <YAxis type="category" tickFormatter={DataFormater} />
+              <XAxis dataKey="name"  type="category" />
+              <YAxis type="number" dataKey="weight" tickFormatter={DataFormater} />
               <Tooltip />
               <Line
                 type="monotone"
-                dataKey="uv"
+                dataKey="weight"
                 stroke="#2676FF"
                 fill="#2676FF"
               />
