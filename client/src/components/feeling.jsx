@@ -57,8 +57,8 @@ export default function Feeling({ onChange }) {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        _id: currentWeek,
-        Thu: feeling,
+        week: currentWeek,
+        [currentDay]: feeling,
         userID
       })
     }
@@ -87,7 +87,7 @@ export default function Feeling({ onChange }) {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        Wed: feeling
+        [currentDay]: feeling
       })
     }
 

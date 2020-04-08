@@ -26,7 +26,6 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
     .startOf('week')
     .format('YYYY-MM-DD')
 
-
   const fetchFeeling = async () => {
     const { id } = getUserDetails()
     const requestOptions = {
@@ -61,8 +60,7 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
     fetchFeeling()
   }, [feeling, JSON.stringify(data)])
 
-
-  const { _id, __v, userID, ...feelings } = data
+  const { _id, __v, userID, week, ...feelings } = data
   const LinChartData = Object.entries(feelings).map(e => ({
     name: e[0],
     uv: e[1].emoji,
@@ -83,28 +81,31 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
     }
   }
 
-  console.log({ LinChartData })
   return (
     <>
       {loading ? (
         <LoadingUI style={{ position: 'absolute', top: '50%' }} />
       ) : error ? (
         <SomethingWrong />
-      ) : (
+      ) : LinChartData.length ? (
         <StyledOverviewBars>
           <span>
             Here’s an overview of how your week has been so far. You’re doing
             great!
           </span>
-
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
               data={LinChartData}
               margin={{ top: 10, right: 30, left: -10, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name"  type="category" />
-              <YAxis type="number" dataKey="weight" tickFormatter={DataFormater} />
+              <XAxis dataKey="name" type="category" />
+              <YAxis
+                type="number"
+                dataKey="weight"
+                tickFormatter={DataFormater}
+                domain={[dataMin => 0, dataMax => 100]}
+              />
               <Tooltip />
               <Line
                 type="monotone"
@@ -115,7 +116,7 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
             </LineChart>
           </ResponsiveContainer>
         </StyledOverviewBars>
-      )}
+      ) : null}
     </>
   )
 }
