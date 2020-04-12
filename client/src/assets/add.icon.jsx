@@ -1,14 +1,18 @@
-import React from 'react'
+import * as React from 'react'
 
-function AddIcon(props) {
+function SvgComponent(props) {
   return (
-    <svg width={28} height={28} viewBox="0 0 28 28" fill="none" {...props}>
+    <svg viewBox="0 0 512 512" {...props}>
       <path
-        d="M16.952.632v10.8h10.512v5.472H16.952v10.728h-6.048V16.904H.464v-5.472h10.44V.632h6.048z"
-        fill="#fff"
+        d="M256 0C114.836 0 0 114.836 0 256s114.836 256 256 256 256-114.836 256-256S397.164 0 256 0zm0 0"
+        fill="#2196f3"
+      />
+      <path
+        d="M368 277.332h-90.668V368c0 11.777-9.555 21.332-21.332 21.332s-21.332-9.555-21.332-21.332v-90.668H144c-11.777 0-21.332-9.555-21.332-21.332s9.555-21.332 21.332-21.332h90.668V144c0-11.777 9.555-21.332 21.332-21.332s21.332 9.555 21.332 21.332v90.668H368c11.777 0 21.332 9.555 21.332 21.332s-9.555 21.332-21.332 21.332zm0 0"
+        fill="#fafafa"
       />
     </svg>
   )
 }
 
-export default AddIcon
+export default SvgComponent

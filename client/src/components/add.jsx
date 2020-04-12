@@ -8,9 +8,8 @@ export const Styled = styled.div`
     position: absolute;
     right: 30px;
     bottom: 20px;
-    border-radius: 50px;
-    background: #2676ff;
-    padding: ${maxmin(15, 10)};
+    width: 50px;
+    padding: 0;
   }
 `
 

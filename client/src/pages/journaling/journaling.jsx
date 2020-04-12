@@ -90,10 +90,12 @@ const Journaling = ({ history }) => {
       </div>
 
       {showCalendar && (
-        <DatePicker
-          onOutsideClick={() => setShowCalendar(false)}
-          onDayChange={day => setSelectedDate(day)}
-        />
+        <div className="calendar">
+          <DatePicker
+            onOutsideClick={() => setShowCalendar(false)}
+            onDayChange={day => setSelectedDate(day)}
+          />
+        </div>
       )}
 
       <main>

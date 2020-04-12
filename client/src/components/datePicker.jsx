@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react'
 import DayPicker from 'react-day-picker'
 import Cookies from 'js-cookie'
 
-export default function DatePicker({ onOutsideClick, onDayChange }) {
+export default function DatePicker({
+  disableOutsideClick,
+  onOutsideClick,
+  onDayChange
+}) {
   const ref = useRef(null)
   const [selectedDay, setSelectedDay] = useState(Cookies.get('selectedDay'))
 
@@ -23,10 +27,10 @@ export default function DatePicker({ onOutsideClick, onDayChange }) {
     Cookies.set('selectedDay', day)
     setSelectedDay(day)
     onDayChange(day)
-    onOutsideClick(false)
   }
 
   useEffect(() => {
+    if (disableOutsideClick) return
     document.addEventListener('mousedown', handleClickOutsideOfCalendar)
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideOfCalendar)
@@ -34,7 +38,7 @@ export default function DatePicker({ onOutsideClick, onDayChange }) {
   })
 
   return (
-    <div className="calendar" ref={ref}>
+    <div ref={ref}>
       <DayPicker
         onDayClick={handleDayClick}
         selectedDays={new Date(selectedDay)}

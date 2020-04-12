@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const getDate = date => {
   return new Date(date).toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -17,4 +19,19 @@ export const getTime = date => {
 
 export const getDay = date => {
   return new Date().toLocaleString('en-us', { weekday: 'short' })
+}
+
+export const getDaysMonth = () => {
+  let count = moment().daysInMonth()
+  let days = []
+  for (let i = 1; i < count + 1; i++) {
+    days.push(i)
+  }
+  return days
+}
+
+export const getDayNumber = () => {
+  return new Date().toLocaleDateString('en-GB', {
+    day: 'numeric'
+  })
 }
