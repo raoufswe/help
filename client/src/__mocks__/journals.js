@@ -1,4 +1,4 @@
-import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
+import { getDate, getTime } from 'utils/dateHelpers/dateHelpers.js'
 
 export const Journals = [
   {

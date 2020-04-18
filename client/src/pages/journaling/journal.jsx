@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledJournal } from './journaling.styles'
-import { getDate, getTime } from 'utils/dataHelpers/dataHelpers.js'
+import { getDate, getTime } from 'utils/dateHelpers/dateHelpers.js'
 
 export default function Journal({ createdAt, content }) {
   return (

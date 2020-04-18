@@ -6,7 +6,7 @@ import Happy from 'assets/happy.icon.jsx'
 import Confused from 'assets/confused.icon.jsx'
 import Unhappy from 'assets/unhappy.icon.jsx'
 import Mad from 'assets/mad.icon.jsx'
-import { getDay } from 'utils/dataHelpers/dataHelpers.js'
+import { getDay } from 'utils/dateHelpers/dateHelpers.js'
 import { getUserDetails } from 'utils/verifyToken.js'
 import moment from 'moment'
 

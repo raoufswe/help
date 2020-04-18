@@ -11,7 +11,7 @@ const StyledOverlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
+  /* z-index: 2; */
   cursor: pointer;
 `
 
