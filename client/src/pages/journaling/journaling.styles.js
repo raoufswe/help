@@ -3,7 +3,6 @@ import maxmin from 'utils/maxmin.js'
 
 export const StyledJournaling = styled.div`
   display: flex;
-  font-family: Fira Sans;
   flex-direction: column;
   height: 100vh;
 
@@ -101,7 +100,6 @@ export const StyledJournaling = styled.div`
 `
 
 export const StyledJournal = styled.div`
-  font-family: Fira Sans;
 
   .date {
     display: inline-block;
@@ -129,7 +127,6 @@ export const StyledJournal = styled.div`
 export const StyledAddJournal = styled.div`
   height: 100vh;
   padding: 50px 30px 30px;
-  font-family: Fira Sans;
   display: flex;
   flex-direction: column;
 
@@ -178,7 +175,6 @@ export const StyledUpdateJournal = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-family: Fira Sans;
 
   .page-header {
     display: flex;

@@ -3,7 +3,6 @@ import maxmin from 'utils/maxmin.js'
 
 export const StyledHospitals = styled.div`
   height: 100vh;
-  font-family: Fira Sans;
   padding: 0 20px;
   line-height: 1.3;
   letter-spacing: 0.2px;
@@ -32,7 +31,6 @@ export const StyledHospitals = styled.div`
 export const StyledHospital = styled.div`
   background: #2676ff;
   border-radius: 20px;
-  font-family: Fira Sans;
   margin-bottom: ${maxmin(20, 10)};
   display: flex;
   align-items: center;

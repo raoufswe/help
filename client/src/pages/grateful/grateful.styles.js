@@ -4,7 +4,6 @@ import maxmin from 'utils/maxmin.js'
 export const StyledGrateful = styled.div`
   height: 100vh;
   padding: 0 30px;
-  font-family: Fira Sans;
 
   .page-title {
     padding-bottom: ${maxmin(20, 10)};
@@ -43,7 +42,6 @@ export const StyledGratefulThing = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: Fira Sans;
   border-bottom: 1px solid #edecec;
 
   .title {
@@ -56,7 +54,6 @@ export const StyledGratefulThing = styled.div`
 export const StyledAddGratefulThing = styled.div`
   height: 100vh;
   padding: 50px 30px 30px;
-  font-family: Fira Sans;
   display: flex;
   flex-direction: column;
 

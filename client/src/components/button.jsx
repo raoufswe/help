@@ -4,7 +4,6 @@ import styled from 'styled-components'
 const StyledButton = styled.button`
   background: ${props => props.color};
   border-radius: 40px;
-  font-family: Fira Sans;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;

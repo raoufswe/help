@@ -4,7 +4,6 @@ import maxmin from 'utils/maxmin.js'
 export const StyledFAQ = styled.div`
   height: 100vh;
   padding: 0 20px;
-  font-family: Fira Sans;
 
   .page-title {
     font-weight: 600;

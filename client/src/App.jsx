@@ -21,9 +21,9 @@ import Journaling from 'pages/journaling'
 import AddJournal from 'pages/journaling/addJournal'
 import UpdateJournal from 'pages/journaling/updateJournal'
 import Tasks from 'pages/tasks'
-import AddTask from 'pages/tasks/addTask'
+import Task from 'pages/tasks/task'
 import Player from 'pages/player'
-import Exercises from "pages/exercises"
+import Exercises from 'pages/exercises'
 
 const App = () => {
   return (
@@ -116,8 +116,8 @@ const App = () => {
                     />
                     <PrivateRoute
                       name="Tasks"
-                      path="/addTask"
-                      component={AddTask}
+                      path="/tasks/:id"
+                      component={Task}
                       exact
                     />
                     <PrivateRoute
@@ -132,7 +132,7 @@ const App = () => {
                       component={Player}
                       exact
                     />
-                       <PrivateRoute
+                    <PrivateRoute
                       name="Exercises"
                       path="/exercises"
                       component={Exercises}

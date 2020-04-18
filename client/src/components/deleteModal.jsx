@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Button from 'components/button'
 
 const Styled = styled.div`
-  font-family: Fira Sans;
   background: #ffffff;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

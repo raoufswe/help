@@ -35,7 +35,6 @@ const StyledLogin = styled.div`
       outline: 0;
       max-width: 100%;
       border-bottom: 2px solid black;
-      font-family: Fira Sans;
       font-weight: 600;
       font-size: ${maxmin(60, 26)};
       color: black;

@@ -12,7 +12,6 @@ import moment from 'moment'
 
 const Styled = styled.div`
   background: white;
-  font-family: Fira Sans;
   padding: 15px 51px 0 20px;
   border-bottom: 1px solid #edecec;
 

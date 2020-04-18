@@ -3,7 +3,6 @@ import maxmin from 'utils/maxmin.js'
 
 const Styled = styled.div`
   height: 100vh;
-  font-family: Fira Sans;
   padding: 0 20px;
 
   .page-title {

@@ -6,7 +6,6 @@ const StyledLanding = styled.div`
   flex-direction: column;
   justify-content: space-around;
   height: 100vh;
-  font-family: Fira Sans;
 
   .header-items {
     display: flex;
@@ -15,7 +14,6 @@ const StyledLanding = styled.div`
     align-items: center;
     .landing-title {
       color: #000;
-      font-family: Pacifico;
       font-size: ${maxmin(64, 50)};
       margin: auto;
     }

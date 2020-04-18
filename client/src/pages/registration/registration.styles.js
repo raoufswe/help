@@ -36,7 +36,6 @@ const StyledRegister = styled.div`
   .password-rules {
     margin-top: ${maxmin(75, 40)};
     > div {
-      font-family: Fira Sans;
       font-weight: 500;
       font-size: 18px;
       padding-bottom: ${maxmin(30, 20)};
@@ -56,7 +55,6 @@ const StyledRegister = styled.div`
     outline: 0;
     max-width: 100%;
     border-bottom: 2px solid black;
-    font-family: Fira Sans;
     font-weight: 600;
     font-size: ${maxmin(36, 24)};
     color: black;

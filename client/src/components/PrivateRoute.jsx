@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const journalingPage = useRouteMatch('/journaling')
   const addJournalPage = useRouteMatch('/addJournal')
   const updateJournal = useRouteMatch('/updateJournal')
-  const addTaskPage = useRouteMatch('/addTask')
+  const taskPage = useRouteMatch('/tasks/:id')
   const PLayerPage = useRouteMatch('/player')
 
   const [isOpen, setOpen] = useState(false)
@@ -35,7 +35,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 journalingPage ??
                 addJournalPage ??
                 updateJournal ??
-                addTaskPage ??
+                taskPage ??
                 PLayerPage
               }
             />

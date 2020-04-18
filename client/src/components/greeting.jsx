@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import maxmin from 'utils/maxmin.js'
 
 const Styled = styled.div`
-  font-family: Fira Sans;
   span {
     display: block;
     font-weight: 600;

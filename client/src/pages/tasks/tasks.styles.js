@@ -44,7 +44,6 @@ export const StyledTasks = styled.div`
 `
 
 export const StyledAddTaskModal = styled.div`
-  font-family: Fira Sans;
   color: black;
   margin-top: auto;
   padding: 30px;
@@ -143,8 +142,7 @@ export const StyledTimer = styled.div`
 
   .react-timekeeper.css-nakgy8-TimeKeeper {
     box-shadow: none;
-    font-family: Fira Sans;
-  }
+    }
 
   .react-timekeeper__tb-hour.react-timekeeper__tb-hour--active.css-1aty463-TopBar,
   .react-timekeeper__tb-minute.react-timekeeper__tb-minute--active.css-1nkra40-TopBar {

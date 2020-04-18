@@ -18,7 +18,6 @@ const Styled = styled.div`
     justify-content: space-evenly;
     height: 50%;
     > p {
-      font-family: Fira Sans;
       font-weight: 600;
       font-size: ${maxmin(36, 30)};
       color: #ffffff;

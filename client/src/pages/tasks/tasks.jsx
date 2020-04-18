@@ -3,14 +3,12 @@ import { StyledTasks } from './tasks.styles'
 import { tasks, reminders } from '__mocks__/tasks.js'
 import CompletedTasks from './completedTask'
 import InCompleteTasks from './incompleteTask'
-import Reminder from './reminder'
 import Add from 'components/add.jsx'
 import AddTask from './addTask'
 import BurgerIcon from 'assets/burger.icon.jsx'
 import MoreIcon from 'assets/more.icon.jsx'
 import AddIcon from 'assets/add.icon.jsx'
 import { motion, AnimatePresence } from 'framer-motion'
-import Repeat from 'components/repeat/repeat.jsx'
 
 const Tasks = ({ history }) => {
   const [addTaskModal, setAddTaskModal] = useState(false)
