@@ -24,21 +24,6 @@ const StyledLanding = styled.div`
       padding-top: 30px;
     }
   }
-  .landing-background {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-  }
-  .landing-illustrations {
-    > div {
-      /* width: ${maxmin(800, 200)} !important; */
-      /* height: ${maxmin(800, 200)} !important; */
-    }
-  }
 
   .landing-footer {
     display: flex;
@@ -55,12 +40,6 @@ const StyledLanding = styled.div`
       color: #2676ff;
       border: 1px solid #2676ff;
       letter-spacing: 1px;
-    }
-  }
-
-  @media only screen and (min-width: 600px) {
-    .landing-background {
-      display: none;
     }
   }
 `

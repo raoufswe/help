@@ -5,7 +5,6 @@ import Styled from './landing.styles'
 import Button from 'components/button.jsx'
 import Lottie from 'react-lottie'
 import LightBulb from 'assets/lotties/15193-como-funciona-01.json'
-import Background from 'assets/landing-background.icon.jsx'
 
 const Landing = ({ history, validToken }) => {
   const defaultOptions = {
@@ -25,8 +24,6 @@ const Landing = ({ history, validToken }) => {
         <span className="landing-title">Help</span>
         <span className="landing-subtitle">A tagline or something</span>
       </div>
-
-      {/* <Background className="landing-background" /> */}
 
       <div className="landing-illustrations">
         <Lottie options={defaultOptions} isClickToPauseDisabled={true} />
