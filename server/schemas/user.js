@@ -1,20 +1,20 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 const schema = new Schema(
   {
-    email: { type: String, unique: true },
+    email: {type: String, unique: true},
     password: String,
     name: String,
     googleId: String,
-    facebookId: String
+    facebookId: String,
   },
-  { timestamps: true }
+  {timestamps: true},
 )
 
-schema.pre("save", function(next) {
+schema.pre('save', function (next) {
   if (this.password) {
     this.password = bcrypt.hashSync(this.password, saltRounds)
     next()
@@ -22,4 +22,4 @@ schema.pre("save", function(next) {
   next()
 })
 
-module.exports = mongoose.model("User", schema)
+module.exports = mongoose.model('User', schema)

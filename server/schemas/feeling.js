@@ -1,8 +1,8 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const FeelingSchema = new Schema({
-  week: { type: String },
+  week: {type: String},
   Sat: {
     weight: Number,
     emoji: String,
@@ -31,7 +31,7 @@ const FeelingSchema = new Schema({
     weight: Number,
     emoji: String,
   },
-  userID: { type: String },
+  userID: {type: String},
 })
 
-module.exports = mongoose.model("Feeling", FeelingSchema)
+module.exports = mongoose.model('Feeling', FeelingSchema)

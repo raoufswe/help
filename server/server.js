@@ -1,33 +1,33 @@
-const express = require("express")
+const express = require('express')
 const app = express()
-const cors = require("cors")
+const cors = require('cors')
 const port = 3000
-const mongoose = require("mongoose")
-const bodyParser = require("body-parser")
-const jwt = require("express-jwt")
-const dotenv = require("dotenv")
-const passport = require("passport")
-const passportSetup = require("./config/passport.setup")
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const jwt = require('express-jwt')
+const dotenv = require('dotenv')
+const passport = require('passport')
+const passportSetup = require('./config/passport.setup')
 
 dotenv.config()
 
-app.use(express.static("uploads"))
+app.use(express.static('uploads'))
 mongoose
   .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   })
-  .then(info => {
-    console.log("mongo connected")
+  .then((info) => {
+    console.log('mongo connected')
   })
-  .catch(err => {
-    console.log("mongo connection error", err.message)
+  .catch((err) => {
+    console.log('mongo connection error', err.message)
   })
 
-app.set("secretKey", process.env.TOKEN_SECRET)
-app.use(bodyParser.urlencoded({ extended: false }))
+app.set('secretKey', process.env.TOKEN_SECRET)
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(cors())
 app.use(
@@ -36,37 +36,37 @@ app.use(
     getToken: function fromHeaderOrQuerystring(req) {
       if (
         req.headers.authorization &&
-        req.headers.authorization.split(" ")[0] === "Bearer"
+        req.headers.authorization.split(' ')[0] === 'Bearer'
       ) {
-        return req.headers.authorization.split(" ")[1]
+        return req.headers.authorization.split(' ')[1]
       } else if (req.query && req.query.token) {
         return req.query.token
       }
       return null
-    }
+    },
   }).unless({
     path: [
-      "/",
-      "/user/auth",
-      "/user/register",
-      "/user/google",
-      "/user/google/redirect",
-      "/user/facebook",
-      "/user/facebook/redirect"
-    ]
+      '/',
+      '/user/auth',
+      '/user/register',
+      '/user/google',
+      '/user/google/redirect',
+      '/user/facebook',
+      '/user/facebook/redirect',
+    ],
   }),
-  function(err, req, res, next) {
+  function (err, req, res, next) {
     if (err) {
       res.sendStatus(401)
     }
-  }
+  },
 )
 
 app.use(passport.initialize())
 
-app.get("/", (req, res) => res.send("Hello World!"))
-app.use("/user", require("./routes/user.route"))
-app.use("/journals", require("./routes/journal.route"))
-app.use("/grateful", require("./routes/grateful.route"))
-app.use("/feeling", require("./routes/feeling.route"))
+app.get('/', (req, res) => res.send('Hello World!'))
+app.use('/user', require('./routes/user.route'))
+app.use('/journals', require('./routes/journal.route'))
+app.use('/grateful', require('./routes/grateful.route'))
+app.use('/feeling', require('./routes/feeling.route'))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
