@@ -63,11 +63,6 @@ export default function Task({ title, details, time, repeat }) {
         <Reminder show={showReminder} onHide={() => setShowReminder(false)} />
       )}
 
-      {/* <div>
-        <RepeatIcon />
-       <h5>repeat</h5>
-      </div> */}
-
       <button className="mark-completed">
         <CorrectIcon />
         <span>Mark completed</span>

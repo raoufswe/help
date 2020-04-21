@@ -25,6 +25,11 @@ const StyledLanding = styled.div`
     }
   }
 
+  .landing-illustrations {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
   .landing-footer {
     display: flex;
     flex-direction: column;
