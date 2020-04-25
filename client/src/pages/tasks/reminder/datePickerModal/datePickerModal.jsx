@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Styled, { GlobalStyle } from './datePickerModal.styles'
 import DatePicker from 'components/datePicker.jsx'
 import { Modal } from 'react-bootstrap'
 
 export default function DatePickerModal(props) {
   const [selectedDate, setSelectedDate] = useState(new Date())
+
+  useEffect(() => {
+    props.onChange(selectedDate)
+  }, [selectedDate])
   return (
     <>
       <Modal
@@ -18,7 +22,7 @@ export default function DatePickerModal(props) {
         <Styled>
           <DatePicker
             disableOutsideClick
-            onDayChange={day => setSelectedDate(day)}
+            onChange={day => setSelectedDate(day)}
           />
 
           <div className="footer-section">

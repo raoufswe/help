@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import Styled, { GlobalStyle } from './reminder.styles'
 import { Modal } from 'react-bootstrap'
 import SetTime from './setTime'
@@ -6,12 +6,32 @@ import Repeat from './repeat'
 import DatePicker from 'components/datePicker.jsx'
 import ClockIcon from 'assets/clock.icon.jsx'
 import RepeatIcon from 'assets/repeat.icon.jsx'
+import { Context } from 'context'
 
 export default function Reminder(props) {
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [globalContext, setGlobalContext] = useContext(Context)
   const [showSetTime, setShowSetTime] = useState(false)
   const [showSetRepeat, setShowSetRepeat] = useState(false)
 
+  const onTimeChange = time => {
+    setGlobalContext({
+      addTask: {
+        ...globalContext.addTask,
+        time
+      }
+    })
+  }
+
+  const onDateChange = day => {
+    setGlobalContext({
+      addTask: {
+        ...globalContext.addTask,
+        date: day
+      }
+    })
+  }
+
+  console.log(globalContext)
   return (
     <>
       <Modal
@@ -26,7 +46,7 @@ export default function Reminder(props) {
           <div className="date-picker">
             <DatePicker
               disableOutsideClick
-              onDayChange={day => setSelectedDate(day)}
+              onChange={day => onDateChange(day)}
             />
             <div className="set-actions">
               <div className="action">
@@ -36,6 +56,7 @@ export default function Reminder(props) {
                 </button>
                 {showSetTime && (
                   <SetTime
+                    onChange={onTimeChange}
                     show={showSetTime}
                     onHide={() => setShowSetTime(false)}
                   />

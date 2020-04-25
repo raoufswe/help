@@ -1,26 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Styled, { GlobalStyle, StyledDatePickerModal } from './repeat.styles'
 import { Modal } from 'react-bootstrap'
 import WeekDaysPicker from 'components/weekDaysPicker.jsx'
 import SetTime from '../setTime'
-import { getDaysMonth, getDayNumber } from 'utils/dateHelpers/dateHelpers.js'
+import { getDaysMonth } from 'utils/dateHelpers/dateHelpers.js'
 import DatePickerModal from '../datePickerModal'
+import { Context } from 'context'
+
 export default function Repeat(props) {
+  const [{ addTask }, setGlobalContext] = useContext(Context)
+  const { numberOfTimes, every, everyDayOfMonth, start } = addTask.repeat || {}
   const [showSetTime, setShowSetTime] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [repeatForm, setRepeatForm] = useState({
-    numberOfTimes: '1',
-    every: 'week',
-    start: '1',
-    everyDayOfMonth: getDayNumber()
-  })
-  const [selectedWeekDays, setSelectedWeekDays] = useState([])
 
   function handleRepeatFormChange(event) {
     let { value } = event.target
-    setRepeatForm({
-      ...repeatForm,
-      [event.target.name]: value
+    setGlobalContext({
+      addTask: {
+        ...addTask,
+        repeat: {
+          ...addTask.repeat,
+          [event.target.name]: value
+        }
+      }
+    })
+  }
+
+  const onWeekDayChange = day => {
+    setGlobalContext({
+      addTask: {
+        ...addTask,
+        repeat: {
+          ...addTask.repeat,
+          weekDays: day
+        }
+      }
+    })
+  }
+
+  const onTimeChange = time => {
+    setGlobalContext({
+      addTask: {
+        ...addTask,
+        repeat: {
+          ...addTask.repeat,
+          time
+        }
+      }
+    })
+  }
+
+  const onDateChange = date => {
+    setGlobalContext({
+      addTask: {
+        ...addTask,
+        repeat: {
+          ...addTask.repeat,
+          date
+        }
+      }
     })
   }
 
@@ -40,43 +78,41 @@ export default function Repeat(props) {
             <input
               type="text"
               name="numberOfTimes"
-              value={repeatForm.numberOfTimes}
+              value={numberOfTimes}
               onChange={handleRepeatFormChange}
               maxLength={2}
             />
             <select
               name="every"
-              value={repeatForm.every}
+              value={every}
               onChange={handleRepeatFormChange}
             >
               <option value="day">
-                {`day${repeatForm.numberOfTimes !== '1' ? 's' : ''}`}
+                {`day${numberOfTimes !== '1' ? 's' : ''}`}
               </option>
               <option value="week">
-                {`week${repeatForm.numberOfTimes !== '1' ? 's' : ''}`}
+                {`week${numberOfTimes !== '1' ? 's' : ''}`}
               </option>
               <option value="month">
-                {`month${repeatForm.numberOfTimes !== '1' ? 's' : ''}`}
+                {`month${numberOfTimes !== '1' ? 's' : ''}`}
               </option>
               <option value="year">
-                {`year${repeatForm.numberOfTimes !== '1' ? 's' : ''}`}
+                {`year${numberOfTimes !== '1' ? 's' : ''}`}
               </option>
             </select>
           </div>
 
-          {repeatForm.every === 'week' && (
+          {every === 'week' && (
             <WeekDaysPicker
-              onChange={selectedWeekDays =>
-                setSelectedWeekDays(selectedWeekDays)
-              }
+              onChange={selectedWeekDays => onWeekDayChange(selectedWeekDays)}
             />
           )}
 
-          {repeatForm.every === 'month' && (
+          {every === 'month' && (
             <select
               className="full-width-input"
               name="everyDayOfMonth"
-              value={repeatForm.everyDayOfMonth}
+              value={everyDayOfMonth}
               onChange={handleRepeatFormChange}
             >
               {getDaysMonth().map(day => (
@@ -87,10 +123,10 @@ export default function Repeat(props) {
 
           <div className="start">
             <span>Start</span>
-            {repeatForm.every === 'month' ? (
+            {every === 'month' ? (
               <select
                 name="start"
-                defaultValue={repeatForm.start}
+                defaultValue={start}
                 onChange={handleRepeatFormChange}
               >
                 <option value="1">Janaury</option>
@@ -127,13 +163,18 @@ export default function Repeat(props) {
 
       {showDatePicker && (
         <DatePickerModal
+          onChange={onDateChange}
           show={showDatePicker}
           onHide={() => setShowDatePicker(false)}
         />
       )}
 
       {showSetTime && (
-        <SetTime show={showSetTime} onHide={() => setShowSetTime(false)} />
+        <SetTime
+          show={showSetTime}
+          onHide={() => setShowSetTime(false)}
+          onChange={onTimeChange}
+        />
       )}
       <GlobalStyle showSetTime={showSetTime} showDatePicker={showDatePicker} />
     </>

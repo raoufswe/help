@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Styled, { GlobalStyle } from './addTaskModal.styles'
 import TextareaAutosize from 'react-autosize-textarea'
 import AddMoreDetailsIcon from 'assets/addMoreDetails.icon'
 import ReminderIcon from 'assets/reminder.icon.jsx'
 import Reminder from '../reminder'
 import { Modal } from 'react-bootstrap'
+import { Context } from 'context'
 
 export default function AddTaskModal(props) {
+  const [globalContext, setGlobalContext] = useContext(Context)
   const [addMoreDetails, setAddMoreDetails] = useState(false)
   const [showReminder, setShowReminder] = useState(false)
 
   const onChange = e => {
-    const { value } = e.target
+    const { value, name } = e.target
+    setGlobalContext({
+      addTask: {
+        ...globalContext.addTask,
+        [name]: value
+      }
+    })
   }
 
   return (
@@ -27,13 +35,13 @@ export default function AddTaskModal(props) {
             type="text"
             className="task-input"
             onChange={onChange}
-            name="task"
+            name="title"
             placeholder="New task"
           />
 
           {addMoreDetails && (
             <TextareaAutosize
-              name="title"
+              name="details"
               placeholder="Add details"
               className="grateful-input"
               onChange={onChange}

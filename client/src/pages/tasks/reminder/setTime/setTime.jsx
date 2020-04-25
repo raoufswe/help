@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Styled, { GlobalStyle } from './setTime.styles'
 import { Modal } from 'react-bootstrap'
 import TimeKeeper from 'react-timekeeper'
 
 export default function SetTime(props) {
-  const [time, setTime] = useState('12:34pm')
+  const [time, setTime] = useState(
+    new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      hour12: true,
+      minute: 'numeric'
+    })
+  )
+
+  useEffect(() => {
+    props.onChange(time)
+  }, [time])
 
   return (
     <>

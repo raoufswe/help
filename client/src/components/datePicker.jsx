@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react'
 import DayPicker from 'react-day-picker'
 import Cookies from 'js-cookie'
+import { useLocation } from 'react-router'
 
 export default function DatePicker({
   disableOutsideClick,
   onOutsideClick,
-  onDayChange
+  onChange
 }) {
+  const location = useLocation()
   const ref = useRef(null)
-  const [selectedDay, setSelectedDay] = useState(Cookies.get('selectedDay'))
+  const [selectedDay, setSelectedDay] = useState(
+    Cookies.get(`selectedDay-${location.pathname}`)
+  )
 
   function handleClickOutsideOfCalendar(event) {
     if (ref.current && !ref.current.contains(event.target)) {
@@ -19,14 +23,14 @@ export default function DatePicker({
   const handleDayClick = (day, { selected, disabled }) => {
     if (disabled) return
     if (selected) {
-      Cookies.set('selectedDay', undefined)
+      Cookies.set(`selectedDay-${location.pathname}`, undefined)
       setSelectedDay(undefined)
-      onDayChange(undefined)
+      onChange(undefined)
       return
     }
-    Cookies.set('selectedDay', day)
+    Cookies.set(`selectedDay-${location.pathname}`, day)
     setSelectedDay(day)
-    onDayChange(day)
+    onChange(day)
   }
 
   useEffect(() => {
