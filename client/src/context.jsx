@@ -8,7 +8,11 @@ export const Provider = props => {
     registerUser: {},
     currentUser: {},
     addTask: {
+      title: '',
+      details: '',
       completed: false,
+      date: '',
+      time: '',
       repeat: {
         numberOfTimes: '1',
         every: 'week',

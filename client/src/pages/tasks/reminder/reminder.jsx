@@ -7,31 +7,28 @@ import DatePicker from 'components/datePicker.jsx'
 import ClockIcon from 'assets/clock.icon.jsx'
 import RepeatIcon from 'assets/repeat.icon.jsx'
 import { Context } from 'context'
+import Cookies from 'js-cookie'
+import { useLocation } from 'react-router'
 
 export default function Reminder(props) {
-  const [globalContext, setGlobalContext] = useContext(Context)
+  const location = useLocation()
+  const [{ addTask }, setGlobalContext] = useContext(Context)
   const [showSetTime, setShowSetTime] = useState(false)
   const [showSetRepeat, setShowSetRepeat] = useState(false)
+  const [date, setDate] = useState(addTask.date)
+  const [time, setTime] = useState(addTask.time)
 
-  const onTimeChange = time => {
+  const onReminderChange = () => {
     setGlobalContext({
       addTask: {
-        ...globalContext.addTask,
+        ...addTask,
+        date,
         time
       }
     })
+    props.onHide()
   }
 
-  const onDateChange = day => {
-    setGlobalContext({
-      addTask: {
-        ...globalContext.addTask,
-        date: day
-      }
-    })
-  }
-
-  console.log(globalContext)
   return (
     <>
       <Modal
@@ -44,19 +41,17 @@ export default function Reminder(props) {
       >
         <Styled>
           <div className="date-picker">
-            <DatePicker
-              disableOutsideClick
-              onChange={day => onDateChange(day)}
-            />
+            <DatePicker disableOutsideClick onChange={day => setDate(day)} />
             <div className="set-actions">
               <div className="action">
                 <ClockIcon />
                 <button className="timer" onClick={() => setShowSetTime(true)}>
-                  Set time
+                  {time ? time : addTask.time ? addTask.time : 'Set time'}
                 </button>
                 {showSetTime && (
                   <SetTime
-                    onChange={onTimeChange}
+                    time={time}
+                    onChange={time => setTime(time)}
                     show={showSetTime}
                     onHide={() => setShowSetTime(false)}
                   />
@@ -76,8 +71,16 @@ export default function Reminder(props) {
             </div>
 
             <div className="footer-section">
-              <button onClick={props.onHide}>Cancel</button>
-              <button onClick={() => {}}>Done</button>
+              <button
+                onClick={() => {
+                  props.onHide()
+                  if (addTask.date) return
+                  Cookies.remove(`selectedDay-${location.pathname}`)
+                }}
+              >
+                Cancel
+              </button>
+              <button onClick={onReminderChange}>Done</button>
             </div>
           </div>
         </Styled>

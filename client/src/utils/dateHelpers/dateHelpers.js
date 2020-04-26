@@ -9,6 +9,14 @@ export const getDate = date => {
   })
 }
 
+export const getReminderDate = date => {
+  return new Date(date).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    weekday: 'short'
+  })
+}
+
 export const getTime = date => {
   return new Date(date).toLocaleString('en-US', {
     hour: 'numeric',

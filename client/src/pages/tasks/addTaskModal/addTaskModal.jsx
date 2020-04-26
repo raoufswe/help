@@ -6,20 +6,39 @@ import ReminderIcon from 'assets/reminder.icon.jsx'
 import Reminder from '../reminder'
 import { Modal } from 'react-bootstrap'
 import { Context } from 'context'
+import useSaveTask from './useSaveTask'
+import CrossIcon from 'assets/cross.icon.jsx'
+import { getReminderDate } from 'utils/dateHelpers/dateHelpers.js'
+import Cookies from 'js-cookie'
+import { useLocation } from 'react-router'
 
 export default function AddTaskModal(props) {
-  const [globalContext, setGlobalContext] = useContext(Context)
+  const location = useLocation()
+  const [{ addTask }, setGlobalContext] = useContext(Context)
+  const { date, time } = addTask || {}
   const [addMoreDetails, setAddMoreDetails] = useState(false)
   const [showReminder, setShowReminder] = useState(false)
+  const [saveTask, { status, response }] = useSaveTask()
 
   const onChange = e => {
     const { value, name } = e.target
     setGlobalContext({
       addTask: {
-        ...globalContext.addTask,
+        ...addTask,
         [name]: value
       }
     })
+  }
+
+  const onReminderClear = () => {
+    setGlobalContext({
+      addTask: {
+        ...addTask,
+        time: '',
+        date: ''
+      }
+    })
+    Cookies.remove(`selectedDay-${location.pathname}`)
   }
 
   return (
@@ -43,7 +62,7 @@ export default function AddTaskModal(props) {
             <TextareaAutosize
               name="details"
               placeholder="Add details"
-              className="grateful-input"
+              className="task-input"
               onChange={onChange}
             />
           )}
@@ -55,6 +74,19 @@ export default function AddTaskModal(props) {
             />
           )}
 
+          {date || time ? (
+            <div className="reminder-box">
+              <button onClick={() => setShowReminder(true)}>
+                <ReminderIcon className="reminder-calendar-icon" />
+                {date && <span>{getReminderDate(date)}</span>}{' '}
+                {time && <span>{time}</span>}
+              </button>
+              <button className="cross-calendar-icon" onClick={onReminderClear}>
+                <CrossIcon />
+              </button>
+            </div>
+          ) : null}
+
           <div className="actions">
             <div>
               <button onClick={() => setAddMoreDetails(true)}>
@@ -64,7 +96,9 @@ export default function AddTaskModal(props) {
                 <ReminderIcon />
               </button>
             </div>
-            <button className="save-task">Save</button>
+            <button className="save-task" onClick={saveTask}>
+              Save
+            </button>
           </div>
         </Styled>
       </Modal>

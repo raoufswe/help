@@ -21,6 +21,7 @@
     "react-dom": "^16.13.0",
     "react-howler": "^3.7.4",
     "react-lottie": "^1.2.3",
+    "react-query": "^1.2.9",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.4.0",

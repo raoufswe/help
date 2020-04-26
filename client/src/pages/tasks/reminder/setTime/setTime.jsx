@@ -5,16 +5,18 @@ import TimeKeeper from 'react-timekeeper'
 
 export default function SetTime(props) {
   const [time, setTime] = useState(
-    new Date().toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      hour12: true,
-      minute: 'numeric'
-    })
+    props.time ||
+      new Date().toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        hour12: true,
+        minute: 'numeric'
+      })
   )
 
-  useEffect(() => {
+  const onTimeChange = () => {
     props.onChange(time)
-  }, [time])
+    props.onHide()
+  }
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function SetTime(props) {
           />
           <div className="timer-actions">
             <button onClick={props.onHide}>Cancel</button>
-            <button>Ok</button>
+            <button onClick={onTimeChange}>Ok</button>
           </div>
         </Styled>
       </Modal>

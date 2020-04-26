@@ -43,6 +43,35 @@ const Styled = styled.div`
     }
   }
 
+  .reminder-box {
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 5px;
+
+    span {
+      vertical-align: bottom;
+    }
+
+    .reminder-calendar-icon {
+      fill: rgb(33, 150, 243);
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+      vertical-align: bottom;
+    }
+    .cross-calendar-icon {
+      margin-left: 10px;
+      vertical-align: middle;
+      padding: 0;
+      svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+
   textarea {
     margin-top: 15px;
   }
@@ -50,6 +79,10 @@ const Styled = styled.div`
   button {
     padding: 0;
     outline: 0;
+  }
+
+  .task-input {
+    display: block;
   }
 `
 
