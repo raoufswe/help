@@ -1,6 +1,6 @@
 const Grateful = require('../schemas/grateful')
 
-exports.grateful_create = (req, res, next) => {
+exports.create_grateful = (req, res, next) => {
   let grateful = new Grateful({
     content: req.body.content,
     userID: req.body.userID,
@@ -18,7 +18,7 @@ exports.grateful_create = (req, res, next) => {
     })
 }
 
-exports.grateful_get = (req, res) => {
+exports.get_grateful = (req, res) => {
   Grateful.findOne({_id: req.params.id, userID: req.params.userID})
     .then((doc) => {
       if (doc) {
@@ -39,7 +39,7 @@ exports.grateful_get = (req, res) => {
     })
 }
 
-exports.grateful_update = (req, res) => {
+exports.update_grateful = (req, res) => {
   Grateful.findOneAndUpdate(
     {_id: req.params.id, userID: req.params.userID},
     {$set: req.body},
@@ -61,7 +61,7 @@ exports.grateful_update = (req, res) => {
     })
 }
 
-exports.grateful_delete = (req, res) => {
+exports.delete_grateful = (req, res) => {
   Grateful.findOneAndRemove({_id: req.params.id, userID: req.params.userID})
     .then((docs) => {
       if (docs) {
@@ -81,7 +81,7 @@ exports.grateful_delete = (req, res) => {
     })
 }
 
-exports.grateful_getAll = (req, res) => {
+exports.get_all_grateful = (req, res) => {
   Grateful.find({userID: req.params.userID})
     .sort({createdAt: -1})
     .then((data) => {
@@ -94,7 +94,7 @@ exports.grateful_getAll = (req, res) => {
     })
 }
 
-exports.grateful_deleteAll = (req, res) => {
+exports.delete_all_grateful = (req, res) => {
   Grateful.remove({userID: req.params.userID})
     .then((data) => {
       res.send({success: 'success', data: [], errors: []})

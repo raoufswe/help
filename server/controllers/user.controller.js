@@ -2,7 +2,7 @@ const User = require('../schemas/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-exports.create = function (req, res) {
+exports.register_user = function (req, res) {
   let user = {
     email: req.body.email,
     password: req.body.password,
@@ -19,7 +19,7 @@ exports.create = function (req, res) {
     })
 }
 
-exports.readOne = function (req, res, next) {
+exports.auth_user = function (req, res, next) {
   if (req.body.email !== '' && req.body.password !== '') {
     User.findOne(
       {
@@ -54,7 +54,7 @@ exports.readOne = function (req, res, next) {
   }
 }
 
-exports.users_get = (req, res) => {
+exports.get_users = (req, res) => {
   User.find({})
     .sort({createdAt: -1})
     .then((data) => {
@@ -67,7 +67,7 @@ exports.users_get = (req, res) => {
     })
 }
 
-exports.users_delete = (req, res) => {
+exports.delete_users = (req, res) => {
   User.remove({})
     .then((data) => {
       res.send({success: 'success', data: [], errors: []})

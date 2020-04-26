@@ -6,10 +6,10 @@ const jwt = require('jsonwebtoken')
 const CLIENT_DASHBOARD = 'http://localhost:8100/dashboard'
 const CLIENT_LOGIN = 'http://localhost:8100/login'
 
-router.post('/register', controller.create)
-router.post('/auth', controller.readOne)
-router.get('/', controller.users_get)
-router.delete('/', controller.users_delete)
+router.post('/register', controller.register_user)
+router.post('/auth', controller.auth_user)
+router.get('/', controller.get_users)
+router.delete('/', controller.delete_users)
 
 router.get(
   '/google',

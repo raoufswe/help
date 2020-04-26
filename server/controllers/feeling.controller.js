@@ -1,6 +1,6 @@
 const Feeling = require('../schemas/feeling')
 
-exports.feeling_create = (req, res, next) => {
+exports.create_feeling = (req, res, next) => {
   let feeling = new Feeling({
     week: req.body.week,
     Sat: req.body.Sat,
@@ -23,7 +23,7 @@ exports.feeling_create = (req, res, next) => {
     })
 }
 
-exports.feeling_get = (req, res) => {
+exports.get_feeling = (req, res) => {
   Feeling.findOne({week: req.params.week, userID: req.params.userID})
     .then((doc) => {
       if (doc) {
@@ -44,7 +44,7 @@ exports.feeling_get = (req, res) => {
     })
 }
 
-exports.feeling_update = (req, res) => {
+exports.update_feeling = (req, res) => {
   Feeling.findOneAndUpdate(
     {week: req.params.week, userID: req.params.userID},
     {$set: req.body},
@@ -66,7 +66,7 @@ exports.feeling_update = (req, res) => {
     })
 }
 
-exports.feeling_delete = (req, res) => {
+exports.delete_feeling = (req, res) => {
   Feeling.findOneAndRemove({week: req.params.week, userID: req.params.userID})
     .then((docs) => {
       if (docs) {
@@ -86,10 +86,10 @@ exports.feeling_delete = (req, res) => {
     })
 }
 
-exports.feelings_delete = (req, res) => {
-  Feeling.remove()
+exports.get_feelings = (req, res) => {
+  Feeling.find({userID: req.params.userID})
     .then((data) => {
-      res.send({success: 'success', data: [], errors: []})
+      res.send({success: 'success', data: data, errors: []})
       console.log(data)
     })
     .catch((err) => {
@@ -98,10 +98,10 @@ exports.feelings_delete = (req, res) => {
     })
 }
 
-exports.feelings_get = (req, res) => {
-  Feeling.find({userID: req.params.userID})
+exports.delete_feelings = (req, res) => {
+  Feeling.remove()
     .then((data) => {
-      res.send({success: 'success', data: data, errors: []})
+      res.send({success: 'success', data: [], errors: []})
       console.log(data)
     })
     .catch((err) => {
