@@ -86,6 +86,18 @@ exports.delete_task = (req, res) => {
 }
 
 exports.get_tasks = (req, res) => {
+  Task.find({})
+    .sort({createdAt: -1})
+    .then((data) => {
+      res.send({success: 'success', data: data, errors: []})
+      console.log(data)
+    })
+    .catch((err) => {
+      res.send({success: false, data: [], errors: [err]})
+      console.log(err)
+    })
+}
+exports.get_user_tasks = (req, res) => {
   Task.find({userID: req.params.userID})
     .sort({createdAt: -1})
     .then((data) => {
@@ -98,8 +110,34 @@ exports.get_tasks = (req, res) => {
     })
 }
 
+exports.get_incomplete_tasks = (req, res) => {
+  Task.find({userID: req.params.userID, completed: false})
+    .sort({createdAt: -1})
+    .then((data) => {
+      res.send({success: 'success', data: data, errors: []})
+      console.log(data)
+    })
+    .catch((err) => {
+      res.send({success: false, data: [], errors: [err]})
+      console.log(err)
+    })
+}
+
+exports.get_completed_tasks = (req, res) => {
+  Task.find({userID: req.params.userID, completed: false})
+    .sort({createdAt: -1})
+    .then((data) => {
+      res.send({success: 'success', data: data, errors: []})
+      console.log(data)
+    })
+    .catch((err) => {
+      res.send({success: false, data: [], errors: [err]})
+      console.log(err)
+    })
+}
+
 exports.delete_tasks = (req, res) => {
-  Task.remove({userID: req.params.userID})
+  Task.remove()
     .then((data) => {
       res.send({success: 'success', data: [], errors: []})
       console.log(data)
