@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useMutation } from 'react-query'
+import { useMutation, queryCache } from 'react-query'
 import { getUserDetails } from 'utils/verifyToken.js'
 import { Context } from 'context'
 import Cookies from 'js-cookie'
@@ -7,8 +7,8 @@ import { useLocation } from 'react-router'
 
 export default function useSaveTask() {
   const location = useLocation()
-  const [{ addTask }] = useContext(Context)
-  const { title, details, completed, date, time } = addTask || {}
+  const [{ task }] = useContext(Context)
+  const { title, details, completed, date, time } = task || {}
   const { id: userID } = getUserDetails()
 
   const handleSaveTask = async () => {
@@ -21,7 +21,6 @@ export default function useSaveTask() {
       body: JSON.stringify({
         title,
         details,
-        completed,
         date,
         time,
         userID
@@ -31,7 +30,9 @@ export default function useSaveTask() {
     return data.json()
   }
 
-  const [mutate, { status, data }] = useMutation(handleSaveTask)
+  const [mutate, { status, data }] = useMutation(handleSaveTask, {
+    onSuccess: () => queryCache.refetchQueries('tasks')
+  })
 
   const saveTask = async () => {
     try {

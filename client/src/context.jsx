@@ -7,10 +7,9 @@ export const Provider = props => {
   const [globalContext, setGlobalContext] = useState({
     registerUser: {},
     currentUser: {},
-    addTask: {
+    task: {
       title: '',
       details: '',
-      completed: false,
       date: '',
       time: '',
       repeat: {

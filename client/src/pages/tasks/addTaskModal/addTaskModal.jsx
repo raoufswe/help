@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Styled, { GlobalStyle } from './addTaskModal.styles'
 import TextareaAutosize from 'react-autosize-textarea'
 import AddMoreDetailsIcon from 'assets/addMoreDetails.icon'
@@ -6,7 +6,7 @@ import ReminderIcon from 'assets/reminder.icon.jsx'
 import Reminder from '../reminder'
 import { Modal } from 'react-bootstrap'
 import { Context } from 'context'
-import useSaveTask from './useSaveTask'
+import useSaveTask from '../hooks/useSaveTask'
 import CrossIcon from 'assets/cross.icon.jsx'
 import { getReminderDate } from 'utils/dateHelpers/dateHelpers.js'
 import Cookies from 'js-cookie'
@@ -14,17 +14,22 @@ import { useLocation } from 'react-router'
 
 export default function AddTaskModal(props) {
   const location = useLocation()
-  const [{ addTask }, setGlobalContext] = useContext(Context)
-  const { date, time } = addTask || {}
+  const [{ task }, setGlobalContext] = useContext(Context)
+  const { date, time } = task || {}
   const [addMoreDetails, setAddMoreDetails] = useState(false)
   const [showReminder, setShowReminder] = useState(false)
   const [saveTask, { status, response }] = useSaveTask()
 
+  useEffect(() => {
+    if (!response) return
+    if (response.success === 'success') props.onHide()
+  }, [response])
+
   const onChange = e => {
     const { value, name } = e.target
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         [name]: value
       }
     })
@@ -32,8 +37,8 @@ export default function AddTaskModal(props) {
 
   const onReminderClear = () => {
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         time: '',
         date: ''
       }

@@ -8,18 +8,18 @@ import DatePickerModal from '../datePickerModal'
 import { Context } from 'context'
 
 export default function Repeat(props) {
-  const [{ addTask }, setGlobalContext] = useContext(Context)
-  const { numberOfTimes, every, everyDayOfMonth, start } = addTask.repeat || {}
+  const [{ task }, setGlobalContext] = useContext(Context)
+  const { numberOfTimes, every, everyDayOfMonth, start } = task.repeat || {}
   const [showSetTime, setShowSetTime] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
 
   function handleRepeatFormChange(event) {
     let { value } = event.target
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         repeat: {
-          ...addTask.repeat,
+          ...task.repeat,
           [event.target.name]: value
         }
       }
@@ -28,10 +28,10 @@ export default function Repeat(props) {
 
   const onWeekDayChange = day => {
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         repeat: {
-          ...addTask.repeat,
+          ...task.repeat,
           weekDays: day
         }
       }
@@ -40,10 +40,10 @@ export default function Repeat(props) {
 
   const onTimeChange = time => {
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         repeat: {
-          ...addTask.repeat,
+          ...task.repeat,
           time
         }
       }
@@ -52,10 +52,10 @@ export default function Repeat(props) {
 
   const onDateChange = date => {
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         repeat: {
-          ...addTask.repeat,
+          ...task.repeat,
           date
         }
       }

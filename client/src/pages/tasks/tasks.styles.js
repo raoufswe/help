@@ -12,6 +12,59 @@ export const StyledTasks = styled.div`
     padding: 20px;
   }
 
+  .incomplete-tasks {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .task {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    svg {
+      width: 22px;
+      height: 22px;
+      margin-right: 20px;
+    }
+
+    .task-item {
+      font-size: 18px;
+      .details {
+        margin-top: 8px;
+        font-size: 16px;
+        color: #8f9092;
+      }
+    }
+
+    .reminder {
+      margin-top: 8px;
+      font-size: 16px;
+      display: flex;
+      align-items: flex-start;
+      border: 1px solid #cacaca;
+      padding: 6px;
+      border-radius: 4px;
+      color: #8f9092;
+      .reminder-calendar-icon {
+        fill: rgb(33, 150, 243);
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+      }
+      .date {
+        margin-right: 5px;
+      }
+    }
+
+    border-bottom: 1px solid #dcdcdc;
+  }
+
   .footer {
     position: absolute;
     bottom: 0;

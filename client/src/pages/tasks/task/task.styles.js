@@ -12,9 +12,6 @@ const Styled = styled.div`
 
   .task-title {
     font-size: 24px;
-    &::placeholder {
-      color: black;
-    }
   }
 
   .task-details,
@@ -96,6 +93,10 @@ const Styled = styled.div`
       fill: rgb(33, 150, 243);
       height: 14px;
     }
+  }
+
+  .add-date-time {
+    color: #8f9092;
   }
 `
 

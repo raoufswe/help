@@ -12,16 +12,16 @@ import { useLocation } from 'react-router'
 
 export default function Reminder(props) {
   const location = useLocation()
-  const [{ addTask }, setGlobalContext] = useContext(Context)
+  const [{ task }, setGlobalContext] = useContext(Context)
   const [showSetTime, setShowSetTime] = useState(false)
   const [showSetRepeat, setShowSetRepeat] = useState(false)
-  const [date, setDate] = useState(addTask.date)
-  const [time, setTime] = useState(addTask.time)
+  const [date, setDate] = useState(task.date)
+  const [time, setTime] = useState(task.time)
 
   const onReminderChange = () => {
     setGlobalContext({
-      addTask: {
-        ...addTask,
+      task: {
+        ...task,
         date,
         time
       }
@@ -46,7 +46,7 @@ export default function Reminder(props) {
               <div className="action">
                 <ClockIcon />
                 <button className="timer" onClick={() => setShowSetTime(true)}>
-                  {time ? time : addTask.time ? addTask.time : 'Set time'}
+                  {time ? time : task.time ? task.time : 'Set time'}
                 </button>
                 {showSetTime && (
                   <SetTime
@@ -74,7 +74,7 @@ export default function Reminder(props) {
               <button
                 onClick={() => {
                   props.onHide()
-                  if (addTask.date) return
+                  if (task.date) return
                   Cookies.remove(`selectedDay-${location.pathname}`)
                 }}
               >
