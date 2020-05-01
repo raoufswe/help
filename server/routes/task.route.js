@@ -5,7 +5,7 @@ const incompleteRouter = express.Router({mergeParams: true})
 const completedRouter = express.Router({mergeParams: true})
 
 router.use('/:userID/incomplete', incompleteRouter)
-router.use('/:userID/incomplete', completedRouter)
+router.use('/:userID/completed', completedRouter)
 
 router.post('/', controller.create_task)
 router.get('/:userID/:id', controller.get_task)

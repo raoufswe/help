@@ -124,7 +124,7 @@ exports.get_incomplete_tasks = (req, res) => {
 }
 
 exports.get_completed_tasks = (req, res) => {
-  Task.find({userID: req.params.userID, completed: false})
+  Task.find({userID: req.params.userID, completed: true})
     .sort({createdAt: -1})
     .then((data) => {
       res.send({success: 'success', data: data, errors: []})
