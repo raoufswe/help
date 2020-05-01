@@ -22,7 +22,13 @@ export default function AddTaskModal(props) {
 
   useEffect(() => {
     if (!response) return
-    if (response.success === 'success') props.onHide()
+    if (response.success === 'success') {
+      setAddMoreDetails(false)
+      setGlobalContext({
+        task: {}
+      })
+      props.onHide()
+    }
   }, [response])
 
   const onChange = e => {
@@ -55,22 +61,40 @@ export default function AddTaskModal(props) {
         dialogClassName="add-task-modal"
       >
         <Styled>
-          <input
-            type="text"
-            className="task-input"
-            onChange={onChange}
-            name="title"
-            placeholder="New task"
-          />
-
-          {addMoreDetails && (
-            <TextareaAutosize
-              name="details"
-              placeholder="Add details"
+          <div>
+            <input
+              type="text"
               className="task-input"
               onChange={onChange}
+              name="title"
+              placeholder="New task"
             />
-          )}
+
+            {addMoreDetails && (
+              <TextareaAutosize
+                name="details"
+                placeholder="Add details"
+                className="task-input"
+                onChange={onChange}
+              />
+            )}
+
+            {date || time ? (
+              <div className="reminder-box">
+                <button onClick={() => setShowReminder(true)}>
+                  <ReminderIcon className="reminder-calendar-icon" />
+                  {date && <span>{getReminderDate(date)}</span>}{' '}
+                  {time && <span>{time}</span>}
+                </button>
+                <button
+                  className="cross-calendar-icon"
+                  onClick={onReminderClear}
+                >
+                  <CrossIcon />
+                </button>
+              </div>
+            ) : null}
+          </div>
 
           {showReminder && (
             <Reminder
@@ -78,19 +102,6 @@ export default function AddTaskModal(props) {
               onHide={() => setShowReminder(false)}
             />
           )}
-
-          {date || time ? (
-            <div className="reminder-box">
-              <button onClick={() => setShowReminder(true)}>
-                <ReminderIcon className="reminder-calendar-icon" />
-                {date && <span>{getReminderDate(date)}</span>}{' '}
-                {time && <span>{time}</span>}
-              </button>
-              <button className="cross-calendar-icon" onClick={onReminderClear}>
-                <CrossIcon />
-              </button>
-            </div>
-          ) : null}
 
           <div className="actions">
             <div>

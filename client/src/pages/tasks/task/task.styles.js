@@ -17,7 +17,7 @@ const Styled = styled.div`
   .task-details,
   .task-reminder {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     color: #838486;
     margin-top: 30px;
     font-size: 18px;
@@ -37,6 +37,7 @@ const Styled = styled.div`
     outline: 0;
     color: black;
     resize: none;
+    width: 100%;
     ::placeholder {
       color: #838486;
     }

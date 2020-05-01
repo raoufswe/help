@@ -12,6 +12,7 @@ export const Provider = props => {
       details: '',
       date: '',
       time: '',
+      completed: false,
       repeat: {
         numberOfTimes: '1',
         every: 'week',

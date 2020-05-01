@@ -5,13 +5,13 @@ import { Context } from 'context'
 import Cookies from 'js-cookie'
 import { useLocation } from 'react-router'
 
-export default function useUpdateTask(taskID) {
+export default function useUpdateTask() {
   const location = useLocation()
   const [{ task }] = useContext(Context)
   const { title, details, completed, date, time } = task || {}
   const { id: userID } = getUserDetails()
 
-  const handleUpdateTask = async () => {
+  const handleUpdateTask = async ({ id: taskID }) => {
     const requestOptions = {
       method: 'PUT',
       headers: {
@@ -23,6 +23,7 @@ export default function useUpdateTask(taskID) {
         details,
         date,
         time,
+        completed,
         userID
       })
     }
@@ -37,9 +38,9 @@ export default function useUpdateTask(taskID) {
     onSuccess: () => queryCache.refetchQueries('tasks')
   })
 
-  const updateTask = async () => {
+  const updateTask = async id => {
     try {
-      await mutate()
+      await mutate({ id })
       console.log('done')
       Cookies.remove(`selectedDay-${location.pathname}`)
     } catch (error) {

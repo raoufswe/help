@@ -6,6 +6,7 @@ import { useLocation } from 'react-router'
 export default function DatePicker({
   disableOutsideClick,
   onOutsideClick,
+  disabledDays,
   onChange
 }) {
   const location = useLocation()
@@ -46,7 +47,7 @@ export default function DatePicker({
       <DayPicker
         onDayClick={handleDayClick}
         selectedDays={new Date(selectedDay)}
-        disabledDays={{ after: new Date() }}
+        disabledDays={disabledDays}
       />
     </div>
   )

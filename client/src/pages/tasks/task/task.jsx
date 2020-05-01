@@ -25,14 +25,10 @@ export default function Task() {
   const [updateTask, { updateStatus, updateResponse }] = useUpdateTask(id)
   const [showReminder, setShowReminder] = useState(false)
 
-  console.log(task)
-  console.log(taskData)
-
   useEffect(() => {
     if (!taskData) return
     setGlobalContext({
       task: {
-        ...task,
         ...taskData
       }
     })
@@ -50,7 +46,6 @@ export default function Task() {
   const handleUpdate = async () => {
     try {
       await updateTask(id)
-      console.log(updateStatus)
       history.push('/tasks')
     } catch (e) {
       console.log('something went wrong')
@@ -67,14 +62,20 @@ export default function Task() {
     })
   }
 
-  const markCompleted = () => {
+  const markCompleted = async () => {
     setGlobalContext({
       task: {
         ...task,
         completed: true
       }
     })
-    history.push('/tasks')
+
+    try {
+      await updateTask(id)
+      history.push('/tasks')
+    } catch (e) {
+      console.log('something went wrong')
+    }
   }
 
   if (status === 'error') return <span>Sorry something went wrong</span>
@@ -132,7 +133,11 @@ export default function Task() {
         <Reminder show={showReminder} onHide={() => setShowReminder(false)} />
       )}
 
-      <button className="mark-completed" onClick={onChange} name="completed">
+      <button
+        className="mark-completed"
+        onClick={markCompleted}
+        name="completed"
+      >
         <CorrectIcon />
         <span>Mark completed</span>
       </button>

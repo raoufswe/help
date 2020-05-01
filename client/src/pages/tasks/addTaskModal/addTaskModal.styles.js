@@ -12,12 +12,13 @@ export const GlobalStyle = createGlobalStyle`
   border: none;
   color: black;
   margin-top: auto;
-  padding: 30px;
-  border-radius: 20px 20px 0 0;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 20px 20px 0 0;
 
 .modal-content {
-  border: none
+  border: none;
+  padding: 30px;
+  border-radius: 20px 20px 0 0;
  }
 }
 `
@@ -27,7 +28,7 @@ const Styled = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 40px;
     color: rgb(33, 150, 243);
     font-weight: 500;
     > div button svg {
@@ -63,7 +64,6 @@ const Styled = styled.div`
     }
     .cross-calendar-icon {
       margin-left: 10px;
-      vertical-align: middle;
       padding: 0;
       svg {
         width: 10px;
@@ -74,6 +74,7 @@ const Styled = styled.div`
 
   textarea {
     margin-top: 15px;
+    width: 100%;
   }
 
   button {

@@ -10,15 +10,26 @@ import useIncompleteTasks from './hooks/useIncompleteTasks'
 import IncompleteIcon from 'assets/incomplete.icon.jsx'
 import { getReminderDate } from 'utils/dateHelpers/dateHelpers.js'
 import ReminderIcon from 'assets/reminder.icon.jsx'
+import useUpdateTask from './hooks/useUpdateTask'
 
 const Tasks = () => {
   const location = useLocation()
-  const [globalContext, setGlobalContext] = useContext(Context)
+  const [{ task }, setGlobalContext] = useContext(Context)
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
   const { status, data, error } = useIncompleteTasks()
   const { data: incompleteTasks, errors } = data || {}
-
   const history = useHistory()
+  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
+
+  const markCompleted = id => {
+    setGlobalContext({
+      task: {
+        ...task,
+        completed: true
+      }
+    })
+    updateTask(id)
+  }
 
   if (status === 'error' || errors?.length)
     return <span>Sorry something went wrong</span>
@@ -31,24 +42,26 @@ const Tasks = () => {
       <div className="incomplete-tasks">
         {incompleteTasks.map(({ _id, title, details, date, time }) => (
           <div className="task" key={_id}>
-            <button>
+            <button onClick={() => markCompleted(_id)}>
               <IncompleteIcon />
             </button>
-            <button onClick={() => history.push(`/tasks/${_id}`)}>
-              <div className="task-item">
-                <div>{title}</div>
-                {details && <div className="details">{details}</div>}
-                {date || time ? (
-                  <div className="reminder">
-                    <ReminderIcon className="reminder-calendar-icon" />
-                    {date && (
-                      <span className="date">{getReminderDate(date)}</span>
-                    )}
-                    {time && <span>{time}</span>}
-                  </div>
-                ) : null}
-              </div>
-            </button>
+
+            <div
+              className="task-item"
+              onClick={() => history.push(`/tasks/${_id}`)}
+            >
+              <div>{title}</div>
+              {details && <div className="details">{details}</div>}
+              {date || time ? (
+                <div className="reminder">
+                  <ReminderIcon className="reminder-calendar-icon" />
+                  {date && (
+                    <span className="date">{getReminderDate(date)}</span>
+                  )}
+                  {time && <span>{time}</span>}
+                </div>
+              ) : null}
+            </div>
           </div>
         ))}
       </div>
@@ -57,7 +70,6 @@ const Tasks = () => {
         show={showAddTaskModal}
         onHide={() => {
           setGlobalContext({
-            ...globalContext,
             task: {}
           })
           Cookies.remove(`selectedDay-${location.pathname}`)

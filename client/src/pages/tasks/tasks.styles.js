@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import maxmin from 'utils/maxmin.js'
 
 export const StyledTasks = styled.div`
   height: 92vh;
@@ -8,7 +9,7 @@ export const StyledTasks = styled.div`
   .page-title {
     display: block;
     font-weight: 600;
-    font-size: 36px;
+    font-size: ${maxmin(36, 30)};
     padding: 20px;
   }
 
@@ -35,6 +36,8 @@ export const StyledTasks = styled.div`
 
     .task-item {
       font-size: 18px;
+      text-align: left;
+      width: 100%;
       .details {
         margin-top: 8px;
         font-size: 16px;
@@ -45,8 +48,7 @@ export const StyledTasks = styled.div`
     .reminder {
       margin-top: 8px;
       font-size: 16px;
-      display: flex;
-      align-items: flex-start;
+      display: inline-block;
       border: 1px solid #cacaca;
       padding: 6px;
       border-radius: 4px;

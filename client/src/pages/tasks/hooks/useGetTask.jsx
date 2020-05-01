@@ -20,7 +20,9 @@ const getTask = async (_, taskID) => {
 }
 
 export default function useGetTask(taskID) {
-  const { status, data, error } = useQuery(['task', taskID], getTask)
+  const { status, data, error } = useQuery(['task', taskID], getTask, {
+    refetchOnWindowFocus: false
+  })
 
   return {
     status,

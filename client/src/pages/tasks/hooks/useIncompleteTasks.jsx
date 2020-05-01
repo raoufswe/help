@@ -17,10 +17,11 @@ const getIncompleteTasks = async () => {
     `http://localhost:3000/tasks/${id}/incomplete`,
     requestOptions
   )
-  console.log(data)
   return data
 }
 
 export default function useIncompleteTasks() {
-  return useQuery('incomplete-tasks', getIncompleteTasks)
+  return useQuery('tasks', getIncompleteTasks, {
+    refetchOnWindowFocus: false
+  })
 }

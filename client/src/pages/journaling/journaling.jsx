@@ -92,6 +92,7 @@ const Journaling = ({ history }) => {
       {showCalendar && (
         <div className="calendar">
           <DatePicker
+            disabledDate={{ after: new Date() }}
             onOutsideClick={() => setShowCalendar(false)}
             onChange={day => setSelectedDate(day)}
           />
