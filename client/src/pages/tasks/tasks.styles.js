@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import maxmin from 'utils/maxmin.js'
 
 export const StyledTasks = styled.div`
-  height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -11,60 +10,6 @@ export const StyledTasks = styled.div`
     font-weight: 600;
     font-size: ${maxmin(36, 30)};
     padding: 20px;
-  }
-
-  .incomplete-tasks {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .task {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
-    svg {
-      width: 22px;
-      height: 22px;
-      margin-right: 20px;
-    }
-
-    .task-item {
-      font-size: 18px;
-      text-align: left;
-      width: 100%;
-      .details {
-        margin-top: 8px;
-        font-size: 16px;
-        color: #8f9092;
-      }
-    }
-
-    .reminder {
-      margin-top: 8px;
-      font-size: 16px;
-      display: inline-block;
-      border: 1px solid #cacaca;
-      padding: 6px;
-      border-radius: 4px;
-      color: #8f9092;
-      .reminder-calendar-icon {
-        fill: rgb(33, 150, 243);
-        width: 15px;
-        height: 15px;
-        margin-right: 10px;
-      }
-      .date {
-        margin-right: 5px;
-      }
-    }
-
-    border-bottom: 1px solid #dcdcdc;
   }
 
   .footer {

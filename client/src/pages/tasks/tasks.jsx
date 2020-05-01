@@ -5,65 +5,21 @@ import MoreIcon from 'assets/more.icon.jsx'
 import AddIcon from 'assets/add.icon.jsx'
 import { Context } from 'context'
 import Cookies from 'js-cookie'
-import { useLocation, Link, useHistory } from 'react-router-dom'
-import useIncompleteTasks from './hooks/useIncompleteTasks'
-import IncompleteIcon from 'assets/incomplete.icon.jsx'
-import { getReminderDate } from 'utils/dateHelpers/dateHelpers.js'
-import ReminderIcon from 'assets/reminder.icon.jsx'
-import useUpdateTask from './hooks/useUpdateTask'
+import CompletedTasks from './completedTasks.jsx'
+import InCompleteTasks from './incompleteTasks.jsx'
+import { useLocation } from 'react-router-dom'
 
 const Tasks = () => {
-  const location = useLocation()
   const [{ task }, setGlobalContext] = useContext(Context)
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
-  const { status, data, error } = useIncompleteTasks()
-  const { data: incompleteTasks, errors } = data || {}
-  const history = useHistory()
-  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
-
-  const markCompleted = id => {
-    setGlobalContext({
-      task: {
-        ...task,
-        completed: true
-      }
-    })
-    updateTask(id)
-  }
-
-  if (status === 'error' || errors?.length)
-    return <span>Sorry something went wrong</span>
-  if (status === 'loading') return <h1>Loading...</h1>
+  const location = useLocation()
 
   return (
     <StyledTasks>
       <div className="page-title">Let’s get some things done today.</div>
-
-      <div className="incomplete-tasks">
-        {incompleteTasks.map(({ _id, title, details, date, time }) => (
-          <div className="task" key={_id}>
-            <button onClick={() => markCompleted(_id)}>
-              <IncompleteIcon />
-            </button>
-
-            <div
-              className="task-item"
-              onClick={() => history.push(`/tasks/${_id}`)}
-            >
-              <div>{title}</div>
-              {details && <div className="details">{details}</div>}
-              {date || time ? (
-                <div className="reminder">
-                  <ReminderIcon className="reminder-calendar-icon" />
-                  {date && (
-                    <span className="date">{getReminderDate(date)}</span>
-                  )}
-                  {time && <span>{time}</span>}
-                </div>
-              ) : null}
-            </div>
-          </div>
-        ))}
+      <div style={{ overflow: 'scroll', maxHeight: 600 }}>
+        <InCompleteTasks />
+        <CompletedTasks />
       </div>
 
       <AddTaskModal

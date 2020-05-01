@@ -17,7 +17,7 @@ const Styled = styled.div`
   .task-details,
   .task-reminder {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     color: #838486;
     margin-top: 30px;
     font-size: 18px;
@@ -55,8 +55,8 @@ const Styled = styled.div`
     .reminder-details {
       text-align: left;
       font-size: 16px;
-      > div {
-        margin-bottom: 10px;
+      .reminder-time {
+        margin-top: 10px;
       }
       .reminder-date {
         color: rgb(33, 150, 243);

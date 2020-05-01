@@ -5,7 +5,7 @@ import LeftArrow from 'assets/left-arrow.icon'
 import Trash from 'assets/trash.icon'
 import AddMoreDetailsIcon from 'assets/addMoreDetails.icon'
 import Reminder from '../reminder'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useParams, useLocation } from 'react-router-dom'
 import ReminderIcon from 'assets/reminder.icon.jsx'
 import RepeatIcon from 'assets/repeat.icon.jsx'
 import CorrectIcon from 'assets/correct.icom.jsx'
@@ -14,21 +14,26 @@ import useGetTask from '../hooks/useGetTask.jsx'
 import useDeleteTask from '../hooks/useDeleteTask'
 import { Context } from 'context'
 import useUpdateTask from '../hooks/useUpdateTask'
+import { getReminderDate } from 'utils/dateHelpers/dateHelpers.js'
+import Cookies from 'js-cookie'
 
 export default function Task() {
   const [{ task }, setGlobalContext] = useContext(Context)
   const history = useHistory()
   const { id } = useParams()
+  const location = useLocation()
   const { status, data, error } = useGetTask(id)
   const { data: taskData, errors } = data || {}
   const [deleteTask, { deleteStatus, deleteResponse }] = useDeleteTask(id)
-  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask(id)
+  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
   const [showReminder, setShowReminder] = useState(false)
+  Cookies.set(`selectedDay-${location.pathname}`, task.date)
 
   useEffect(() => {
     if (!taskData) return
     setGlobalContext({
       task: {
+        ...task,
         ...taskData
       }
     })
@@ -43,9 +48,9 @@ export default function Task() {
     }
   }
 
-  const handleUpdate = async () => {
+  const handleUpdate = () => {
     try {
-      await updateTask(id)
+      updateTask(id)
       history.push('/tasks')
     } catch (e) {
       console.log('something went wrong')
@@ -62,7 +67,7 @@ export default function Task() {
     })
   }
 
-  const markCompleted = async () => {
+  const markCompleted = () => {
     setGlobalContext({
       task: {
         ...task,
@@ -71,11 +76,23 @@ export default function Task() {
     })
 
     try {
-      await updateTask(id)
+      updateTask(id)
       history.push('/tasks')
     } catch (e) {
       console.log('something went wrong')
     }
+  }
+
+  const onReminderClear = e => {
+    e.stopPropagation()
+    setGlobalContext({
+      task: {
+        ...task,
+        time: '',
+        date: ''
+      }
+    })
+    Cookies.remove(`selectedDay-${location.pathname}`)
   }
 
   if (status === 'error') return <span>Sorry something went wrong</span>
@@ -115,12 +132,16 @@ export default function Task() {
         {task.date || task.time ? (
           <div className="reminder">
             <div className="reminder-details">
-              <div className="reminder-date">Thu, April 16</div>
-              <div>14:34 AM</div>
-              <div>Repeated weekly on Sun, Thu</div>
+              {task.date && (
+                <div className="reminder-date">
+                  {getReminderDate(task.date)}
+                </div>
+              )}
+              {task.time && <div className="reminder-time">{task.time}</div>}
+              {/* <div>Repeated weekly on Sun, Thu</div> */}
             </div>
 
-            <button className="delete-reminder">
+            <button className="delete-reminder" onClick={onReminderClear}>
               <Cross />
             </button>
           </div>
