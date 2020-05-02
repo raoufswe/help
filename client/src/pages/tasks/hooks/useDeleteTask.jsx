@@ -3,9 +3,9 @@ import { getUserDetails } from 'utils/verifyToken.js'
 import Cookies from 'js-cookie'
 import { useLocation } from 'react-router'
 
-export default function useDeleteTask(taskID) {
+export default function useDeleteTask() {
   const location = useLocation()
-  const handleDeleteTask = async () => {
+  const handleDeleteTask = async ({ id: taskID }) => {
     const { id: userID } = getUserDetails()
     const requestOptions = {
       method: 'DELETE',
@@ -26,9 +26,9 @@ export default function useDeleteTask(taskID) {
     onSuccess: () => queryCache.refetchQueries('tasks')
   })
 
-  const deleteTask = async () => {
+  const deleteTask = async id => {
     try {
-      await mutate()
+      await mutate({ id })
       console.log('done')
       Cookies.remove(`selectedDay-${location.pathname}`)
     } catch (error) {
@@ -36,5 +36,5 @@ export default function useDeleteTask(taskID) {
     }
   }
 
-  return [deleteTask, { deleteStatus: status, response: data }]
+  return [deleteTask, { deleteStatus: status, deleteResponse: data }]
 }

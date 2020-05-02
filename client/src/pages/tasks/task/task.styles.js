@@ -99,6 +99,12 @@ const Styled = styled.div`
   .add-date-time {
     color: #8f9092;
   }
+
+  .undo-icon {
+    fill: rgb(33, 150, 243);
+    transform: rotate(90deg);
+    margin-right: 0;
+  }
 `
 
 export default Styled

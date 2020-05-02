@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import useIncompleteTasks from './hooks/useIncompleteTasks'
 import { useHistory } from 'react-router-dom'
 import { Context } from 'context'
@@ -58,11 +58,9 @@ const Styled = styled.div`
   }
 `
 
-export default function InCompletedTasks() {
+export default function InCompletedTasks({ data }) {
   const history = useHistory()
   const [{ task }, setGlobalContext] = useContext(Context)
-  const { status, data: inCompletedTasks, error } = useIncompleteTasks()
-  const { data, errors } = inCompletedTasks || {}
   const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
 
   const markCompleted = id => {
@@ -75,11 +73,9 @@ export default function InCompletedTasks() {
     updateTask(id)
   }
 
-  if (status === 'loading') return <h1>Loading...</h1>
-
   return (
     <Styled>
-      {data.map(({ _id, title, details, date, time }) => (
+      {data?.map(({ _id, title, details, date, time }) => (
         <div className="task" key={_id}>
           <button onClick={() => markCompleted(_id)}>
             <IncompleteIcon />

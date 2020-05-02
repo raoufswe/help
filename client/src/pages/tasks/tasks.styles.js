@@ -2,9 +2,6 @@ import styled from 'styled-components'
 import maxmin from 'utils/maxmin.js'
 
 export const StyledTasks = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   .page-title {
     display: block;
     font-weight: 600;

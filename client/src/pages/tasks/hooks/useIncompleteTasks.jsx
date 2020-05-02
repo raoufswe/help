@@ -21,7 +21,17 @@ const getIncompleteTasks = async () => {
 }
 
 export default function useIncompleteTasks() {
-  return useQuery(['tasks', { type: 'incomplete' }], getIncompleteTasks, {
-    refetchOnWindowFocus: false
-  })
+  const { status, data, error } = useQuery(
+    ['tasks', { type: 'incomplete' }],
+    getIncompleteTasks,
+    {
+      refetchOnWindowFocus: false
+    }
+  )
+
+  return {
+    inCompletedTasksStatus: status,
+    inCompletedTasks: data,
+    inCompletedTasksErrors: error
+  }
 }

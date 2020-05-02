@@ -41,7 +41,6 @@ export default function useUpdateTask() {
   const updateTask = async id => {
     try {
       await mutate({ id })
-      console.log('done')
       Cookies.remove(`selectedDay-${location.pathname}`)
     } catch (error) {
       console.log(error)

@@ -1,17 +1,15 @@
 import React, { useContext, useState } from 'react'
 import TickIcon from 'assets/tick.icon.jsx'
-import useCompletedTasks from './hooks/useCompletedTasks'
 import { useHistory } from 'react-router-dom'
 import { Context } from 'context'
 import useUpdateTask from './hooks/useUpdateTask'
 import styled from 'styled-components'
 import AngleIcon from 'assets/angle.icon.jsx'
+import { queryCache } from 'react-query'
 
 const Styled = styled.div`
-  height: 100%;
-
   .completed-count {
-    margin: 20px 20px 30px 20px;
+    margin: 20px;
     font-size: 18px;
     display: flex;
     justify-content: space-between;
@@ -43,11 +41,9 @@ const Styled = styled.div`
   }
 `
 
-export default function CompletedTasks() {
+export default function CompletedTasks({ data }) {
   const history = useHistory()
   const [{ task }, setGlobalContext] = useContext(Context)
-  const { status, data: completedTasks, error } = useCompletedTasks()
-  const { data, errors } = completedTasks || {}
   const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
   const [showTasks, seShowTasks] = useState(false)
 
@@ -61,7 +57,6 @@ export default function CompletedTasks() {
     updateTask(id)
   }
 
-  if (status === 'loading') return <h1>Loading...</h1>
   if (!data.length) return null
 
   return (

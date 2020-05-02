@@ -8,20 +8,42 @@ import Cookies from 'js-cookie'
 import CompletedTasks from './completedTasks.jsx'
 import InCompleteTasks from './incompleteTasks.jsx'
 import { useLocation } from 'react-router-dom'
+import useIncompleteTasks from './hooks/useIncompleteTasks'
+import useCompletedTasks from './hooks/useCompletedTasks'
+import NoData from './noData'
+import Loader from 'assets/loader.jsx'
+import ErrorUI from 'components/errorUI.jsx'
 
 const Tasks = () => {
+  const location = useLocation()
   const [{ task }, setGlobalContext] = useContext(Context)
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
-  const location = useLocation()
+  const {
+    inCompletedTasksStatus,
+    inCompletedTasks,
+    inCompletedTasksErrors
+  } = useIncompleteTasks()
+  const {
+    completedTasksStatus,
+    completedTasks,
+    completedTasksErrors
+  } = useCompletedTasks()
 
   return (
     <StyledTasks>
       <div className="page-title">Let’s get some things done today.</div>
-      <div style={{ overflow: 'scroll', maxHeight: 600 }}>
-        <InCompleteTasks />
-        <CompletedTasks />
-      </div>
-
+      {inCompletedTasksStatus && completedTasksStatus === 'loading' ? (
+        <Loader />
+      ) : inCompletedTasksStatus && completedTasksStatus === 'error' ? (
+        <ErrorUI />
+      ) : inCompletedTasks?.data?.length || completedTasks?.data?.length ? (
+        <div style={{ overflow: 'scroll', maxHeight: 500 }}>
+          <InCompleteTasks data={inCompletedTasks?.data} />
+          <CompletedTasks data={completedTasks?.data} />
+        </div>
+      ) : (
+        <NoData />
+      )}
       <AddTaskModal
         show={showAddTaskModal}
         onHide={() => {

@@ -21,7 +21,17 @@ const getCompleteTasks = async () => {
 }
 
 export default function useCompletedTasks() {
-  return useQuery(['tasks', { type: 'completed' }], getCompleteTasks, {
-    refetchOnWindowFocus: false
-  })
+  const { status, data, error } = useQuery(
+    ['tasks', { type: 'completed' }],
+    getCompleteTasks,
+    {
+      refetchOnWindowFocus: false
+    }
+  )
+
+  return {
+    completedTasksStatus: status,
+    completedTasks: data,
+    completedTasksErrors: error
+  }
 }
