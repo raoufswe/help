@@ -83,7 +83,7 @@ exports.delete_grateful = (req, res) => {
 
 exports.get_all_grateful = (req, res) => {
   Grateful.find({userID: req.params.userID})
-    .sort({createdAt: -1})
+    .sort({_id: -1})
     .then((data) => {
       res.send({success: 'success', data: data, errors: []})
       console.log(data)

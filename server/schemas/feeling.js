@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const FeelingSchema = new Schema({
-  week: {type: String},
+  week: {
+    type: String,
+    default: new Date().toLocaleDateString().replace(/\//g, '-'),
+  },
   Sat: {
     weight: Number,
     emoji: String,
