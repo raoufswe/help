@@ -16,18 +16,10 @@ import ErrorUI from 'components/errorUI.jsx'
 
 const Tasks = () => {
   const location = useLocation()
-  const [{ task }, setGlobalContext] = useContext(Context)
+  const [, setGlobalContext] = useContext(Context)
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
-  const {
-    inCompletedTasksStatus,
-    inCompletedTasks,
-    inCompletedTasksErrors
-  } = useIncompleteTasks()
-  const {
-    completedTasksStatus,
-    completedTasks,
-    completedTasksErrors
-  } = useCompletedTasks()
+  const { inCompletedTasksStatus, inCompletedTasks } = useIncompleteTasks()
+  const { completedTasksStatus, completedTasks } = useCompletedTasks()
 
   return (
     <StyledTasks>
