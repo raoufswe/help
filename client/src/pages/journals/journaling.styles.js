@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import maxmin from 'utils/maxmin.js'
 
-export const StyledJournaling = styled.div`
+export const StyledJournals = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -16,22 +16,17 @@ export const StyledJournaling = styled.div`
   }
 
   .top-page {
-    background: linear-gradient(120.59deg, #46ccf7 0%, #2676ff 100%);
+    background: linear-gradient(120.59deg, #46ccf7 0%, #2196f3 100%);
     color: #ffffff;
-    padding: 30px 30px 50px;
+    padding: 20px;
   }
 
   .page-header {
     display: block;
-    font-weight: 600;
-    font-size: ${maxmin(36, 30)};
-    padding: 20px 0 10px 0;
-  }
-
-  .page-subheader {
-    display: block;
-    font-weight: normal;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 30px;
+    padding: 20px 0;
+    line-height: 1.15;
   }
 
   .journaling-cta {
@@ -55,7 +50,6 @@ export const StyledJournaling = styled.div`
         text-align: center;
       }
     }
-
     .journaling-calendar {
       padding: 0;
     }
@@ -78,33 +72,34 @@ export const StyledJournaling = styled.div`
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      margin: 20px 30px;
+      margin: 20px;
       border-bottom: 1px solid #edecec;
       button {
         padding: 0;
       }
     }
+  }
 
-    .no-data {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 30px 30px;
-      font-weight: 500;
-      color: #000000;
-      line-height: 1.5;
-      letter-spacing: 0.2px;
-    }
+  .completed-count {
+    margin: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .angle {
+    transform: ${props => (props.showAll ? 'rotate(0deg)' : 'rotate(-180deg)')};
   }
 `
 
 export const StyledJournal = styled.div`
+  font-size: 16px;
 
   .date {
     display: inline-block;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
   }
 
   .time {
@@ -118,13 +113,12 @@ export const StyledJournal = styled.div`
     display: block;
     padding-top: 10px;
     font-weight: 300;
-    font-size: 14px;
     line-height: 13px;
     padding-bottom: 20px;
   }
 `
 
-export const StyledAddJournal = styled.div`
+export const StyledJournalDetails = styled.div`
   height: 100vh;
   padding: 50px 30px 30px;
   display: flex;
@@ -136,91 +130,38 @@ export const StyledAddJournal = styled.div`
     .back-arrow {
       padding: 0;
       svg {
-        width: 24px;
-        height: 21px;
+        height: 20px;
+        width: 20px;
+        fill: #8f9092;
       }
     }
 
     .journal-date {
-      font-weight: 600;
+      font-weight: 500;
       font-size: 18px;
-      color: #000000;
+      color: #8f9092;
     }
-    margin-bottom: 30px;
+    margin: 30px 0;
   }
 
   .journal-input {
-    margin: 55px auto auto;
+    margin: 20px auto auto;
     border: 0;
     outline: 0;
     min-width: 100%;
-    font-size: 24px;
+    font-size: 22px;
     color: black;
     padding-bottom: 10px;
     resize: none;
 
     ::placeholder {
-      color: #d9d9d9;
+      color: #8f9092;
     }
   }
-
-  button {
-    margin-top: auto;
-  }
-`
-
-export const StyledUpdateJournal = styled.div`
-  padding: 50px 30px 30px;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    .back-arrow {
-      padding: 0;
-      svg {
-        width: 24px;
-        height: 21px;
-      }
-    }
-
-    .journal-date {
-      font-weight: 600;
-      font-size: 18px;
-      color: #000000;
-    }
-    margin-bottom: 30px;
-  }
-
-  .journal-input {
-    margin: 55px auto auto;
-    border: 0;
-    outline: 0;
-    min-width: 100%;
-    font-size: 24px;
-    color: black;
-    padding-bottom: 10px;
-    resize: none;
-
-    ::placeholder {
-      color: #d9d9d9;
-    }
-  }
-
-  footer {
-    margin-top: auto;
-    display: flex;
-    .update-button {
-      font-size: 18px;
-      min-height: 56px;
-    }
-
-    .delete-button {
-      padding: 0;
-      margin-right: 35px;
-    }
+  svg {
+    height: 20px;
+    width: 20px;
+    fill: #8f9092;
+    margin-right: 15px;
   }
 `

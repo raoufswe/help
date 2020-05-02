@@ -13,7 +13,7 @@ import Loader from 'assets/loader.jsx'
 import ErrorUI from 'components/errorUI.jsx'
 import ReminderIcon from 'assets/reminder.icon.jsx'
 import LeftArrow from 'assets/left-arrow.icon'
-import Trash from 'assets/trash.icon'
+import TrashIcon from 'assets/trash.icon'
 import AddMoreDetailsIcon from 'assets/addMoreDetails.icon'
 import CorrectIcon from 'assets/correct.icon.jsx'
 import Cross from 'assets/cross.icon.jsx'
@@ -105,7 +105,7 @@ export default function Task() {
           className="trashIcon"
           disabled={status !== 'success'}
         >
-          <Trash />
+          <TrashIcon />
         </button>
       </div>
 

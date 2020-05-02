@@ -59,9 +59,9 @@ function SideMenu({ isOpen, onClick, hide }) {
               </div>
 
               <div className="nav-item" onClick={onClick}>
-                <NavLink to="/journaling" exact>
+                <NavLink to="/journals" exact>
                   <JournalIcon />
-                  Journaling
+                  Journals
                 </NavLink>
               </div>
 
@@ -73,7 +73,7 @@ function SideMenu({ isOpen, onClick, hide }) {
               </div>
 
               <div className="nav-item" onClick={onClick}>
-                <NavLink to="/grateful" exact>
+                <NavLink to="/gratefulThings" exact>
                   <GratefulIcon />
                   Grateful
                 </NavLink>
