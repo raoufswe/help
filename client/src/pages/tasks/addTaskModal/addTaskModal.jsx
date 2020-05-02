@@ -18,18 +18,17 @@ export default function AddTaskModal(props) {
   const { date, time } = task || {}
   const [addMoreDetails, setAddMoreDetails] = useState(false)
   const [showReminder, setShowReminder] = useState(false)
-  const [saveTask, { status, response }] = useSaveTask()
+  const [saveTask, { status }] = useSaveTask()
 
   useEffect(() => {
-    if (!response) return
-    if (response.success === 'success') {
+    if (status === 'success') {
       setAddMoreDetails(false)
       setGlobalContext({
         task: {}
       })
       props.onHide()
     }
-  }, [response])
+  }, [status])
 
   const onChange = e => {
     const { value, name } = e.target

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useMutation, queryCache } from 'react-query'
 import { getUserDetails } from 'utils/verifyToken.js'
 import { Context } from 'context'
@@ -8,7 +8,7 @@ import { useLocation } from 'react-router'
 export default function useSaveTask() {
   const location = useLocation()
   const [{ task }] = useContext(Context)
-  const { title, details, completed, date, time } = task || {}
+  const { title, details, date, time } = task || {}
   const { id: userID } = getUserDetails()
 
   const handleSaveTask = async () => {
@@ -37,7 +37,6 @@ export default function useSaveTask() {
   const saveTask = async () => {
     try {
       await mutate()
-      console.log('done')
       Cookies.remove(`selectedDay-${location.pathname}`)
     } catch (error) {
       console.log(error)

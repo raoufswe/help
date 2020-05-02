@@ -1,5 +1,4 @@
 import React, { useState, createContext } from 'react'
-import { getDayNumber } from 'utils/dateHelpers/dateHelpers.js'
 
 export const Context = createContext()
 
@@ -11,13 +10,7 @@ export const Provider = props => {
       title: '',
       details: '',
       date: '',
-      time: '',
-      repeat: {
-        numberOfTimes: '1',
-        every: 'week',
-        start: '1',
-        everyDayOfMonth: getDayNumber()
-      }
+      time: ''
     }
   })
 

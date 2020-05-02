@@ -24,10 +24,10 @@ export default function Task() {
   const history = useHistory()
   const { id } = useParams()
   const location = useLocation()
-  const { status, data, error } = useGetTask(id)
+  const { status, data } = useGetTask(id)
   const { data: taskData } = data || {}
-  const [deleteTask, { deleteStatus, deleteResponse }] = useDeleteTask()
-  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
+  const [deleteTask, { deleteStatus }] = useDeleteTask()
+  const [updateTask, { updateStatus }] = useUpdateTask()
   const [showReminder, setShowReminder] = useState(false)
   Cookies.set(`selectedDay-${location.pathname}`, task.date)
 
@@ -146,7 +146,6 @@ export default function Task() {
                   {task.time && (
                     <div className="reminder-time">{task.time}</div>
                   )}
-                  {/* <div>Repeated weekly on Sun, Thu</div> */}
                 </div>
 
                 <button className="delete-reminder" onClick={onReminderClear}>

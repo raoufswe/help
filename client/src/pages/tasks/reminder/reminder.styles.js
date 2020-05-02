@@ -4,7 +4,6 @@ import { createGlobalStyle } from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
 
 .reminder-modal .modal-content {
-  display: ${({ showSetRepeat }) => (showSetRepeat ? 'none' : 'initial')};
   border: none;
   width: 300px;
   position: absolute;

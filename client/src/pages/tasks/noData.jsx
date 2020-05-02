@@ -1,7 +1,5 @@
 import React from 'react'
-
 import styled from 'styled-components'
-import maxmin from 'utils/maxmin.js'
 
 function NoDataSvg(props) {
   return (

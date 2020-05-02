@@ -5,7 +5,6 @@ import { Context } from 'context'
 import useUpdateTask from './hooks/useUpdateTask'
 import styled from 'styled-components'
 import AngleIcon from 'assets/angle.icon.jsx'
-import { queryCache } from 'react-query'
 
 const Styled = styled.div`
   .completed-count {
@@ -44,7 +43,7 @@ const Styled = styled.div`
 export default function CompletedTasks({ data }) {
   const history = useHistory()
   const [{ task }, setGlobalContext] = useContext(Context)
-  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
+  const [updateTask] = useUpdateTask()
   const [showTasks, seShowTasks] = useState(false)
 
   const markAsInCompleted = id => {

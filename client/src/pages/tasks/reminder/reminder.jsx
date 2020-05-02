@@ -1,11 +1,9 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Styled, { GlobalStyle } from './reminder.styles'
 import { Modal } from 'react-bootstrap'
 import SetTime from './setTime'
-import Repeat from './repeat'
 import DatePicker from 'components/datePicker.jsx'
 import ClockIcon from 'assets/clock.icon.jsx'
-import RepeatIcon from 'assets/repeat.icon.jsx'
 import { Context } from 'context'
 import Cookies from 'js-cookie'
 import { useLocation } from 'react-router'
@@ -14,7 +12,6 @@ export default function Reminder(props) {
   const location = useLocation()
   const [{ task }, setGlobalContext] = useContext(Context)
   const [showSetTime, setShowSetTime] = useState(false)
-  const [showSetRepeat, setShowSetRepeat] = useState(false)
   const [date, setDate] = useState(task.date)
   const [time, setTime] = useState(task.time)
 
@@ -57,17 +54,6 @@ export default function Reminder(props) {
                   />
                 )}
               </div>
-
-              <div className="action">
-                <RepeatIcon />
-                <button onClick={() => setShowSetRepeat(true)}>Repeat</button>
-                {showSetRepeat && (
-                  <Repeat
-                    show={showSetRepeat}
-                    onHide={() => setShowSetRepeat(false)}
-                  />
-                )}
-              </div>
             </div>
 
             <div className="footer-section">
@@ -85,7 +71,7 @@ export default function Reminder(props) {
           </div>
         </Styled>
       </Modal>
-      <GlobalStyle showSetRepeat={showSetRepeat} />
+      <GlobalStyle />
     </>
   )
 }

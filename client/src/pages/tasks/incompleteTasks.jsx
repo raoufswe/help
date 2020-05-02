@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-import useIncompleteTasks from './hooks/useIncompleteTasks'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Context } from 'context'
 import useUpdateTask from './hooks/useUpdateTask'
@@ -61,7 +60,7 @@ const Styled = styled.div`
 export default function InCompletedTasks({ data }) {
   const history = useHistory()
   const [{ task }, setGlobalContext] = useContext(Context)
-  const [updateTask, { updateStatus, updateResponse }] = useUpdateTask()
+  const [updateTask] = useUpdateTask()
 
   const markCompleted = id => {
     setGlobalContext({

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { IonApp } from '@ionic/react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { Provider } from './context'
