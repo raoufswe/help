@@ -30,7 +30,7 @@ const Styled = styled.div`
     display: flex;
     align-items: center;
     padding: 14px 20px;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid #edecec;
 
     .task-item {
       font-size: 18px;

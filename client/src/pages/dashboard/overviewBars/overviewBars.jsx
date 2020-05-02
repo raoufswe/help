@@ -3,10 +3,11 @@ import Cookies from 'js-cookie'
 import moment from 'moment'
 import { StyledOverviewBars } from './overviewBars.styles'
 import LoadingUI from 'components/loading.jsx'
-import SomethingWrong from 'components/someThingWrong.jsx'
 import { getRange } from './date.helper'
 import { getUserDetails } from 'utils/verifyToken.js'
-
+import ErrorUI from 'components/errorUI.jsx'
+import Loader from 'assets/loader.jsx'
+import useGetFeelings from '../hooks/useGetFeelings'
 import {
   LineChart,
   Line,
@@ -17,57 +18,18 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts'
+import NoData from './noData'
 
 export default function OverviewBars({ feeling, onFeelingChange }) {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const currentWeek = moment()
-    .startOf('week')
-    .format('YYYY-MM-DD')
-
-  const fetchFeeling = async () => {
-    const { id } = getUserDetails()
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${Cookies.get('token')}`
-      }
-    }
-
-    try {
-      const response = await fetch(
-        `http://localhost:3000/feeling/${id}/${currentWeek}`,
-        requestOptions
-      )
-      if (response.status === 200) {
-        const data = await response.json()
-        setData(data.data)
-        setLoading(false)
-      } else {
-        setError(true)
-        setLoading(false)
-      }
-    } catch (error) {
-      setError(true)
-      setLoading(false)
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchFeeling()
-  }, [feeling, JSON.stringify(data)])
-
-  const { _id, __v, userID, week, ...feelings } = data
+  const { status, data } = useGetFeelings()
+  const { _id, __v, userID, week, ...feelings } = data || {}
   const LinChartData = Object.entries(feelings).map(e => ({
     name: e[0],
     uv: e[1].emoji,
     weight: e[1].weight
   }))
 
-  const DataFormater = weight => {
+  const DataFormatter = weight => {
     if (weight === 100) {
       return '😬'
     } else if (weight === 75) {
@@ -83,16 +45,13 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
 
   return (
     <>
-      {loading ? (
-        <LoadingUI style={{ position: 'absolute', top: '50%' }} />
-      ) : error ? (
-        <SomethingWrong />
+      {status === 'loading' ? (
+        <Loader />
+      ) : status === 'error' ? (
+        <ErrorUI />
       ) : LinChartData.length ? (
         <StyledOverviewBars>
-          <span>
-            Here’s an overview of how your week has been so far. You’re doing
-            great!
-          </span>
+          <span>Here’s an overview of how your week has been so far.</span>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
               data={LinChartData}
@@ -103,7 +62,7 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
               <YAxis
                 type="number"
                 dataKey="weight"
-                tickFormatter={DataFormater}
+                tickFormatter={DataFormatter}
                 domain={[dataMin => 0, dataMax => 100]}
               />
               <Tooltip />
@@ -116,7 +75,9 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
             </LineChart>
           </ResponsiveContainer>
         </StyledOverviewBars>
-      ) : null}
+      ) : (
+        <NoData />
+      )}
     </>
   )
 }

@@ -18,7 +18,7 @@ const Styled = styled.div`
   .task-reminder {
     display: flex;
     align-items: center;
-    color: #838486;
+    color: #8f9092;
     margin-top: 30px;
     font-size: 18px;
     width: 100%;
@@ -39,7 +39,7 @@ const Styled = styled.div`
     resize: none;
     width: 100%;
     ::placeholder {
-      color: #838486;
+      color: #8f9092;
     }
   }
 
@@ -47,7 +47,7 @@ const Styled = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    border: 1px solid #dcdcdc;
+    border-bottom: 1px solid #edecec;
     border-radius: 4px;
     padding: 10px;
     outline: 0;

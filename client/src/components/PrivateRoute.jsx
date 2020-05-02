@@ -5,8 +5,8 @@ import { verifyToken } from 'utils/verifyToken.js'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const addGratefulThingPage = useRouteMatch('/addGratefulThing')
-  const updateGratefulThingPage = useRouteMatch('/updateGratefulThing')
-  const journalingPage = useRouteMatch('/journaling')
+  const updateGratefulThingPage = useRouteMatch('/gratefulThing')
+  const journalsPage = useRouteMatch('/journals')
   const addJournalPage = useRouteMatch('/addJournal')
   const updateJournal = useRouteMatch('/updateJournal')
   const taskPage = useRouteMatch('/tasks/:id')
@@ -32,7 +32,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
               hide={
                 addGratefulThingPage ??
                 updateGratefulThingPage ??
-                journalingPage ??
+                journalsPage ??
                 addJournalPage ??
                 updateJournal ??
                 taskPage ??

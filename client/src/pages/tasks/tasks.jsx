@@ -36,6 +36,7 @@ const Tasks = () => {
       ) : (
         <NoData />
       )}
+
       <AddTaskModal
         show={showAddTaskModal}
         onHide={() => {

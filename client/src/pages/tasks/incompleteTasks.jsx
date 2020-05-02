@@ -53,7 +53,7 @@ const Styled = styled.div`
       }
     }
 
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid #edecec;
   }
 `
 

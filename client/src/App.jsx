@@ -14,12 +14,12 @@ import PasswordRegistration from 'pages/registration/customRegistration/password
 import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
 import Hospitals from 'pages/hospitals'
-import Grateful from 'pages/grateful'
-import AddGratefulThing from 'pages/grateful/addGratefulThing'
-import UpdateGratefulThing from 'pages/grateful/updateGratefulThing.jsx'
-import Journaling from 'pages/journaling'
-import AddJournal from 'pages/journaling/addJournal'
-import UpdateJournal from 'pages/journaling/updateJournal'
+import GratefulThings from 'pages/gratefulThings'
+import AddGratefulThing from 'pages/gratefulThings/addGratefulThing'
+import GratefulThing from 'pages/gratefulThings/gratefulThing.jsx'
+import journals from 'pages/journals'
+import AddJournal from 'pages/journals/addJournal'
+import UpdateJournal from 'pages/journals/updateJournal'
 import Tasks from 'pages/tasks'
 import Task from 'pages/tasks/task'
 import Player from 'pages/player'
@@ -66,9 +66,9 @@ const App = () => {
               exact
             />
             <PrivateRoute
-              name="Journaling"
-              path="/journaling"
-              component={Journaling}
+              name="Journals"
+              path="/journals"
+              component={journals}
               exact
             />
             <PrivateRoute
@@ -84,9 +84,9 @@ const App = () => {
               exact
             />
             <PrivateRoute
-              name="Grateful"
-              path="/grateful"
-              component={Grateful}
+              name="GratefulThings"
+              path="/gratefulThings"
+              component={GratefulThings}
               exact
             />
             <PrivateRoute
@@ -96,9 +96,9 @@ const App = () => {
               exact
             />
             <PrivateRoute
-              name="UpdateGratefulThing"
-              path="/updateGratefulThing/:id"
-              component={UpdateGratefulThing}
+              name="GratefulThing"
+              path="/gratefulThing/:id"
+              component={GratefulThing}
               exact
             />
             <PrivateRoute name="Tasks" path="/tasks" component={Tasks} exact />
