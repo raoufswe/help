@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/user/google/redirect',
+      callbackURL: 'https://help-mv.herokuapp.com/user/google/redirect',
     },
     function (accessToken, refreshToken, profile, done) {
       User.findOne({googleId: profile.id}).then((currentUser) => {
@@ -41,7 +41,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: '/user/facebook/redirect',
+      callbackURL: 'https://help-mv.herokuapp.com/user/facebook/redirect',
       profileFields: ['id', 'displayName'],
     },
     function (accessToken, refreshToken, profile, done) {
