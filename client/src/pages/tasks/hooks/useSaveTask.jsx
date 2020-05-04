@@ -26,7 +26,7 @@ export default function useSaveTask() {
         userID
       })
     }
-    const data = await fetch(`http://localhost:3000/tasks`, requestOptions)
+    const data = await fetch(`tasks`, requestOptions)
     return data.json()
   }
 

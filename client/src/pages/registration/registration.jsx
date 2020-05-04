@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-import { IonToast } from '@ionic/react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { verifyToken } from 'utils/verifyToken.js'
 import Styled from './registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
 import Button from 'components/button.jsx'
+import SignInWithGoogle from 'components/SignInWithGoogle.jsx'
 
 const Registration = ({ history }) => {
-  const [Error, setError] = useState({ showErrorToast: false, message: null })
-
   if (verifyToken()) return <Redirect to="/dashboard" />
 
   return (
@@ -30,29 +28,17 @@ const Registration = ({ history }) => {
           text="Email"
           onClick={() => history.push('/registerName')}
         />
-        <Button
-          color="#EA4335"
-          className="register-method"
-          text="Google"
-          as="a"
-          href="http://localhost:3000/user/google"
-        />
+
+        <SignInWithGoogle />
+
         <Button
           color="rgba(38, 118, 255, 0.9)"
           className="register-method"
           text="Facebook"
           as="a"
-          href="http://localhost:3000/user/facebook"
+          href=" user/facebook"
         />
       </div>
-
-      <IonToast
-        color="danger"
-        isOpen={Error.showErrorToast}
-        onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
-        message={Error.message}
-        duration={2000}
-      />
     </Styled>
   )
 }

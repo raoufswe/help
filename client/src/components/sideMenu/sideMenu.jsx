@@ -30,7 +30,7 @@ function SideMenu({ isOpen, onClick, hide }) {
 
   const onLogout = () => {
     Cookies.remove('token')
-    history.push('/landing')
+    history.push('/')
   }
 
   return (

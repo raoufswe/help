@@ -17,7 +17,7 @@ export default function useAddGratefulThing() {
         userID
       })
     }
-    const data = await fetch(`http://localhost:3000/grateful`, requestOptions)
+    const data = await fetch(`grateful`, requestOptions)
     return data.json()
   }
 

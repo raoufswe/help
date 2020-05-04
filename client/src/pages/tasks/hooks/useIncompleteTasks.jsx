@@ -13,10 +13,7 @@ const getIncompleteTasks = async () => {
     }
   }
 
-  const { data } = await axios.get(
-    `http://localhost:3000/tasks/${id}/incomplete`,
-    requestOptions
-  )
+  const { data } = await axios.get(`tasks/${id}/incomplete`, requestOptions)
   return data
 }
 

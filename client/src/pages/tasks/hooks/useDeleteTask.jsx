@@ -14,10 +14,7 @@ export default function useDeleteTask() {
         authorization: `Bearer ${Cookies.get('token')}`
       }
     }
-    const response = await fetch(
-      `http://localhost:3000/tasks/${userID}/${taskID}`,
-      requestOptions
-    )
+    const response = await fetch(`tasks/${userID}/${taskID}`, requestOptions)
 
     return await response.json()
   }

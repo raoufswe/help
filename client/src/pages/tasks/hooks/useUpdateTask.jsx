@@ -27,10 +27,7 @@ export default function useUpdateTask() {
         userID
       })
     }
-    const data = await fetch(
-      `http://localhost:3000/tasks/${userID}/${taskID}`,
-      requestOptions
-    )
+    const data = await fetch(`tasks/${userID}/${taskID}`, requestOptions)
     return data.json()
   }
 

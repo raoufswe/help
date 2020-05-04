@@ -42,10 +42,7 @@ const CustomRegistration = ({ history }) => {
           password
         })
       }
-      const response = await fetch(
-        'http://localhost:3000/user/register',
-        requestOptions
-      )
+      const response = await fetch('user/register', requestOptions)
       const data = await response.json()
       if (data.success === false) {
         console.log(data.errors)

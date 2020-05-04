@@ -14,7 +14,7 @@ const getJournal = async (_, journalID) => {
   }
 
   const { data } = await axios.get(
-    `http://localhost:3000/journals/${userID}/${journalID}`,
+    `journals/${userID}/${journalID}`,
     requestOptions
   )
   return data

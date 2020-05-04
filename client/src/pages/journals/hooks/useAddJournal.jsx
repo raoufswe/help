@@ -17,7 +17,7 @@ export default function useAddJournal() {
         userID
       })
     }
-    const data = await fetch(`http://localhost:3000/journals`, requestOptions)
+    const data = await fetch(`journals`, requestOptions)
     return data.json()
   }
 

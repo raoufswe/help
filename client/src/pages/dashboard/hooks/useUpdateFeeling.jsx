@@ -18,10 +18,7 @@ export default function useUpdateFeeling() {
         [currentDay]: feeling
       })
     }
-    const data = await fetch(
-      `http://localhost:3000/feeling/${userID}`,
-      requestOptions
-    )
+    const data = await fetch(`feeling/${userID}`, requestOptions)
     return data.json()
   }
 

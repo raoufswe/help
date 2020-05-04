@@ -12,10 +12,7 @@ export default function useDeleteGratefulThing() {
         authorization: `Bearer ${Cookies.get('token')}`
       }
     }
-    const response = await fetch(
-      `http://localhost:3000/grateful/${userID}/${id}`,
-      requestOptions
-    )
+    const response = await fetch(`grateful/${userID}/${id}`, requestOptions)
     return await response.json()
   }
 

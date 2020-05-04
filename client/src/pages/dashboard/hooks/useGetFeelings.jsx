@@ -15,7 +15,7 @@ const getFeelings = async () => {
   }
 
   const { data } = await axios.get(
-    `http://localhost:3000/feeling/${id}/${currentWeek}`,
+    `feeling/${id}/${currentWeek}`,
     requestOptions
   )
   return data

@@ -1,20 +1,13 @@
-import React, { useState, useContext } from 'react'
-import { IonToast } from '@ionic/react'
+import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import { verifyToken } from 'utils/verifyToken.js'
 import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
-import Button from 'components/button.jsx'
-import { Context } from 'context'
+import SignInWithGoogle from 'components/SignInWithGoogle.jsx'
+import SignInWithEmail from 'components/signInWithEmail'
 
 const Login = ({ history }) => {
-  const [globalContext, setGlobalContext] = useContext(Context)
-  const [error, setError] = useState({
-    showErrorToast: false,
-    message: []
-  })
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState('')
 
   const onChange = e => {
     const { value } = e.target
@@ -22,44 +15,6 @@ const Login = ({ history }) => {
       ...user,
       [e.target.name]: value
     })
-  }
-
-  const signInWithEmail = async e => {
-    const { email, password } = user
-    if (!email || !password) return
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    }
-    const response = await fetch(
-      'http://localhost:3000/user/auth',
-      requestOptions
-    )
-    const data = await response.json()
-    if (data.success === false) {
-      setError({
-        showErrorToast: true,
-        message: 'Email or password is invalid. Please try again'
-      })
-    } else {
-      const { token, user } = data.data
-      const { name, email, _id } = user
-      setGlobalContext({
-        currentUser: {
-          ...globalContext.currentUser,
-          _id,
-          name,
-          email
-        }
-      })
-      Cookies.set('token', token, { expires: 7 })
-      Cookies.set('userName', name, { expires: 7 })
-      history.push('/dashboard')
-    }
   }
 
   if (verifyToken()) return <Redirect to="/dashboard" />
@@ -92,36 +47,17 @@ const Login = ({ history }) => {
       </div>
 
       <div className="login-methods">
-        <Button
-          className="login-button"
-          onClick={signInWithEmail}
-          color="#2676FF"
-          text="Sign me in"
-        />
+        <SignInWithEmail user={user} />
         <div className="login-or">OR</div>
-        <Button
-          className="login-method"
-          color="#EA4335"
-          text="Google"
-          as="a"
-          href="http://localhost:3000/user/google"
-        />
-        <Button
+        <SignInWithGoogle />
+        {/* <Button
           className="login-method"
           color="#2676FF"
           text="Facebook"
           as="a"
-          href="http://localhost:3000/user/facebook"
-        />
+          href=" user/facebook"
+        /> */}
       </div>
-
-      <IonToast
-        color="danger"
-        isOpen={error.showErrorToast}
-        onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
-        message={error.message}
-        duration={2000}
-      />
     </Styled>
   )
 }

@@ -13,10 +13,7 @@ const getGratefulThings = async () => {
     }
   }
 
-  const { data } = await axios.get(
-    `http://localhost:3000/grateful/${id}`,
-    requestOptions
-  )
+  const { data } = await axios.get(`grateful/${id}`, requestOptions)
   return data
 }
 

@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "heh",
+  "appId": "help.mv",
+  "appName": "help",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build"

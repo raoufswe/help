@@ -16,10 +16,7 @@ export default function useUpdateGratefulThing() {
         content
       })
     }
-    const data = await fetch(
-      `http://localhost:3000/grateful/${userID}/${id}`,
-      requestOptions
-    )
+    const data = await fetch(`grateful/${userID}/${id}`, requestOptions)
     return data.json()
   }
 

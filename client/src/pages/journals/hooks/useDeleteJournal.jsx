@@ -12,10 +12,7 @@ export default function useDeleteJournal() {
         authorization: `Bearer ${Cookies.get('token')}`
       }
     }
-    const response = await fetch(
-      `http://localhost:3000/journals/${userID}/${id}`,
-      requestOptions
-    )
+    const response = await fetch(`journals/${userID}/${id}`, requestOptions)
 
     return await response.json()
   }
