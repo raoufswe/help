@@ -1,41 +1,37 @@
 import React from 'react'
 import styled from 'styled-components'
+import AngleIcon from 'assets/angle.icon'
 
 const StyledButton = styled.button`
-  background: ${props => props.color};
-  border-radius: 40px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  min-height: 60px;
-  color: ${props => props.textColor};
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border: 1px solid #dadada;
+  border-radius: 0.5rem;
   width: 100%;
-  outline: none;
-  display: block;
-  text-decoration: none;
-  text-align: center;
+  font-size: medium;
+  font-weight: 600;
+  margin: 1.3rem 0;
+
+  .icon {
+    margin-right: 1rem;
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+  .angle {
+    margin-left: auto;
+    transform: rotate(-90deg);
+    height: 1rem;
+    width: 1rem;
+  }
 `
 
-const Button = ({
-  color,
-  text,
-  textColor = '#ffff',
-  onClick,
-  href,
-  as = 'button',
-  ...props
-}) => {
+const Button = ({ text, onClick, Icon }) => {
   return (
-    <StyledButton
-      color={color}
-      onClick={onClick}
-      textColor={textColor}
-      as={as}
-      href={href}
-      {...props}
-    >
-      {text}
+    <StyledButton onClick={onClick}>
+      {Icon && <Icon className="icon" />}
+      <span>{text}</span>
+      <AngleIcon className="angle" />
     </StyledButton>
   )
 }

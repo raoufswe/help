@@ -3,42 +3,42 @@ import { Redirect } from 'react-router-dom'
 import { verifyToken } from 'utils/verifyToken.js'
 import Styled from './registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
-import Button from 'components/button.jsx'
+import CreateWithEmail from 'components/createWithEmail'
 import SignInWithGoogle from 'components/SignInWithGoogle.jsx'
+import SignInWithFacebook from 'components/signInWithFacebook'
+import Button from 'components/button'
+import EmailIcon from 'assets/email.icon.jsx'
 
 const Registration = ({ history }) => {
   if (verifyToken()) return <Redirect to="/dashboard" />
 
   return (
     <Styled>
+      <div className="back" onClick={() => history.push('/')}>
+        <LeftArrow />
+      </div>
+
       <main>
-        <div className="registration-back" onClick={() => history.push('/')}>
-          <LeftArrow />
+        <div className="create-account">
+          <div>Create</div>
+          <div>an account</div>
         </div>
 
-        <div className="registration-top-text">
-          Let’s get you started. How would you like to set up your account?
+        <SignInWithGoogle text="Create with Google" />
+        <SignInWithFacebook text="Create with Facebook" />
+        <Button
+          text="Create with Email"
+          Icon={EmailIcon}
+          onClick={() => history.push('/createWithEmail')}
+        />
+
+        <div
+          className="already-have-account"
+          onClick={() => history.push('/login')}
+        >
+          Already have an account?
         </div>
       </main>
-
-      <div className="register-methods">
-        <Button
-          color="#2676FF"
-          className="register-method"
-          text="Email"
-          onClick={() => history.push('/registerName')}
-        />
-
-        <SignInWithGoogle />
-
-        <Button
-          color="rgba(38, 118, 255, 0.9)"
-          className="register-method"
-          text="Facebook"
-          as="a"
-          href=" user/facebook"
-        />
-      </div>
     </Styled>
   )
 }

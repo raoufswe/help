@@ -6,11 +6,10 @@ import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Dashboard from 'pages/dashboard'
 import Login from 'pages/login'
+import LoginWithEmail from 'components/loginWithEmail'
 import Registration from 'pages/registration'
 import Landing from 'pages/landing'
-import NameRegistration from 'pages/registration/customRegistration/name'
-import EmailRegistration from 'pages/registration/customRegistration/email'
-import PasswordRegistration from 'pages/registration/customRegistration/password'
+import EmailRegistration from 'components/createWithEmail'
 import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
 import Hospitals from 'pages/hospitals'
@@ -43,15 +42,16 @@ const App = () => {
                 > */}
             <Route path="/" exact component={Landing} />
             <Route path="/register" exact component={Registration} />
-            <Route path="/registerName" exact component={NameRegistration} />
-            <Route path="/registerEmail" exact component={EmailRegistration} />
             <Route
-              path="/registerPassword"
+              path="/createWithEmail"
               exact
-              component={PasswordRegistration}
+              component={EmailRegistration}
             />
+
             <Route path="/hooray" exact component={Hooray} />
             <Route path="/login" exact component={Login} />
+            <Route path="/loginWithEmail" exact component={LoginWithEmail} />
+
             <PrivateRoute
               style={{ background: '#F5F5FA' }}
               name="dashboard"
@@ -124,7 +124,6 @@ const App = () => {
             {/* </CSSTransition>
               </TransitionGroup>
             )} */}
-            />
           </Provider>
         </IonRouterOutlet>
       </IonReactRouter>

@@ -31,8 +31,6 @@ const Landing = ({ history, validToken }) => {
 
       <div className="landing-footer">
         <Button
-          className="sign-up"
-          color="#2676FF"
           text="Get Started"
           onClick={e => {
             e.preventDefault()
@@ -41,8 +39,6 @@ const Landing = ({ history, validToken }) => {
         />
 
         <Button
-          className="sign-in"
-          color="white"
           text=" I already have an account"
           onClick={e => {
             e.preventDefault()

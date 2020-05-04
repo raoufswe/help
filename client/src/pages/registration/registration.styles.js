@@ -4,76 +4,32 @@ import maxmin from 'utils/maxmin.js'
 const StyledRegister = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${maxmin(70, 35)} ${maxmin(40, 20)};
+  padding: 20px;
   height: 100vh;
 
-  .registration-back {
-    width: 24px;
-    height: 21px;
-    margin-bottom: ${maxmin(30, 20)};
+  .back {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-bottom: auto;
   }
 
-  main {
-    display: flex;
-    flex-direction: column;
-    height: 30%;
-    justify-content: space-evenly;
+  .create-account {
+    font-size: x-large;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.2px;
 
-    .registration-top-text {
-      font-weight: 600;
-      font-size: ${maxmin(36, 30)};
-      letter-spacing: 0.4px;
-      line-height: 1.2;
+    div:first-of-type {
+      color: rgb(33, 150, 243);
     }
   }
 
-  .registration-name {
-    display: inline-block;
-    color: #2676ff;
-    font-size: ${maxmin(36, 24)};
-  }
-
-  .password-rules {
-    margin-top: ${maxmin(75, 40)};
-    > div {
-      font-weight: 500;
-      font-size: 18px;
-      padding-bottom: ${maxmin(30, 20)};
-      display: flex;
-      align-items: flex-end;
-      > svg {
-        margin-right: 10px;
-        width: 30px;
-        height: 30px;
-      }
-    }
-  }
-
-  .register-input {
-    margin: ${maxmin(55, 20)} auto auto;
-    border: 0;
-    outline: 0;
-    max-width: 100%;
-    border-bottom: 2px solid black;
-    font-weight: 600;
-    font-size: ${maxmin(36, 24)};
-    color: black;
-    padding-bottom: 10px;
-    width: 100%;
-
-    ::placeholder {
-      color: #d9d9d9;
-    }
-  }
-  .register-methods {
-    padding-top: ${maxmin(60, 30)};
-    .register-method {
-      margin-bottom: ${maxmin(30, 20)};
-    }
-  }
-
-  .register-button {
-    margin-top: auto;
+  .already-have-account {
+    font-family: Fira Sans;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 1.5rem 0 1rem 0;
+    color: rgb(33, 150, 243);
   }
 `
 

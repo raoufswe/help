@@ -5,6 +5,9 @@ import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
 import SignInWithGoogle from 'components/SignInWithGoogle.jsx'
 import SignInWithEmail from 'components/signInWithEmail'
+import SignInWithFacebook from 'components/signInWithFacebook/signInWithFacebook'
+import Button from 'components/button'
+import EmailIcon from 'assets/email.icon.jsx'
 
 const Login = ({ history }) => {
   const [user, setUser] = useState('')
@@ -21,43 +24,29 @@ const Login = ({ history }) => {
 
   return (
     <Styled>
+      <div className="back" onClick={() => history.push('/')}>
+        <LeftArrow />
+      </div>
+
       <main>
-        <div className="login-back" onClick={() => history.push('/')}>
-          <LeftArrow />
+        <div className="login">
+          <span className="colored-title">Login</span> {''}
+          <span>to</span>
+          <div>Your Account</div>
         </div>
 
-        <div className="login-top-text">Let’s sign you in. </div>
+        <SignInWithGoogle text="Login with Google" />
+        <SignInWithFacebook text="Login with Facebook" />
+        <Button
+          text="Login with Email"
+          Icon={EmailIcon}
+          onClick={() => history.push('/loginWithEmail')}
+        />
+
+        <div className="no-account" onClick={() => history.push('/register')}>
+          Don't have an account?
+        </div>
       </main>
-
-      <div className="login-inputs">
-        <input
-          type="text"
-          className="login-input"
-          onChange={onChange}
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          className="login-input"
-          onChange={onChange}
-          name="password"
-          placeholder="Password"
-        />
-      </div>
-
-      <div className="login-methods">
-        <SignInWithEmail user={user} />
-        <div className="login-or">OR</div>
-        <SignInWithGoogle />
-        {/* <Button
-          className="login-method"
-          color="#2676FF"
-          text="Facebook"
-          as="a"
-          href=" user/facebook"
-        /> */}
-      </div>
     </Styled>
   )
 }

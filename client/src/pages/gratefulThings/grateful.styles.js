@@ -5,7 +5,7 @@ export const StyledGratefulThings = styled.div`
   height: 100vh;
   .page-title {
     font-weight: 600;
-    font-size: ${maxmin(36, 30)};
+    font-size: x-large;
     padding: 20px;
   }
 
@@ -24,7 +24,7 @@ export const StyledGratefulThings = styled.div`
     word-break: break-word;
 
     .title {
-      font-size: 20px;
+      font-size: large;
       font-weight: 400;
     }
 

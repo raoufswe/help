@@ -24,7 +24,6 @@ const Styled = styled.div`
     width: 70%;
     padding: 20px;
     color: #ffffff;
-    font-size: 18px;
     position: fixed;
     top: 0;
     left: 0;
@@ -55,7 +54,7 @@ const Styled = styled.div`
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      font-size: ${maxmin(18, 16)};
+      font-size: 16px
       font-weight: 500;
       color: #ffff;
       text-decoration: none;
@@ -69,6 +68,7 @@ const Styled = styled.div`
     margin: auto 0 60px;
     display: flex;
     place-items: center;
+    font-size: 16px;
     svg {
       margin-right: 20px;
     }

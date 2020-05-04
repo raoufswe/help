@@ -4,8 +4,9 @@ import Button from 'components/button.jsx'
 import { IonToast } from '@ionic/react'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
+import GoogleIcon from 'assets/google.icon.jsx'
 
-export default function SignInWithGoogle() {
+export default function SignInWithGoogle({ text }) {
   const history = useHistory()
   const [error, setError] = useState({
     showErrorToast: false,
@@ -31,13 +32,7 @@ export default function SignInWithGoogle() {
 
   return (
     <>
-      <Button
-        className="login-method"
-        color="#EA4335"
-        text="Google"
-        as="a"
-        onClick={signInWithGoogle}
-      />
+      <Button text={text} onClick={signInWithGoogle} Icon={GoogleIcon} />
 
       <IonToast
         color="danger"
