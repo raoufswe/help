@@ -2,7 +2,6 @@
   "name": "help",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://help-mv.herokuapp.com",
   "dependencies": {
     "@capacitor/android": "^1.5.1",
     "@capacitor/core": "1.5.1",

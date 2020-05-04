@@ -42,7 +42,10 @@ const CustomRegistration = ({ history }) => {
           password
         })
       }
-      const response = await fetch('user/register', requestOptions)
+      const response = await fetch(
+        'https://help-mv.herokuapp.com/user/register',
+        requestOptions
+      )
       const data = await response.json()
       if (data.success === false) {
         console.log(data.errors)

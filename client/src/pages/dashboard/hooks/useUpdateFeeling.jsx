@@ -18,7 +18,10 @@ export default function useUpdateFeeling() {
         [currentDay]: feeling
       })
     }
-    const data = await fetch(`feeling/${userID}`, requestOptions)
+    const data = await fetch(
+      `https://help-mv.herokuapp.com/feeling/${userID}`,
+      requestOptions
+    )
     return data.json()
   }
 

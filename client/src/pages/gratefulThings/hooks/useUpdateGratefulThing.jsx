@@ -16,7 +16,10 @@ export default function useUpdateGratefulThing() {
         content
       })
     }
-    const data = await fetch(`grateful/${userID}/${id}`, requestOptions)
+    const data = await fetch(
+      `https://help-mv.herokuapp.com/grateful/${userID}/${id}`,
+      requestOptions
+    )
     return data.json()
   }
 

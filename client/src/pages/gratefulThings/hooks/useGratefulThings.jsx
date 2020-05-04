@@ -13,7 +13,10 @@ const getGratefulThings = async () => {
     }
   }
 
-  const { data } = await axios.get(`grateful/${id}`, requestOptions)
+  const { data } = await axios.get(
+    `https://help-mv.herokuapp.com/grateful/${id}`,
+    requestOptions
+  )
   return data
 }
 

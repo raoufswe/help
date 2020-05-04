@@ -27,7 +27,10 @@ export default function useUpdateTask() {
         userID
       })
     }
-    const data = await fetch(`tasks/${userID}/${taskID}`, requestOptions)
+    const data = await fetch(
+      `https://help-mv.herokuapp.com/tasks/${userID}/${taskID}`,
+      requestOptions
+    )
     return data.json()
   }
 

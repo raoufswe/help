@@ -14,7 +14,7 @@ const getJournal = async (_, journalID) => {
   }
 
   const { data } = await axios.get(
-    `journals/${userID}/${journalID}`,
+    `https://help-mv.herokuapp.com/journals/${userID}/${journalID}`,
     requestOptions
   )
   return data

@@ -14,7 +14,7 @@ const getGratefulThing = async (_, gratefulThinID) => {
   }
 
   const { data } = await axios.get(
-    `grateful/${userID}/${gratefulThinID}`,
+    `https://help-mv.herokuapp.com/grateful/${userID}/${gratefulThinID}`,
     requestOptions
   )
   return data

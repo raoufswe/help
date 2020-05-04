@@ -16,7 +16,10 @@ export default function useUpdateJournal() {
         content
       })
     }
-    const data = await fetch(`journals/${userID}/${id}`, requestOptions)
+    const data = await fetch(
+      `https://help-mv.herokuapp.com/journals/${userID}/${id}`,
+      requestOptions
+    )
     return data.json()
   }
 

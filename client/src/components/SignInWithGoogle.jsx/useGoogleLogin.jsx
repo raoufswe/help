@@ -14,7 +14,7 @@ export default function useGoogleLogin() {
       })
     }
     const data = await fetch(
-      `http://localhost:3000/user/google`,
+      `https://help-mv.herokuapp.com/user/google`,
       requestOptions
     )
     return data.json()

@@ -15,7 +15,7 @@ const getFeelings = async () => {
   }
 
   const { data } = await axios.get(
-    `feeling/${id}/${currentWeek}`,
+    `https://help-mv.herokuapp.com/feeling/${id}/${currentWeek}`,
     requestOptions
   )
   return data

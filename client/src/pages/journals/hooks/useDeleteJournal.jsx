@@ -12,7 +12,10 @@ export default function useDeleteJournal() {
         authorization: `Bearer ${Cookies.get('token')}`
       }
     }
-    const response = await fetch(`journals/${userID}/${id}`, requestOptions)
+    const response = await fetch(
+      `https://help-mv.herokuapp.com/journals/${userID}/${id}`,
+      requestOptions
+    )
 
     return await response.json()
   }

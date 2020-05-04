@@ -13,7 +13,10 @@ const getJournals = async () => {
     }
   }
 
-  const { data } = await axios.get(`journals/${id}`, requestOptions)
+  const { data } = await axios.get(
+    `https://help-mv.herokuapp.com/journals/${id}`,
+    requestOptions
+  )
   return data
 }
 

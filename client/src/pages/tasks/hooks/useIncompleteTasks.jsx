@@ -13,7 +13,10 @@ const getIncompleteTasks = async () => {
     }
   }
 
-  const { data } = await axios.get(`tasks/${id}/incomplete`, requestOptions)
+  const { data } = await axios.get(
+    `https://help-mv.herokuapp.com/tasks/${id}/incomplete`,
+    requestOptions
+  )
   return data
 }
 

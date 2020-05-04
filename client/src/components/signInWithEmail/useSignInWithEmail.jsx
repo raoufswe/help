@@ -12,7 +12,10 @@ export default function useSignInWithEmail() {
         password
       })
     }
-    const response = await fetch('user/auth', requestOptions)
+    const response = await fetch(
+      'https://help-mv.herokuapp.com/user/auth',
+      requestOptions
+    )
     const data = await response.json()
   }
 
