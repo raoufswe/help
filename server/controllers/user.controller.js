@@ -11,12 +11,49 @@ exports.register_user = function (req, res) {
   User.create(user)
     .then((User) => {
       res.send({success: true, result: User, errors: []})
-      console.log('saved to db')
     })
     .catch((err) => {
-      res.send({success: false, result: [], errors: [err]})
+      res.send({success: false, result: [], errors: err})
       console.log(err)
     })
+}
+
+exports.google_user = function (req, res) {
+  User.findOne({googleId: req.body.googleId}).then((currentUser) => {
+    if (currentUser) {
+      res.send({
+        success: true,
+        token: jwt.sign(
+          {
+            id: currentUser._id,
+            name: currentUser.name,
+          },
+          req.app.get('secretKey'),
+          {expiresIn: '24h'},
+        ),
+      })
+    } else {
+      new User({
+        googleId: req.body.googleId,
+        name: req.body.name,
+        email: req.body.email,
+      })
+        .save()
+        .then((newUser) => {
+          res.send({
+            success: true,
+            token: jwt.sign(
+              {
+                id: newUser.googleId,
+                name: newUser.name,
+              },
+              req.app.get('secretKey'),
+              {expiresIn: '24h'},
+            ),
+          })
+        })
+    }
+  })
 }
 
 exports.auth_user = function (req, res, next) {
@@ -27,21 +64,19 @@ exports.auth_user = function (req, res, next) {
       },
       function (err, userInfo) {
         if (userInfo === null) {
-          res.send({success: false, result: [], errors: [err]})
+          res.send({success: false, result: [], errors: err})
         } else {
           if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-            const token = jwt.sign(
-              {
-                id: userInfo._id,
-                name: userInfo.name,
-              },
-              req.app.get('secretKey'),
-              {expiresIn: '24h'},
-            )
             res.json({
               status: 'success',
-              message: 'User Found',
-              data: {user: userInfo, token: token},
+              token: jwt.sign(
+                {
+                  id: userInfo._id,
+                  name: userInfo.name,
+                },
+                req.app.get('secretKey'),
+                {expiresIn: '24h'},
+              ),
             })
           } else {
             res.send({success: false, result: [], errors: [err]})

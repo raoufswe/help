@@ -6,8 +6,6 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const jwt = require('express-jwt')
 const dotenv = require('dotenv')
-const passport = require('passport')
-const passportSetup = require('./config/passport.setup')
 
 dotenv.config()
 
@@ -50,9 +48,7 @@ app.use(
       '/user/auth',
       '/user/register',
       '/user/google',
-      '/user/google/redirect',
       '/user/facebook',
-      '/user/facebook/redirect',
     ],
   }),
   function (err, req, res, next) {
@@ -61,8 +57,6 @@ app.use(
     }
   },
 )
-
-app.use(passport.initialize())
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use('/user', require('./routes/user.route'))
