@@ -2,7 +2,7 @@
   "name": "help",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "https://help-mv.herokuapp.com",
   "dependencies": {
     "@capacitor/android": "^1.5.1",
     "@capacitor/core": "1.5.1",
@@ -11,7 +11,6 @@
     "@ionic/react": "^5.0.5",
     "@ionic/react-router": "^5.0.5",
     "bootstrap": "^4.4.1",
-    "http-proxy-middleware": "^1.0.3",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
