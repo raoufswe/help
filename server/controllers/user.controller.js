@@ -10,7 +10,17 @@ exports.register_user = function (req, res) {
   }
   User.create(user)
     .then((User) => {
-      res.send({success: true, result: User, errors: []})
+      res.send({
+        success: true,
+        token: jwt.sign(
+          {
+            id: User._id,
+            name: User.name,
+          },
+          req.app.get('secretKey'),
+          {expiresIn: '24h'},
+        ),
+      })
     })
     .catch((err) => {
       res.send({success: false, result: [], errors: err})
@@ -68,7 +78,7 @@ exports.auth_user = function (req, res, next) {
         } else {
           if (bcrypt.compareSync(req.body.password, userInfo.password)) {
             res.json({
-              status: 'success',
+              success: true,
               token: jwt.sign(
                 {
                   id: userInfo._id,
@@ -79,13 +89,13 @@ exports.auth_user = function (req, res, next) {
               ),
             })
           } else {
-            res.send({success: false, result: [], errors: [err]})
+            res.send({success: false, result: [], errors: err})
           }
         }
       },
     )
   } else {
-    res.send({success: false, result: [], errors: [err]})
+    res.send({success: false, result: [], errors: err})
   }
 }
 
