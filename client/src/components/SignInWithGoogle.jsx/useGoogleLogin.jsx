@@ -22,8 +22,6 @@ export default function useGoogleLogin() {
 
   const [mutate, { status, data }] = useMutation(handleGoogleLogin)
 
-  console.log({ data })
-
   const signInWithGoogle = async () => {
     const result = await Plugins.GoogleAuth.signIn()
     if (result) {

@@ -39,6 +39,20 @@ const Styled = styled.div`
       padding: 1rem;
     }
   }
+
+  .password {
+    display: flex;
+    align-items: center;
+
+    .show-password {
+      padding: 0;
+      position: absolute;
+      right: 30px;
+      svg {
+        height: 1.3rem;
+      }
+    }
+  }
 `
 
 export default Styled

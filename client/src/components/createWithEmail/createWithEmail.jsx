@@ -7,9 +7,14 @@ import Button from 'components/button'
 import ValidPassword from 'assets/validPassword.icon.jsx'
 import InvalidPassword from 'assets/invalidPassword.icon.jsx'
 import LeftArrow from 'assets/left-arrow.icon'
+import ClosedEyeIcon from 'assets/closedEye.icon.jsx'
+import OpenEyeIcon from 'assets/openEye.icon.jsx'
+import useCreateWithEmail from './useCreateWithEmail'
 
 export default function CreateWithEmail() {
   const history = useHistory()
+  const [createEmail, { status, data }] = useCreateWithEmail()
+  const [showPassword, setShowPassword] = useState(false)
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -17,7 +22,7 @@ export default function CreateWithEmail() {
   })
   const [error, setError] = useState({
     showErrorToast: false,
-    message: []
+    message: ''
   })
 
   const onChange = e => {
@@ -28,11 +33,42 @@ export default function CreateWithEmail() {
     })
   }
 
-  const longEnough = state.password.length > 8
-  const hasNumber = /\d/.test(state.password)
-  const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-    state.email
-  )
+  useEffect(() => {
+    if (!data) return
+    if (data?.success && status === 'success') {
+      Cookies.set('token', data?.token)
+      history.push('/dashboard')
+    } else if (!data?.success || status === 'error') {
+      setError({
+        showErrorToast: true,
+        message:
+          data?.errors.code === 11000
+            ? 'The used email address exists'
+            : 'Something went wrong. Please try again'
+      })
+    }
+  }, [status])
+
+  const onCreateEmail = () => {
+    const { name, password, email } = state
+    const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      email
+    )
+
+    if (!name || !password || !email) {
+      setError({
+        showErrorToast: true,
+        message: 'Please fill up all fields'
+      })
+    } else if (!validEmail) {
+      setError({
+        showErrorToast: true,
+        message: 'Please enter a valid email address'
+      })
+    } else {
+      createEmail(state)
+    }
+  }
 
   return (
     <Styled>
@@ -46,17 +82,27 @@ export default function CreateWithEmail() {
         <input
           type="text"
           onChange={onChange}
-          name="name"
+          name="email"
           placeholder="Email"
         />
-        <input
-          type="password"
-          onChange={onChange}
-          name="password"
-          placeholder="Password"
-        />
+        <div className="password">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={onChange}
+            name="password"
+            placeholder="Password"
+          />
+          <button
+            className="show-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <OpenEyeIcon /> : <ClosedEyeIcon />}
+          </button>
+        </div>
 
-        <button className="sign-up">Sign up</button>
+        <button className="sign-up" onClick={onCreateEmail}>
+          Sign up
+        </button>
       </main>
 
       <IonToast
