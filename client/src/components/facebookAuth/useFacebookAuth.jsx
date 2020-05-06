@@ -16,7 +16,7 @@ export default function useFacebookAuth() {
       })
     }
     const data = await fetch(
-      `http://localhost:3000/user/facebook`,
+      `https://help-mv.herokuapp.com/user/facebook`,
       requestOptions
     )
     return data.json()
