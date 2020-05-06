@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import { IonApp } from '@ionic/react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+// import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Dashboard from 'pages/dashboard'
 import Login from 'pages/login'
-import LoginWithEmail from 'components/loginWithEmail'
+import EmailLogin from 'components/emailLogin'
 import Registration from 'pages/registration'
 import Landing from 'pages/landing'
-import EmailRegistration from 'components/createWithEmail'
+import EmailSignUp from 'components/emailSignUp'
 import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
 import Hospitals from 'pages/hospitals'
@@ -42,15 +42,11 @@ const App = () => {
                 > */}
             <Route path="/" exact component={Landing} />
             <Route path="/register" exact component={Registration} />
-            <Route
-              path="/createWithEmail"
-              exact
-              component={EmailRegistration}
-            />
+            <Route path="/emailSignUp" exact component={EmailSignUp} />
 
             <Route path="/hooray" exact component={Hooray} />
             <Route path="/login" exact component={Login} />
-            <Route path="/loginWithEmail" exact component={LoginWithEmail} />
+            <Route path="/EmailLogin" exact component={EmailLogin} />
 
             <PrivateRoute
               style={{ background: '#F5F5FA' }}

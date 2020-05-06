@@ -11,7 +11,8 @@ def capacitor_pods
   # Automatic Capacitor Pod dependencies, do not delete
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
-  
+  pod 'CodetrixStudioCapacitorGoogleAuth', :path => '../../node_modules/@codetrix-studio/capacitor-google-auth'
+  pod 'RdlaboCapacitorFacebookLogin', :path => '../../node_modules/@rdlabo/capacitor-facebook-login'
   # Do not delete
 end
 

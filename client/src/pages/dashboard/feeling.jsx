@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import Cookies from 'js-cookie'
+import React from 'react'
 import styled from 'styled-components'
 import SuperHappyIcon from 'assets/super-happy.icon.jsx'
 import Happy from 'assets/happy.icon.jsx'

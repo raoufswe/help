@@ -2,8 +2,8 @@ import { useMutation, queryCache } from 'react-query'
 import '@codetrix-studio/capacitor-google-auth'
 import { Plugins } from '@capacitor/core'
 
-export default function useGoogleLogin() {
-  const handleGoogleLogin = async ({ result }) => {
+export default function useGoogleAuth() {
+  const handleGoogleAuth = async ({ result }) => {
     console.log(result)
     const requestOptions = {
       method: 'POST',
@@ -20,9 +20,9 @@ export default function useGoogleLogin() {
     return data.json()
   }
 
-  const [mutate, { status, data }] = useMutation(handleGoogleLogin)
+  const [mutate, { status, data }] = useMutation(handleGoogleAuth)
 
-  const signInWithGoogle = async () => {
+  const googleAuth = async () => {
     const result = await Plugins.GoogleAuth.signIn()
     if (result) {
       try {
@@ -33,8 +33,5 @@ export default function useGoogleLogin() {
     }
   }
 
-  return [
-    signInWithGoogle,
-    { googleLoginStatus: status, googleToken: data?.token }
-  ]
+  return [googleAuth, { status, token: data?.token }]
 }

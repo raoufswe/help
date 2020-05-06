@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import maxmin from 'utils/maxmin.js'
 
 const StyledRegister = styled.div`
   display: flex;

@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import useGoogleLogin from './useGoogleLogin'
+import useGoogleAuth from './useGoogleAuth'
 import Button from 'components/button.jsx'
 import { IonToast } from '@ionic/react'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
 import GoogleIcon from 'assets/google.icon.jsx'
+import Loader from 'assets/loader.jsx'
 
-export default function SignInWithGoogle({ text }) {
+export default function GoogleAuth({ text }) {
   const history = useHistory()
   const [error, setError] = useState({
     showErrorToast: false,
     message: []
   })
 
-  const [
-    signInWithGoogle,
-    { googleLoginStatus, googleToken }
-  ] = useGoogleLogin()
+  const [googleAuth, { status, token }] = useGoogleAuth()
 
   useEffect(() => {
-    if (googleLoginStatus === 'success') {
-      Cookies.set('token', googleToken)
+    if (status === 'success') {
+      Cookies.set('token', token)
       history.push('/dashboard')
-    } else if (googleLoginStatus === 'error') {
+    } else if (status === 'error') {
       setError({
         showErrorToast: true,
         message: 'Something went wrong. Please try again'
       })
     }
-  }, [googleLoginStatus])
+  }, [status])
 
   return (
     <>
-      <Button text={text} onClick={signInWithGoogle} Icon={GoogleIcon} />
+      <Button text={text} onClick={googleAuth} Icon={GoogleIcon} />
 
+      {status === 'loading' ? <Loader /> : null}
       <IonToast
         color="danger"
         isOpen={error.showErrorToast}

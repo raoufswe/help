@@ -1,27 +1,29 @@
 import { useMutation, queryCache } from 'react-query'
+import Cookies from 'js-cookie'
 
-export default function useLoginWithEmail() {
-  const handleLoginWithEmail = async ({ userDetails }) => {
-    const { email, password } = userDetails
+export default function useEmailSignUp() {
+  const handleEmailSignUp = async ({ userDetails }) => {
+    const { name, email, password } = userDetails
 
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        name,
         email,
         password
       })
     }
     const response = await fetch(
-      'https://help-mv.herokuapp.com/user/auth',
+      'https://help-mv.herokuapp.com/user/register',
       requestOptions
     )
     return await response.json()
   }
 
-  const [mutate, { status, data }] = useMutation(handleLoginWithEmail)
+  const [mutate, { status, data }] = useMutation(handleEmailSignUp)
 
-  const loginWithEmail = async userDetails => {
+  const emailSignUp = async userDetails => {
     try {
       await mutate({ userDetails })
     } catch (error) {
@@ -29,5 +31,5 @@ export default function useLoginWithEmail() {
     }
   }
 
-  return [loginWithEmail, { status, data }]
+  return [emailSignUp, { status, data }]
 }

@@ -4,4 +4,6 @@
     <string name="title_activity_main">help</string>
     <string name="package_name">help.mv</string>
     <string name="custom_url_scheme">help.mv</string>
+    <string name="facebook_app_id">448869162454503</string>
+    <string name="fb_login_protocol_scheme">fb448869162454503</string>
 </resources>

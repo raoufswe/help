@@ -3,9 +3,8 @@ import { Redirect } from 'react-router-dom'
 import { verifyToken } from 'utils/verifyToken.js'
 import Styled from './registration.styles'
 import LeftArrow from 'assets/left-arrow.icon'
-import CreateWithEmail from 'components/createWithEmail'
-import SignInWithGoogle from 'components/SignInWithGoogle.jsx'
-import SignInWithFacebook from 'components/signInWithFacebook'
+import GoogleAuth from 'components/googleAuth'
+import FacebookAuth from 'components/facebookAuth'
 import Button from 'components/button'
 import EmailIcon from 'assets/email.icon.jsx'
 
@@ -24,12 +23,12 @@ const Registration = ({ history }) => {
           <div>an account</div>
         </div>
 
-        <SignInWithGoogle text="Create with Google" />
-        <SignInWithFacebook text="Create with Facebook" />
+        <GoogleAuth text="Create with Google" />
+        <FacebookAuth text="Create with Facebook" />
         <Button
           text="Create with Email"
           Icon={EmailIcon}
-          onClick={() => history.push('/createWithEmail')}
+          onClick={() => history.push('/emailSignUp')}
         />
 
         <div

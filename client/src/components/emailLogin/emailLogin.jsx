@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { IonToast } from '@ionic/react'
-import Styled from './loginWithEmail.styles'
+import Styled from './emailLogin.styles'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
-import Button from 'components/button'
-import ValidPassword from 'assets/validPassword.icon.jsx'
-import InvalidPassword from 'assets/invalidPassword.icon.jsx'
 import LeftArrow from 'assets/left-arrow.icon'
 import ClosedEyeIcon from 'assets/closedEye.icon.jsx'
 import OpenEyeIcon from 'assets/openEye.icon.jsx'
-import useLoginWithEmail from './useLoginWithEmail'
+import useEmailLogin from './useEmailLogin'
+import Loader from 'assets/loader.jsx'
 
-export default function LoginWithEmail() {
+export default function EmailLogin() {
   const history = useHistory()
-  const [loginWithEmail, { status, data }] = useLoginWithEmail()
+  const [emailLogin, { status, data }] = useEmailLogin()
   const [showPassword, setShowPassword] = useState(false)
   const [state, setState] = useState({
     email: '',
@@ -32,8 +30,6 @@ export default function LoginWithEmail() {
     })
   }
 
-  console.log(data)
-
   useEffect(() => {
     if (!data) return
     if (data?.success && status === 'success') {
@@ -49,7 +45,7 @@ export default function LoginWithEmail() {
     }
   }, [status])
 
-  const onLogin = () => {
+  const onEmailLogin = () => {
     const { password, email } = state
     const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       email
@@ -66,7 +62,7 @@ export default function LoginWithEmail() {
         message: 'Please enter a valid email address'
       })
     } else {
-      loginWithEmail(state)
+      emailLogin(state)
     }
   }
 
@@ -99,10 +95,12 @@ export default function LoginWithEmail() {
           </button>
         </div>
 
-        <button className="login" onClick={onLogin}>
+        <button className="login" onClick={onEmailLogin}>
           Sign in
         </button>
       </main>
+
+      {status === 'loading' ? <Loader /> : null}
 
       <IonToast
         color="danger"

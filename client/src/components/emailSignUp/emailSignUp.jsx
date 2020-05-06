@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { IonToast } from '@ionic/react'
-import Styled from './createWithEmail.styles'
+import Styled from './emailSignUp.styles'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
-import Button from 'components/button'
-import ValidPassword from 'assets/validPassword.icon.jsx'
-import InvalidPassword from 'assets/invalidPassword.icon.jsx'
 import LeftArrow from 'assets/left-arrow.icon'
 import ClosedEyeIcon from 'assets/closedEye.icon.jsx'
 import OpenEyeIcon from 'assets/openEye.icon.jsx'
-import useCreateWithEmail from './useCreateWithEmail'
+import useEmailSignUp from './useEmailSignUp'
+import Loader from 'assets/loader.jsx'
 
-export default function CreateWithEmail() {
+export default function EmailSignUp() {
   const history = useHistory()
-  const [createEmail, { status, data }] = useCreateWithEmail()
+  const [emailSignUp, { status, data }] = useEmailSignUp()
   const [showPassword, setShowPassword] = useState(false)
   const [state, setState] = useState({
     name: '',
@@ -49,7 +47,7 @@ export default function CreateWithEmail() {
     }
   }, [status])
 
-  const onCreateEmail = () => {
+  const onEmailSignUp = () => {
     const { name, password, email } = state
     const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       email
@@ -66,7 +64,7 @@ export default function CreateWithEmail() {
         message: 'Please enter a valid email address'
       })
     } else {
-      createEmail(state)
+      emailSignUp(state)
     }
   }
 
@@ -100,10 +98,12 @@ export default function CreateWithEmail() {
           </button>
         </div>
 
-        <button className="sign-up" onClick={onCreateEmail}>
+        <button className="sign-up" onClick={onEmailSignUp}>
           Sign up
         </button>
       </main>
+
+      {status === 'loading' ? <Loader /> : null}
 
       <IonToast
         color="danger"
