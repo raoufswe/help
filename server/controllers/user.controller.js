@@ -35,7 +35,7 @@ exports.google_user = function (req, res) {
         success: true,
         token: jwt.sign(
           {
-            id: currentUser._id,
+            id: currentUser.googleId,
             name: currentUser.name,
           },
           req.app.get('secretKey'),
@@ -64,6 +64,50 @@ exports.google_user = function (req, res) {
         })
     }
   })
+}
+
+exports.facebook_user = (req, res) => {
+  User.findOne({
+    facebookId: req.body.facebookId,
+  })
+    .then((user) => {
+      if (user) {
+        res.send({
+          success: true,
+          token: jwt.sign(
+            {
+              id: user.facebookId,
+              name: user.name,
+            },
+            req.app.get('secretKey'),
+            {expiresIn: '24h'},
+          ),
+        })
+      } else {
+        new User({
+          facebookId: req.body.facebookId,
+          name: req.body.name,
+        })
+          .save()
+          .then((newUser) => {
+            res.send({
+              success: true,
+              token: jwt.sign(
+                {
+                  id: newUser.facebookId,
+                  name: newUser.name,
+                },
+                req.app.get('secretKey'),
+                {expiresIn: '24h'},
+              ),
+            })
+          })
+      }
+    })
+    .catch((err) => {
+      res.send({success: false, data: [], errors: err})
+      console.log(err)
+    })
 }
 
 exports.auth_user = function (req, res, next) {
@@ -113,7 +157,7 @@ exports.get_users = (req, res) => {
 }
 
 exports.delete_users = (req, res) => {
-  User.remove({})
+  User.deleteMany({})
     .then((data) => {
       res.send({success: 'success', data: [], errors: []})
       console.log(data)
