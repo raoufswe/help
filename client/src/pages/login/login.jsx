@@ -7,6 +7,7 @@ import GoogleAuth from 'components/googleAuth'
 import FacebookAuth from 'components/facebookAuth'
 import Button from 'components/button'
 import EmailIcon from 'assets/email.icon.jsx'
+import { IonPage } from '@ionic/react'
 
 const Login = ({ history }) => {
   const [user, setUser] = useState('')
@@ -22,31 +23,33 @@ const Login = ({ history }) => {
   if (verifyToken()) return <Redirect to="/dashboard" />
 
   return (
-    <Styled>
-      <div className="back" onClick={() => history.push('/')}>
-        <LeftArrow />
-      </div>
-
-      <main>
-        <div className="login">
-          <span className="colored-title">Login</span> {''}
-          <span>to</span>
-          <div>Your Account</div>
+    <IonPage id="login">
+      <Styled>
+        <div className="back" onClick={() => history.push('/')}>
+          <LeftArrow />
         </div>
 
-        <GoogleAuth text="Login with Google" />
-        <FacebookAuth text="Login with Facebook" />
-        <Button
-          text="Login with Email"
-          Icon={EmailIcon}
-          onClick={() => history.push('/emailLogin')}
-        />
+        <main>
+          <div className="login">
+            <span className="colored-title">Login</span> {''}
+            <span>to</span>
+            <div>Your Account</div>
+          </div>
 
-        <div className="no-account" onClick={() => history.push('/register')}>
-          Don't have an account?
-        </div>
-      </main>
-    </Styled>
+          <GoogleAuth text="Login with Google" />
+          <FacebookAuth text="Login with Facebook" />
+          <Button
+            text="Login with Email"
+            Icon={EmailIcon}
+            onClick={() => history.push('/emailLogin')}
+          />
+
+          <div className="no-account" onClick={() => history.push('/register')}>
+            Don't have an account?
+          </div>
+        </main>
+      </Styled>
+    </IonPage>
   )
 }
 
