@@ -13,6 +13,7 @@ import FAQIcon from 'assets/FAQ.icon.jsx'
 import HospitalsIcon from 'assets/hospitals.icon.jsx'
 import LogoutIcon from 'assets/logout.icon.jsx'
 import { Plugins } from '@capacitor/core'
+import { IonNavLink } from '@ionic/react'
 
 function SideMenu({ isOpen, onClick, hide }) {
   let history = useHistory()

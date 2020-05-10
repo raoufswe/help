@@ -9,12 +9,6 @@ export const StyledGratefulThings = styled.div`
     padding: 20px;
   }
 
-  main {
-    min-height: 290px;
-    max-height: 490px;
-    overflow: auto;
-  }
-
   .gratefulThing {
     display: flex;
     justify-content: space-between;

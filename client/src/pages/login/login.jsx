@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { verifyToken } from 'utils/verifyToken.js'
-import LeftArrow from 'assets/left-arrow.icon'
 import Styled from './login.styles'
 import GoogleAuth from 'components/googleAuth'
 import FacebookAuth from 'components/facebookAuth'
 import Button from 'components/button'
 import EmailIcon from 'assets/email.icon.jsx'
-import { IonPage } from '@ionic/react'
+import { IonPage, IonContent, IonRouterLink } from '@ionic/react'
+import LeftArrow from 'assets/left-arrow.icon'
 
 const Login = ({ history }) => {
   const [user, setUser] = useState('')
@@ -24,12 +24,12 @@ const Login = ({ history }) => {
 
   return (
     <IonPage id="login">
-      <Styled>
-        <div className="back" onClick={() => history.push('/')}>
-          <LeftArrow />
-        </div>
+      <IonContent scrollY={false}>
+        <Styled>
+          <IonRouterLink routerLink="/" routerDirection="back">
+            <LeftArrow />
+          </IonRouterLink>
 
-        <main>
           <div className="login">
             <span className="colored-title">Login</span> {''}
             <span>to</span>
@@ -47,8 +47,8 @@ const Login = ({ history }) => {
           <div className="no-account" onClick={() => history.push('/register')}>
             Don't have an account?
           </div>
-        </main>
-      </Styled>
+        </Styled>
+      </IonContent>
     </IonPage>
   )
 }

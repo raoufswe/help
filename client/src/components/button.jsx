@@ -11,7 +11,7 @@ const StyledButton = styled.button`
   width: 100%;
   font-size: medium;
   font-weight: 600;
-  margin: 1.3rem 0;
+  margin-bottom: 1.3rem;
 
   .icon {
     margin-right: 1rem;

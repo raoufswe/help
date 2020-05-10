@@ -4,9 +4,13 @@ const Styled = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 100vh;
+  height: 100%;
 
   .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
     svg {
       width: 1.3rem;
       height: 1.3rem;
@@ -15,6 +19,7 @@ const Styled = styled.div`
     span {
       font-size: large;
       font-weight: 600;
+      margin-left: 1rem;
     }
   }
 

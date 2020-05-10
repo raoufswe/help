@@ -3,7 +3,6 @@ import Styled from './exercises.styles'
 import { Link } from 'react-router-dom'
 import Wrapper from 'components/exerciseWrapper'
 import { AudioPlayerProvider } from 'react-use-audio-player'
-import LeftArrow from 'assets/left-arrow.icon'
 
 const Exercises = ({ history }) => {
   const sounds = [

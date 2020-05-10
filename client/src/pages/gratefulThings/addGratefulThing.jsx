@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { StyledAddGratefulThing } from './grateful.styles'
-import LeftArrow from 'assets/left-arrow.icon'
 import TextareaAutosize from 'react-autosize-textarea'
 import Button from 'components/button'
 import useAddGratefulThing from './hooks/useAddGratefulThing'
+import LeftArrow from 'assets/left-arrow.icon'
 
 export default function AddGratefulThing({ history }) {
   const [saveGrateful, { status }] = useAddGratefulThing()

@@ -4,19 +4,19 @@ const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 100vh;
+  height: 100%;
 
-  .back {
-    width: 1.3rem;
-    height: 1.3rem;
-    margin-bottom: auto;
+  .ion-activatable {
+    color: black;
   }
 
   .login {
+    margin-top: auto;
     font-size: x-large;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.5;
     letter-spacing: 0.2px;
+    margin-bottom: 1.3rem;
 
     .colored-title {
       color: rgb(33, 150, 243);
@@ -27,7 +27,7 @@ const StyledLogin = styled.div`
     font-family: Fira Sans;
     font-size: 15px;
     font-weight: 500;
-    margin: 1.5rem 0 1rem 0;
+    margin-bottom: 1.3rem;
     color: rgb(33, 150, 243);
   }
 `

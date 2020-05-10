@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import { IonApp, IonButtons } from '@ionic/react'
-// import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Dashboard from 'pages/dashboard'
@@ -10,7 +9,6 @@ import EmailLogin from 'components/emailLogin'
 import Registration from 'pages/registration'
 import Landing from 'pages/landing'
 import EmailSignUp from 'components/emailSignUp'
-import Hooray from 'pages/registration/customRegistration/hooray'
 import FAQ from 'pages/FAQ'
 import Hospitals from 'pages/hospitals'
 import GratefulThings from 'pages/gratefulThings'
@@ -31,19 +29,10 @@ const App = () => {
     <IonApp id="main">
       <IonReactRouter>
         <IonRouterOutlet>
-          {/* <Route
-            render={({ location }) => (
-              <TransitionGroup>
-                <CSSTransition
-                  key={location.key}
-                  timeout={350}
-                   classNames="fade"
-                > */}
           <Route path="/" exact component={Landing} />
           <Route path="/register" exact component={Registration} />
           <Route path="/emailSignUp" exact component={EmailSignUp} />
 
-          <Route path="/hooray" exact component={Hooray} />
           <Route path="/login" exact component={Login} />
           <Route path="/EmailLogin" exact component={EmailLogin} />
 
@@ -106,9 +95,6 @@ const App = () => {
             component={Exercises}
             exact
           />
-          {/* </CSSTransition>
-              </TransitionGroup>
-            )} */}
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

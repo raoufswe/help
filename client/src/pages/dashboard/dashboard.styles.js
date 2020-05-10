@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
 const StyledDashboard = styled.div`
-  height: 100vh;
-
   .title {
     background: #f5f5fa;
     padding: 0 30px 20px 20px;

@@ -5,7 +5,7 @@ const StyledLanding = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100vh;
+  height: 100%;
 
   .header-items {
     display: flex;
