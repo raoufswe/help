@@ -12,6 +12,7 @@ import ExercisesIcon from 'assets/exercises.icon.jsx'
 import FAQIcon from 'assets/FAQ.icon.jsx'
 import HospitalsIcon from 'assets/hospitals.icon.jsx'
 import LogoutIcon from 'assets/logout.icon.jsx'
+import { Plugins } from '@capacitor/core'
 
 function SideMenu({ isOpen, onClick, hide }) {
   let history = useHistory()
@@ -28,7 +29,8 @@ function SideMenu({ isOpen, onClick, hide }) {
     }
   })
 
-  const onLogout = () => {
+  const onLogout = async () => {
+    await Plugins.FacebookLogin.logout()
     Cookies.remove('token')
     history.push('/')
   }

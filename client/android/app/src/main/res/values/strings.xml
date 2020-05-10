@@ -5,4 +5,6 @@
     <string name="package_name">help.mv</string>
     <string name="custom_url_scheme">help.mv</string>
     <string name="server_client_id">890430186033-llp5u7il43mh4p2fkl5s8u99drnd3gc5.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">448869162454503</string>
+    <string name="fb_login_protocol_scheme">fb448869162454503</string>
 </resources>

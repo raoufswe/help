@@ -5,6 +5,9 @@ import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
 import FacebookIcon from 'assets/facebook.icon.jsx'
 import useFacebookAuth from './useFacebookAuth'
+import { registerWebPlugin, Plugins } from '@capacitor/core'
+import { FacebookLogin } from '@rdlabo/capacitor-facebook-login'
+import Loader from 'assets/loader.jsx'
 
 export default function FacebookAuth({ text }) {
   const history = useHistory()
@@ -13,6 +16,26 @@ export default function FacebookAuth({ text }) {
     message: []
   })
   const [facebookAuth, { status, data }] = useFacebookAuth()
+
+  const FacebookSignIn = async () => {
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email']
+    const result = await Plugins.FacebookLogin.login({
+      permissions: FACEBOOK_PERMISSIONS
+    })
+    if (result?.accessToken) {
+      const fetchUserData = await fetch(
+        `https://graph.facebook.com/me?fields=id,name&access_token=${result.accessToken.token}`
+      )
+      const userData = await fetchUserData.json()
+      if (userData?.id) {
+        facebookAuth(userData)
+      }
+    }
+  }
+
+  useEffect(() => {
+    registerWebPlugin(FacebookLogin)
+  }, [])
 
   useEffect(() => {
     if (status === 'success' && data.success) {
@@ -28,8 +51,8 @@ export default function FacebookAuth({ text }) {
 
   return (
     <>
-      <Button text={text} Icon={FacebookIcon} onClick={facebookAuth} />
-
+      {status === 'loading' && <Loader />}
+      <Button text={text} Icon={FacebookIcon} onClick={FacebookSignIn} />
       <IonToast
         color="danger"
         isOpen={error.showErrorToast}

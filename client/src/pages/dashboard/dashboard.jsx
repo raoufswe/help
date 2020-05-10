@@ -8,8 +8,6 @@ import { getUserDetails } from 'utils/verifyToken.js'
 
 const Dashboard = ({ history }) => {
   const [feeling, setFeeling] = useState(null)
-  const { name } = getUserDetails()
-  console.log(name)
 
   return (
     <Styled>
