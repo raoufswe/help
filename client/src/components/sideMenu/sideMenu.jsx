@@ -30,7 +30,6 @@ function SideMenu({ isOpen, onClick, hide }) {
   })
 
   const onLogout = async () => {
-    await Plugins.FacebookLogin.logout()
     Cookies.remove('token')
     history.push('/')
   }
