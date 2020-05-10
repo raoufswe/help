@@ -9,6 +9,7 @@ import { getUserDetails } from 'utils/verifyToken.js'
 const Dashboard = ({ history }) => {
   const [feeling, setFeeling] = useState(null)
 
+  const { name } = getUserDetails()
   return (
     <Styled>
       <div className="title">
