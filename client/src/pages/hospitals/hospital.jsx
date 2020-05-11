@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyledHospital } from './hospitals.styles'
+import './hospitals.scss'
 import MedicalCross from 'assets/medial-cross.icon.jsx'
 import HospitalLocation from 'assets/hospital-location.icon.jsx'
 
 export default function hospital({ name, tel }) {
   return (
-    <StyledHospital>
+    <div className="hospital">
       <span>
         <MedicalCross />
       </span>
@@ -18,6 +18,6 @@ export default function hospital({ name, tel }) {
           <HospitalLocation />
         </button>
       </div>
-    </StyledHospital>
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledQuestion } from './FAQ.styles'
+import './FAQ.scss'
 
 export default function Question({
   id,
@@ -10,12 +10,12 @@ export default function Question({
   onClick
 }) {
   return (
-    <StyledQuestion>
+    <div className="question">
       <button onClick={() => onClick(id)}>
         <span className="question-title">{title}</span>
         <span className="question-subtitle">{subtitle}</span>
         <p className={isOpen ? 'question-content' : ''}>{content}</p>
       </button>
-    </StyledQuestion>
+    </div>
   )
 }

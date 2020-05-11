@@ -1,34 +1,30 @@
-import styled from 'styled-components'
-import maxmin from 'utils/maxmin.js'
-
-export const StyledFAQ = styled.div`
-  padding: 0 20px;
-
-  .page-title {
+.faq {
+  padding: 0 1.3rem;
+  .faq-page-title {
     font-weight: 600;
-    font-size: ${maxmin(36, 30)};
-    padding-bottom: ${maxmin(20, 10)};
+    font-size: x-large;
+    padding-bottom: 1rem;
   }
-`
+}
 
-export const StyledQuestion = styled.div`
+.question {
   border-bottom: 1px solid #edecec;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
   letter-spacing: 0.2px;
 
   .question-title {
     display: block;
     font-weight: 600;
-    font-size: ${maxmin(24, 22)};
-    padding-bottom: 15px;
+    font-size: large;
+    padding-bottom: 1rem;
   }
 
   .question-subtitle,
   .question-content {
     display: block;
     font-weight: normal;
-    font-size: 18px;
-    padding-bottom: 15px;
+    font-size: medium;
+    padding-bottom: 1rem;
   }
 
   .question-content {
@@ -42,4 +38,4 @@ export const StyledQuestion = styled.div`
   button {
     text-align: left;
   }
-`
+}

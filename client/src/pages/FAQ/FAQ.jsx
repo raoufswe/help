@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyledFAQ } from './FAQ.styles'
+import './FAQ.scss'
 import Question from './question'
 import { Questions } from '__mocks__/FAQ.js'
 import { IonContent } from '@ionic/react'
@@ -17,9 +17,9 @@ const FAQ = ({ history }) => {
   return (
     <>
       <HeaderMenu />
-      <IonContent forceOverscroll={false}>
-        <StyledFAQ>
-          <h3 className="page-title">FAQ</h3>
+      <IonContent>
+        <div className="faq">
+          <h3 className="faq-page-title">FAQ</h3>
           {Questions.map(({ id, title, subtitle, content }, key) => (
             <Question
               key={key}
@@ -31,7 +31,7 @@ const FAQ = ({ history }) => {
               onClick={onClick}
             />
           ))}
-        </StyledFAQ>
+        </div>
       </IonContent>
     </>
   )
