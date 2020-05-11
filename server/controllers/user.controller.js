@@ -71,12 +71,13 @@ exports.facebook_user = (req, res) => {
     facebookId: req.body.facebookId,
   })
     .then((user) => {
+      console.log('current user', user)
       if (user) {
         res.send({
           success: true,
           token: jwt.sign(
             {
-              id: user.facebookId,
+              id: user._id,
               name: user.name,
             },
             req.app.get('secretKey'),
@@ -84,6 +85,7 @@ exports.facebook_user = (req, res) => {
           ),
         })
       } else {
+        console.log('new user')
         new User({
           facebookId: req.body.facebookId,
           name: req.body.name,
@@ -94,7 +96,7 @@ exports.facebook_user = (req, res) => {
               success: true,
               token: jwt.sign(
                 {
-                  id: newUser.facebookId,
+                  id: newUser._id,
                   name: newUser.name,
                 },
                 req.app.get('secretKey'),
