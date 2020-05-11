@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import BurgerIcon from 'assets/burger.icon.jsx'
 import CrossIcon from 'assets/cross.icon.jsx'
-import { useHistory, useLocation, withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import JournalIcon from 'assets/journals.icon.jsx'
 import DashboardIcon from 'assets/dashboard.icon.jsx'
@@ -22,6 +22,7 @@ import {
   IonRouterLink
 } from '@ionic/react'
 import './menu.css'
+import { verifyToken } from 'utils/verifyToken.js'
 
 const routes = [
   { title: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
@@ -34,7 +35,6 @@ const routes = [
 ]
 
 function Menu() {
-  const location = useLocation()
   let history = useHistory()
 
   const onLogout = async () => {
@@ -43,7 +43,7 @@ function Menu() {
   }
 
   return (
-    <IonMenu side="start" contentId="main" id="menu">
+    <IonMenu side="start" contentId="main" id="menu" disabled={!verifyToken()}>
       <IonContent forceOverscroll={false}>
         <div className="nav-items">
           {routes.map(({ path, title, icon }) => (
@@ -55,8 +55,10 @@ function Menu() {
             </IonMenuToggle>
           ))}
           <div className="logout" onClick={onLogout}>
-            <LogoutIcon />
-            Logout
+            <IonMenuToggle key="logout" auto-hide="false">
+              <LogoutIcon />
+              Logout
+            </IonMenuToggle>
           </div>
         </div>
       </IonContent>
