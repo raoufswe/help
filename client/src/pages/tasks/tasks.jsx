@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { StyledTasks } from './tasks.styles'
+import './tasks.scss'
 import AddTaskModal from './addTaskModal'
 import MoreIcon from 'assets/more.icon.jsx'
 import AddIcon from 'assets/add.icon.jsx'
@@ -10,10 +10,11 @@ import InCompleteTasks from './incompleteTasks.jsx'
 import { useLocation } from 'react-router-dom'
 import useIncompleteTasks from './hooks/useIncompleteTasks'
 import useCompletedTasks from './hooks/useCompletedTasks'
+import useSaveTask from './hooks/useSaveTask'
 import NoData from './noData'
 import Loader from 'assets/loader.jsx'
 import ErrorUI from 'components/errorUI.jsx'
-import { IonContent } from '@ionic/react'
+import { IonContent, IonFooter, IonToolbar } from '@ionic/react'
 import HeaderMenu from 'components/menu/headerMenu'
 
 const Tasks = () => {
@@ -22,52 +23,59 @@ const Tasks = () => {
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
   const { inCompletedTasksStatus, inCompletedTasks } = useIncompleteTasks()
   const { completedTasksStatus, completedTasks } = useCompletedTasks()
+  const [saveTask, { savingStatus }] = useSaveTask()
 
   return (
     <>
       <HeaderMenu />
-      <IonContent>
-        <StyledTasks>
-          <div className="page-title">Let’s get some things done today.</div>
-          {inCompletedTasksStatus && completedTasksStatus === 'loading' ? (
-            <Loader />
-          ) : inCompletedTasksStatus && completedTasksStatus === 'error' ? (
-            <ErrorUI />
-          ) : inCompletedTasks?.data?.length || completedTasks?.data?.length ? (
-            <div style={{ overflow: 'scroll', maxHeight: 500 }}>
-              <InCompleteTasks data={inCompletedTasks?.data} />
-              <CompletedTasks data={completedTasks?.data} />
-            </div>
-          ) : (
-            <NoData />
-          )}
+      <IonContent fullscreen={true}>
+        <div className="page-title" slot="fixed">
+          Let’s get some things done today.
+        </div>
+        {inCompletedTasksStatus && completedTasksStatus === 'loading' ? (
+          <Loader />
+        ) : inCompletedTasksStatus && completedTasksStatus === 'error' ? (
+          <ErrorUI />
+        ) : inCompletedTasks?.data?.length || completedTasks?.data?.length ? (
+          <div>
+            <InCompleteTasks data={inCompletedTasks?.data} />
+            <CompletedTasks data={completedTasks?.data} />
+          </div>
+        ) : (
+          <NoData />
+        )}
 
-          <AddTaskModal
-            show={showAddTaskModal}
-            onHide={() => {
-              setGlobalContext({
-                task: {}
-              })
-              Cookies.remove(`selectedDay-${location.pathname}`)
-              setShowAddTaskModal(false)
-            }}
-          />
-
-          {!showAddTaskModal && (
-            <div className="footer">
-              <button
-                className="plus-button-wrapper"
-                onClick={() => setShowAddTaskModal(true)}
-              >
-                <AddIcon />
-              </button>
-              <button>
-                <MoreIcon />
-              </button>
-            </div>
-          )}
-        </StyledTasks>
+        <AddTaskModal
+          show={showAddTaskModal}
+          onHide={() => {
+            setGlobalContext({
+              task: {}
+            })
+            Cookies.remove(`selectedDay-${location.pathname}`)
+            setShowAddTaskModal(false)
+          }}
+          savingStatus={savingStatus}
+          saveTask={saveTask}
+        />
       </IonContent>
+
+      {savingStatus === 'loading' && <Loader />}
+
+      {!showAddTaskModal && (
+        <IonFooter className="ion-no-border">
+          <div className="footer">
+            <button
+              className="plus-button-wrapper"
+              onClick={() => setShowAddTaskModal(true)}
+            >
+              <AddIcon />
+            </button>
+            <button>
+              <MoreIcon />
+            </button>
+          </div>
+        </IonFooter>
+      )}
     </>
   )
 }

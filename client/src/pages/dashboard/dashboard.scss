@@ -1,0 +1,57 @@
+.dashboard {
+  height: 100%;
+  .title {
+    background: #f5f5fa;
+    padding: 0.5rem 1.3rem 1.3rem 1.3rem;
+    .sub-title {
+      display: block;
+      font-size: large;
+      letter-spacing: 0.2px;
+      line-height: 1.1;
+    }
+  }
+
+  .relax {
+    background: white;
+  }
+
+  ion-header {
+    background: #f5f5fa;
+  }
+
+  ion-toolbar {
+    --color: #ffffff;
+    --background: #f5f5fa;
+  }
+}
+
+.feeling {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fff;
+  padding: 1.3rem;
+
+  span {
+    display: block;
+    font-weight: normal;
+    font-size: large;
+    color: #000000;
+    padding-bottom: 0.8rem;
+  }
+
+  button {
+    padding: 0.5rem;
+  }
+
+  .feelings-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+}

@@ -1,17 +1,15 @@
-import styled from 'styled-components'
-
-const Styled = styled.div`
-  padding: 50px 30px 30px;
+.task {
+  padding: 3rem 2rem 2rem;
 
   .task-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
   }
 
   .task-title {
-    font-size: 24px;
+    font-size: x-large;
   }
 
   .task-details,
@@ -19,17 +17,17 @@ const Styled = styled.div`
     display: flex;
     align-items: center;
     color: #8f9092;
-    margin-top: 30px;
-    font-size: 18px;
+    margin-top: 2rem;
+    font-size: large;
     width: 100%;
     outline: 0;
   }
 
   svg {
-    height: 20px;
-    width: 20px;
+    height: 1.2rem;
+    width: 1.2rem;
     fill: #8f9092;
-    margin-right: 15px;
+    margin-right: 1rem;
   }
 
   .details-input {
@@ -49,14 +47,14 @@ const Styled = styled.div`
     width: 100%;
     border-bottom: 1px solid #edecec;
     border-radius: 4px;
-    padding: 10px;
+    padding: 0.8rem;
     outline: 0;
 
     .reminder-details {
       text-align: left;
-      font-size: 16px;
+      font-size: medium;
       .reminder-time {
-        margin-top: 10px;
+        margin-top: 0.8rem;
       }
       .reminder-date {
         color: rgb(33, 150, 243);
@@ -66,12 +64,12 @@ const Styled = styled.div`
 
     .delete-reminder {
       margin: 0 0 0 auto;
-      width: 14px;
-      height: 14px;
+      width: 1rem;
+      height: 1rem;
       align-self: flex-start;
       svg {
-        width: 14px;
-        height: 14px;
+        width: 1rem;
+        height: 1rem;
         color: #8f9092;
       }
     }
@@ -80,19 +78,19 @@ const Styled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: medium;
     position: absolute;
-    bottom: 50px;
-    right: 20px;
+    bottom: 3rem;
+    right: 1.2rem;
     color: rgb(33, 150, 243);
     border-radius: 45px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     outline: 0;
-    padding: 16px 18px;
+    padding: 1rem;
     cursor: pointer;
     svg {
       fill: rgb(33, 150, 243);
-      height: 14px;
+      height: 1rem;
     }
   }
 
@@ -105,6 +103,4 @@ const Styled = styled.div`
     transform: rotate(90deg);
     margin-right: 0;
   }
-`
-
-export default Styled
+}

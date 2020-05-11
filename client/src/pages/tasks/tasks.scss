@@ -1,0 +1,151 @@
+.page-title {
+  display: block;
+  font-weight: 600;
+  font-size: x-large;
+  padding: 1rem;
+  background: #fff;
+}
+
+.footer {
+  width: 100%;
+  background-color: rgb(33, 150, 243);
+  padding: 1rem;
+  text-align: right;
+  button {
+    svg {
+      width: 2rem;
+      height: 1.5rem;
+      fill: white;
+    }
+  }
+  .plus-button-wrapper {
+    outline: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    transform: translate(-50%);
+    background: white;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+
+    svg {
+      width: 3.1rem;
+      height: 3.1rem;
+    }
+  }
+}
+
+.incomplete-task {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: 5rem;
+
+  .task {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+
+    svg,
+    ion-spinner {
+      width: 22px;
+      height: 22px;
+      margin-right: 20px;
+    }
+
+    .task-item {
+      font-size: 18px;
+      text-align: left;
+      width: 100%;
+      .details {
+        margin-top: 8px;
+        font-size: 16px;
+        color: #8f9092;
+      }
+    }
+
+    .reminder {
+      margin-top: 8px;
+      font-size: 16px;
+      display: inline-block;
+      border: 1px solid #cacaca;
+      padding: 6px;
+      border-radius: 4px;
+      color: #8f9092;
+      .reminder-calendar-icon {
+        fill: rgb(33, 150, 243);
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+      }
+      .date {
+        margin-right: 5px;
+      }
+    }
+
+    border-bottom: 1px solid #edecec;
+  }
+}
+
+.completed-tasks {
+  .completed-count {
+    margin: 20px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tick {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    fill: rgb(33, 150, 243);
+  }
+
+  .active-angle {
+    transform: rotate(-180deg);
+  }
+
+  .task {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid #edecec;
+
+    .task-item {
+      font-size: 18px;
+      text-align: left;
+      width: 100%;
+    }
+  }
+}
+
+.no-tasks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 50% 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  svg {
+    height: 200px;
+    width: 50%;
+  }
+
+  .message {
+    font-size: 18px;
+    text-align: center;
+    > div {
+      margin-top: 10px;
+    }
+
+    div:last-of-type {
+      color: #838486;
+    }
+  }
+}

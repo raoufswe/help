@@ -6,7 +6,6 @@ import ReminderIcon from 'assets/reminder.icon.jsx'
 import Reminder from '../reminder'
 import { Modal } from 'react-bootstrap'
 import { Context } from 'context'
-import useSaveTask from '../hooks/useSaveTask'
 import CrossIcon from 'assets/cross.icon.jsx'
 import { getReminderDate } from 'utils/dateHelpers/dateHelpers.js'
 import Cookies from 'js-cookie'
@@ -18,17 +17,16 @@ export default function AddTaskModal(props) {
   const { date, time } = task || {}
   const [addMoreDetails, setAddMoreDetails] = useState(false)
   const [showReminder, setShowReminder] = useState(false)
-  const [saveTask, { status }] = useSaveTask()
 
   useEffect(() => {
-    if (status === 'success') {
+    if (props.savingStatus === 'success') {
       setAddMoreDetails(false)
       setGlobalContext({
         task: {}
       })
       props.onHide()
     }
-  }, [status])
+  }, [props.savingStatus])
 
   const onChange = e => {
     const { value, name } = e.target
@@ -111,7 +109,8 @@ export default function AddTaskModal(props) {
                 <ReminderIcon />
               </button>
             </div>
-            <button className="save-task" onClick={saveTask}>
+
+            <button className="save-task" onClick={props.saveTask}>
               Save
             </button>
           </div>

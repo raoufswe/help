@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import Styled from './dashboard.styles'
+import './dashboard.scss'
 import Greeting from 'components/greeting.jsx'
 import Feeling from './feeling.jsx'
 import OverviewBars from './overviewBars'
@@ -13,7 +13,7 @@ const Dashboard = ({ history }) => {
   const { name } = getUserDetails()
 
   return (
-    <Styled>
+    <div className="dashboard">
       <HeaderMenu />
       <IonContent forceOverscroll={false}>
         <div className="title">
@@ -22,14 +22,11 @@ const Dashboard = ({ history }) => {
             Remember to breathe and think positive thoughts.
           </span>
         </div>
-
         <Feeling />
-
         <OverviewBars />
-
         <div className="relax"></div>
       </IonContent>
-    </Styled>
+    </div>
   )
 }
 

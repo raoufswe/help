@@ -7,11 +7,10 @@ import { useLocation } from 'react-router'
 
 export default function useUpdateTask() {
   const location = useLocation()
-  const [{ task }] = useContext(Context)
-  const { title, details, completed, date, time } = task || {}
   const { id: userID } = getUserDetails()
 
-  const handleUpdateTask = async ({ id: taskID }) => {
+  const handleUpdateTask = async ({ task }) => {
+    const { details, time, date, title, _id: taskID, completed } = task
     const requestOptions = {
       method: 'PUT',
       headers: {
@@ -38,9 +37,9 @@ export default function useUpdateTask() {
     onSuccess: () => queryCache.refetchQueries('tasks')
   })
 
-  const updateTask = async id => {
+  const updateTask = async task => {
     try {
-      await mutate({ id })
+      await mutate({ task })
       Cookies.remove(`selectedDay-${location.pathname}`)
     } catch (error) {
       console.log(error)

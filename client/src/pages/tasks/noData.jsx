@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 function NoDataSvg(props) {
   return (
@@ -73,43 +72,14 @@ function NoDataSvg(props) {
   )
 }
 
-export const Styled = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 50% 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  svg {
-    height: 200px;
-    width: 50%;
-  }
-
-  .message {
-    font-size: 18px;
-    text-align: center;
-    > div {
-      margin-top: 10px;
-    }
-
-    div:last-of-type {
-      color: #838486;
-    }
-  }
-`
-
-export default function noData() {
+export default function NoData() {
   return (
-    <Styled>
+    <div className="no-tasks">
       <NoDataSvg />
       <div className="message">
         <div>A fresh start</div>
         <div>Anything to add?</div>
       </div>
-    </Styled>
+    </div>
   )
 }

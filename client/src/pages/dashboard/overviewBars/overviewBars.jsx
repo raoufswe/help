@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Cookies from 'js-cookie'
 import moment from 'moment'
-import { StyledOverviewBars } from './overviewBars.styles'
+import './overviewBars.scss'
 import LoadingUI from 'components/loading.jsx'
 import { getRange } from './date.helper'
 import { getUserDetails } from 'utils/verifyToken.js'
@@ -44,13 +44,13 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
   }
 
   return (
-    <>
+    <div className="overview-bars">
       {status === 'loading' ? (
         <Loader />
       ) : status === 'error' ? (
         <ErrorUI />
       ) : LinChartData.length ? (
-        <StyledOverviewBars>
+        <div>
           <span>Here’s an overview of how your week has been so far.</span>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart
@@ -74,10 +74,10 @@ export default function OverviewBars({ feeling, onFeelingChange }) {
               />
             </LineChart>
           </ResponsiveContainer>
-        </StyledOverviewBars>
+        </div>
       ) : (
         <NoData />
       )}
-    </>
+    </div>
   )
 }

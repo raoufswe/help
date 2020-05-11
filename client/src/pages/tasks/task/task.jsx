@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Styled from './task.styles'
 import TextareaAutosize from 'react-autosize-textarea'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import Reminder from '../reminder'
@@ -18,9 +17,9 @@ import AddMoreDetailsIcon from 'assets/addMoreDetails.icon'
 import CorrectIcon from 'assets/correct.icon.jsx'
 import Cross from 'assets/cross.icon.jsx'
 import UndoIcon from 'assets/undo.icon.jsx'
+import './task.scss'
 
 export default function Task() {
-  const [{ task }, setGlobalContext] = useContext(Context)
   const history = useHistory()
   const { id } = useParams()
   const location = useLocation()
@@ -29,16 +28,12 @@ export default function Task() {
   const [deleteTask, { deleteStatus }] = useDeleteTask()
   const [updateTask, { updateStatus }] = useUpdateTask()
   const [showReminder, setShowReminder] = useState(false)
+  const [task, setTask] = useState({})
   Cookies.set(`selectedDay-${location.pathname}`, task.date)
 
   useEffect(() => {
     if (!taskData) return
-    setGlobalContext({
-      task: {
-        ...task,
-        ...taskData
-      }
-    })
+    setTask(taskData)
   }, [taskData])
 
   useEffect(() => {
@@ -48,7 +43,7 @@ export default function Task() {
 
   const handleDelete = () => {
     try {
-      deleteTask(id)
+      deleteTask(task.id)
     } catch (e) {
       console.log('something went wrong')
     }
@@ -56,7 +51,7 @@ export default function Task() {
 
   const handleUpdate = () => {
     try {
-      updateTask(id)
+      updateTask(task)
     } catch (e) {
       console.log('something went wrong')
     }
@@ -64,38 +59,31 @@ export default function Task() {
 
   const onChange = e => {
     const { value, name } = e.target
-    setGlobalContext({
-      task: {
-        ...task,
-        [name]: value
-      }
+    setTask({
+      ...task,
+      [name]: value
     })
   }
 
   const toggleCompleted = () => {
-    setGlobalContext({
-      task: {
-        ...task,
-        completed: !task.completed
-      }
+    updateTask({
+      ...task,
+      completed: !task.completed
     })
-    updateTask(id)
   }
 
   const onReminderClear = e => {
     e.stopPropagation()
-    setGlobalContext({
-      task: {
-        ...task,
-        time: '',
-        date: ''
-      }
+    setTask({
+      ...task,
+      time: '',
+      date: ''
     })
     Cookies.remove(`selectedDay-${location.pathname}`)
   }
 
   return (
-    <Styled>
+    <div className="task">
       <div className="task-header">
         <button className="back" onClick={handleUpdate}>
           <LeftArrow />
@@ -109,9 +97,13 @@ export default function Task() {
         </button>
       </div>
 
-      {status === 'loading' ? (
+      {status === 'loading' ||
+      deleteStatus === 'loading' ||
+      updateStatus === 'loading' ? (
         <Loader />
-      ) : status === 'error' ? (
+      ) : status === 'error' ||
+        deleteStatus === 'error' ||
+        updateStatus === 'error' ? (
         <ErrorUI />
       ) : (
         <>
@@ -156,27 +148,26 @@ export default function Task() {
               <button className="add-date-time">Add date/time</button>
             )}
           </div>
+          <button
+            className="mark-completed"
+            onClick={toggleCompleted}
+            name="completed"
+          >
+            {taskData?.completed ? (
+              <UndoIcon className="undo-icon" />
+            ) : (
+              <>
+                <CorrectIcon />
+                <span>Mark completed</span>
+              </>
+            )}
+          </button>
         </>
       )}
 
       {showReminder && (
         <Reminder show={showReminder} onHide={() => setShowReminder(false)} />
       )}
-
-      <button
-        className="mark-completed"
-        onClick={toggleCompleted}
-        name="completed"
-      >
-        {taskData?.completed ? (
-          <UndoIcon className="undo-icon" />
-        ) : (
-          <>
-            <CorrectIcon />
-            <span>Mark completed</span>
-          </>
-        )}
-      </button>
-    </Styled>
+    </div>
   )
 }
