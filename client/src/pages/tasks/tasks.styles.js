@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import maxmin from 'utils/maxmin.js'
 
 export const StyledTasks = styled.div`
+  height: 90vh;
   .page-title {
     display: block;
     font-weight: 600;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import 'react-day-picker/lib/style.css'
 import { StyledJournals } from './journaling.styles'
-import SideMenu from 'components/sideMenu'
 import Journal from './journal'
 import Add from 'components/add.jsx'
 import PencilIcon from 'assets/pencil.icon.jsx'
@@ -16,10 +15,11 @@ import NoRecentData from './noRecentData'
 import NoData from './noData'
 import { getUserDetails } from 'utils/verifyToken.js'
 import AngleIcon from 'assets/angle.icon.jsx'
+import { IonContent } from '@ionic/react'
+import HeaderMenu from 'components/menu/headerMenu'
 
 const Journals = ({ history }) => {
   const { name } = getUserDetails()
-  const [showSideMenu, setSideMenu] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [selectedDate, setSelectedDate] = useState(new Date())
   const { status, data } = useJournals()
@@ -30,74 +30,52 @@ const Journals = ({ history }) => {
   )
 
   return (
-    <StyledJournals showAll={showAll}>
-      <div className="top-page">
-        <SideMenu
-          isOpen={showSideMenu}
-          onClick={() => setSideMenu(!showSideMenu)}
-        />
-        <span className="page-header">Let's record some ideas, {name} </span>
-      </div>
+    <>
+      <HeaderMenu />
+      <IonContent>
+        <StyledJournals showAll={showAll}>
+          <div className="top-page">
+            <span className="page-header">
+              Let's record some ideas, {name}{' '}
+            </span>
+          </div>
 
-      <div className="journaling-cta">
-        <div className="journaling-streak">
-          <span className="streak-message">
-            🔥 Keep your thoughts organized
-          </span>
-        </div>
+          <div className="journaling-cta">
+            <div className="journaling-streak">
+              <span className="streak-message">
+                🔥 Keep your thoughts organized
+              </span>
+            </div>
 
-        <button
-          onClick={() => setShowCalendar(!showCalendar)}
-          className="journaling-calendar"
-        >
-          <Calendar />
-        </button>
-      </div>
+            <button
+              onClick={() => setShowCalendar(!showCalendar)}
+              className="journaling-calendar"
+            >
+              <Calendar />
+            </button>
+          </div>
 
-      {showCalendar && (
-        <div className="calendar">
-          <DatePicker
-            disabledDate={{ after: new Date() }}
-            onOutsideClick={() => setShowCalendar(false)}
-            onChange={day => setSelectedDate(day)}
-          />
-        </div>
-      )}
+          {showCalendar && (
+            <div className="calendar">
+              <DatePicker
+                disabledDate={{ after: new Date() }}
+                onOutsideClick={() => setShowCalendar(false)}
+                onChange={day => setSelectedDate(day)}
+              />
+            </div>
+          )}
 
-      <main>
-        {
-          <>
-            {status === 'loading' ? (
-              <Loader />
-            ) : status === 'error' ? (
-              <ErrorUI />
-            ) : data.length ? (
+          <main>
+            {
               <>
-                {todayJournals.length ? (
-                  todayJournals?.map(({ _id, content, createdAt }, key) => (
-                    <div className="journal-entry" key={key}>
-                      <Journal createdAt={createdAt} content={content} />
-                      <button
-                        onClick={() => history.push(`/updateJournal/${_id}`)}
-                      >
-                        <PencilIcon />
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <NoRecentData />
-                )}
-                {data.length !== 1 && !todayJournals.length ? (
+                {status === 'loading' ? (
+                  <Loader />
+                ) : status === 'error' ? (
+                  <ErrorUI />
+                ) : data.length ? (
                   <>
-                    <div
-                      className="completed-count"
-                      onClick={() => setShowAll(!showAll)}
-                    >
-                      <span>All journals ({data.length})</span>
-                      <AngleIcon className="angle" />
-                    </div>
-                    {showAll &&
-                      data?.map(({ _id, content, createdAt }, key) => (
+                    {todayJournals.length ? (
+                      todayJournals?.map(({ _id, content, createdAt }, key) => (
                         <div className="journal-entry" key={key}>
                           <Journal createdAt={createdAt} content={content} />
                           <button
@@ -108,19 +86,49 @@ const Journals = ({ history }) => {
                             <PencilIcon />
                           </button>
                         </div>
-                      ))}
+                      ))
+                    ) : (
+                      <NoRecentData />
+                    )}
+                    {data.length !== 1 && !todayJournals.length ? (
+                      <>
+                        <div
+                          className="completed-count"
+                          onClick={() => setShowAll(!showAll)}
+                        >
+                          <span>All journals ({data.length})</span>
+                          <AngleIcon className="angle" />
+                        </div>
+                        {showAll &&
+                          data?.map(({ _id, content, createdAt }, key) => (
+                            <div className="journal-entry" key={key}>
+                              <Journal
+                                createdAt={createdAt}
+                                content={content}
+                              />
+                              <button
+                                onClick={() =>
+                                  history.push(`/updateJournal/${_id}`)
+                                }
+                              >
+                                <PencilIcon />
+                              </button>
+                            </div>
+                          ))}
+                      </>
+                    ) : null}
                   </>
-                ) : null}
+                ) : (
+                  <NoData />
+                )}
               </>
-            ) : (
-              <NoData />
-            )}
-          </>
-        }
-      </main>
+            }
+          </main>
 
-      <Add onClick={() => history.push('/addJournal')} />
-    </StyledJournals>
+          <Add onClick={() => history.push('/addJournal')} />
+        </StyledJournals>
+      </IonContent>{' '}
+    </>
   )
 }
 

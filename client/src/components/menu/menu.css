@@ -1,0 +1,46 @@
+ion-menu ion-content {
+  --padding-top: 1.3rem;
+  --padding-bottom: 1.3rem;
+  --background: #0056ea;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+svg {
+  margin-right: 1.3rem;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.3rem;
+}
+
+.logout {
+  margin: auto 0 4rem;
+  display: flex;
+  place-items: center;
+  font-size: medium;
+  color: #ffff;
+  font-weight: 500;
+}
+
+ion-router-link {
+  padding: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: medium;
+  font-weight: 500;
+  color: #ffff;
+  text-decoration: none;
+}
+ion-header {
+  padding: 0.8rem;
+}
+
+ion-menu-button {
+  font-size: 2.5rem;
+}

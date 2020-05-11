@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import maxmin from 'utils/maxmin.js'
 
 export const StyledFAQ = styled.div`
-  height: 100vh;
   padding: 0 20px;
 
   .page-title {

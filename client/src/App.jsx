@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route } from 'react-router-dom'
-import { IonApp, IonButtons } from '@ionic/react'
+import { Route, Switch } from 'react-router-dom'
 import { Provider } from './context'
 import PrivateRoute from 'components/PrivateRoute'
 import Dashboard from 'pages/dashboard'
@@ -22,82 +21,109 @@ import Task from 'pages/tasks/task'
 import Player from 'pages/player'
 import Exercises from 'pages/exercises'
 import { IonReactRouter } from '@ionic/react-router'
-import { IonRouterOutlet } from '@ionic/react'
+import {
+  IonRouterOutlet,
+  IonApp,
+  IonButtons,
+  IonPage,
+  IonSplitPane
+} from '@ionic/react'
+import Menu from 'components/menu'
 
 const App = () => {
   return (
-    <IonApp id="main">
+    <Provider>
       <IonReactRouter>
-        <IonRouterOutlet>
-          <Route path="/" exact component={Landing} />
-          <Route path="/register" exact component={Registration} />
-          <Route path="/emailSignUp" exact component={EmailSignUp} />
-
-          <Route path="/login" exact component={Login} />
-          <Route path="/EmailLogin" exact component={EmailLogin} />
-
-          <PrivateRoute
-            style={{ background: '#F5F5FA' }}
-            name="dashboard"
-            path="/dashboard"
-            component={Dashboard}
-            exact
-          />
-          <PrivateRoute
-            name="Hospitals"
-            path="/hospitals"
-            component={Hospitals}
-            exact
-          />
-          <PrivateRoute
-            name="Journals"
-            path="/journals"
-            component={journals}
-            exact
-          />
-          <PrivateRoute
-            name="AddJournal"
-            path="/addJournal"
-            component={AddJournal}
-            exact
-          />
-          <PrivateRoute
-            name="UpdateJournal"
-            path="/updateJournal/:id"
-            component={UpdateJournal}
-            exact
-          />
-          <PrivateRoute
-            name="GratefulThings"
-            path="/gratefulThings"
-            component={GratefulThings}
-            exact
-          />
-          <PrivateRoute
-            name="AddGratefulThing"
-            path="/addGratefulThing"
-            component={AddGratefulThing}
-            exact
-          />
-          <PrivateRoute
-            name="GratefulThing"
-            path="/gratefulThing/:id"
-            component={GratefulThing}
-            exact
-          />
-          <PrivateRoute name="Tasks" path="/tasks" component={Tasks} exact />
-          <PrivateRoute name="Tasks" path="/tasks/:id" component={Task} exact />
-          <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />
-          <PrivateRoute name="Player" path="/player" component={Player} exact />
-          <PrivateRoute
-            name="Exercises"
-            path="/exercises"
-            component={Exercises}
-            exact
-          />
-        </IonRouterOutlet>
+        <IonApp>
+          <IonSplitPane contentId="main">
+            <Menu />
+            <IonPage id="main">
+              <Switch>
+                <Route path="/" exact component={Landing} />
+                <Route path="/register" exact component={Registration} />
+                <Route path="/emailSignUp" exact component={EmailSignUp} />
+                <Route path="/login" exact component={Login} />
+                <Route path="/EmailLogin" exact component={EmailLogin} />
+                <PrivateRoute
+                  style={{ background: '#F5F5FA' }}
+                  name="dashboard"
+                  path="/dashboard"
+                  component={Dashboard}
+                  exact
+                />
+                <PrivateRoute
+                  name="Hospitals"
+                  path="/hospitals"
+                  component={Hospitals}
+                  exact
+                />
+                <PrivateRoute
+                  name="Journals"
+                  path="/journals"
+                  component={journals}
+                  exact
+                />
+                <PrivateRoute
+                  name="AddJournal"
+                  path="/addJournal"
+                  component={AddJournal}
+                  exact
+                />
+                <PrivateRoute
+                  name="UpdateJournal"
+                  path="/updateJournal/:id"
+                  component={UpdateJournal}
+                  exact
+                />
+                <PrivateRoute
+                  name="GratefulThings"
+                  path="/gratefulThings"
+                  component={GratefulThings}
+                  exact
+                />
+                <PrivateRoute
+                  name="AddGratefulThing"
+                  path="/addGratefulThing"
+                  component={AddGratefulThing}
+                  exact
+                />
+                <PrivateRoute
+                  name="GratefulThing"
+                  path="/gratefulThing/:id"
+                  component={GratefulThing}
+                  exact
+                />
+                <PrivateRoute
+                  name="Tasks"
+                  path="/tasks"
+                  component={Tasks}
+                  exact
+                />
+                <PrivateRoute
+                  name="Tasks"
+                  path="/tasks/:id"
+                  component={Task}
+                  exact
+                />
+                <PrivateRoute name="FAQ" path="/FAQ" component={FAQ} exact />
+                <PrivateRoute
+                  name="Player"
+                  path="/player"
+                  component={Player}
+                  exact
+                />
+                <PrivateRoute
+                  name="Exercises"
+                  path="/exercises"
+                  component={Exercises}
+                  exact
+                />
+              </Switch>
+            </IonPage>
+          </IonSplitPane>
+        </IonApp>
       </IonReactRouter>
-    </IonApp>
+    </Provider>
   )
 }
 

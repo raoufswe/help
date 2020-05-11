@@ -8,29 +8,32 @@ import Mad from 'assets/mad.icon.jsx'
 import useUpdateFeeling from './hooks/useUpdateFeeling'
 
 const Styled = styled.div`
-  background: white;
-  padding: 15px 51px 0 20px;
-  /* border-bottom: 1px solid #edecec; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fff;
+  padding: 1.3rem;
 
   span {
     display: block;
     font-weight: normal;
-    font-size: 18px;
+    font-size: large;
     color: #000000;
-    padding-bottom: 10px;
+    padding-bottom: 0.8rem;
   }
 
   button {
-    padding: 8px;
+    padding: 0.5rem;
   }
+
   .feelings-icons {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    padding: 10px 0;
+    width: 100%;
     svg {
-      height: 30px;
-      width: 30px;
+      height: 2rem;
+      width: 2rem;
     }
   }
 `

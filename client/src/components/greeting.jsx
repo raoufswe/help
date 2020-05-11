@@ -6,11 +6,11 @@ const Styled = styled.div`
   span {
     display: block;
     font-weight: 600;
-    font-size: ${maxmin(36, 30)};
+    font-size: x-large;
     color: #000000;
-    padding-bottom: 10px;
+    padding-bottom: 0.8rem;
     letter-spacing: 0.2px;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 `
 export default function Greeting({ name = 'Awesome soul' }) {

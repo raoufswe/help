@@ -13,6 +13,8 @@ import useCompletedTasks from './hooks/useCompletedTasks'
 import NoData from './noData'
 import Loader from 'assets/loader.jsx'
 import ErrorUI from 'components/errorUI.jsx'
+import { IonContent } from '@ionic/react'
+import HeaderMenu from 'components/menu/headerMenu'
 
 const Tasks = () => {
   const location = useLocation()
@@ -22,46 +24,51 @@ const Tasks = () => {
   const { completedTasksStatus, completedTasks } = useCompletedTasks()
 
   return (
-    <StyledTasks>
-      <div className="page-title">Let’s get some things done today.</div>
-      {inCompletedTasksStatus && completedTasksStatus === 'loading' ? (
-        <Loader />
-      ) : inCompletedTasksStatus && completedTasksStatus === 'error' ? (
-        <ErrorUI />
-      ) : inCompletedTasks?.data?.length || completedTasks?.data?.length ? (
-        <div style={{ overflow: 'scroll', maxHeight: 500 }}>
-          <InCompleteTasks data={inCompletedTasks?.data} />
-          <CompletedTasks data={completedTasks?.data} />
-        </div>
-      ) : (
-        <NoData />
-      )}
+    <>
+      <HeaderMenu />
+      <IonContent>
+        <StyledTasks>
+          <div className="page-title">Let’s get some things done today.</div>
+          {inCompletedTasksStatus && completedTasksStatus === 'loading' ? (
+            <Loader />
+          ) : inCompletedTasksStatus && completedTasksStatus === 'error' ? (
+            <ErrorUI />
+          ) : inCompletedTasks?.data?.length || completedTasks?.data?.length ? (
+            <div style={{ overflow: 'scroll', maxHeight: 500 }}>
+              <InCompleteTasks data={inCompletedTasks?.data} />
+              <CompletedTasks data={completedTasks?.data} />
+            </div>
+          ) : (
+            <NoData />
+          )}
 
-      <AddTaskModal
-        show={showAddTaskModal}
-        onHide={() => {
-          setGlobalContext({
-            task: {}
-          })
-          Cookies.remove(`selectedDay-${location.pathname}`)
-          setShowAddTaskModal(false)
-        }}
-      />
+          <AddTaskModal
+            show={showAddTaskModal}
+            onHide={() => {
+              setGlobalContext({
+                task: {}
+              })
+              Cookies.remove(`selectedDay-${location.pathname}`)
+              setShowAddTaskModal(false)
+            }}
+          />
 
-      {!showAddTaskModal && (
-        <div className="footer">
-          <button
-            className="plus-button-wrapper"
-            onClick={() => setShowAddTaskModal(true)}
-          >
-            <AddIcon />
-          </button>
-          <button>
-            <MoreIcon />
-          </button>
-        </div>
-      )}
-    </StyledTasks>
+          {!showAddTaskModal && (
+            <div className="footer">
+              <button
+                className="plus-button-wrapper"
+                onClick={() => setShowAddTaskModal(true)}
+              >
+                <AddIcon />
+              </button>
+              <button>
+                <MoreIcon />
+              </button>
+            </div>
+          )}
+        </StyledTasks>
+      </IonContent>
+    </>
   )
 }
 

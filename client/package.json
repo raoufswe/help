@@ -7,6 +7,7 @@
     "@capacitor/core": "1.5.1",
     "@capacitor/ios": "^1.5.1",
     "@codetrix-studio/capacitor-google-auth": "^2.1.1",
+    "@ionic/core": "^5.1.0",
     "@ionic/react": "^5.0.5",
     "@ionic/react-router": "^5.0.5",
     "@rdlabo/capacitor-facebook-login": "^2.0.2",

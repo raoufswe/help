@@ -5,14 +5,14 @@ export const StyledOverviewBars = styled.div`
 
   span {
     display: block;
-    font-size: 18px;
-    padding: 20px 50px 20px 20px;
+    font-size: large;
+    padding: 0 1.3rem 1.3rem 1.3rem;
     line-height: 1.1;
-    letter-spacing: 0.1px;
+    letter-spacing: 0.2px;
   }
 
   .recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
-    font-size: 20px;
+    font-size: large;
   }
   .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis {
     font-family: Fira Sans;
