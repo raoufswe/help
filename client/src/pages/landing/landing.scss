@@ -1,7 +1,4 @@
-import styled from 'styled-components'
-import maxmin from 'utils/maxmin.js'
-
-const StyledLanding = styled.div`
+.landing {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -14,19 +11,19 @@ const StyledLanding = styled.div`
     align-items: center;
     .landing-title {
       color: #000;
-      font-size: ${maxmin(64, 50)};
+      font-size: xx-large;
       margin: auto;
     }
     .landing-subtitle {
       font-weight: 500;
-      font-size: ${maxmin(24, 21)};
+      font-size: large;
       color: #b5b5b5;
-      padding-top: 30px;
+      padding-top: 2rem;
     }
   }
 
   .landing-illustrations {
-    max-width: 450px;
+    max-width: 29rem;
     margin: 0 auto;
   }
 
@@ -36,9 +33,9 @@ const StyledLanding = styled.div`
     align-items: center;
     button {
       width: 90%;
-      margin: 10px 0;
+      margin: 1rem 0;
       text-transform: uppercase;
-      font-size: ${maxmin(24, 16)};
+      font-size: large;
     }
 
     .sign-in {
@@ -47,5 +44,4 @@ const StyledLanding = styled.div`
       letter-spacing: 1px;
     }
   }
-`
-export default StyledLanding
+}

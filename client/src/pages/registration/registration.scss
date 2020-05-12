@@ -1,16 +1,14 @@
-import styled from 'styled-components'
-
-const StyledLogin = styled.div`
+.registration {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 1.25rem;
   height: 100%;
 
   .ion-activatable {
     color: black;
   }
 
-  .login {
+  .create-account {
     margin-top: auto;
     font-size: x-large;
     font-weight: 700;
@@ -18,18 +16,16 @@ const StyledLogin = styled.div`
     letter-spacing: 0.2px;
     margin-bottom: 1.3rem;
 
-    .colored-title {
+    div:first-of-type {
       color: rgb(33, 150, 243);
     }
   }
 
-  .no-account {
+  .already-have-account {
     font-family: Fira Sans;
     font-size: 15px;
     font-weight: 500;
     margin-bottom: 1.3rem;
     color: rgb(33, 150, 243);
   }
-`
-
-export default StyledLogin
+}

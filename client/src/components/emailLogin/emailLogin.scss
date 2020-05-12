@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-const Styled = styled.div`
+.email-login {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -10,6 +8,7 @@ const Styled = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+
     svg {
       width: 1.3rem;
       height: 1.3rem;
@@ -21,11 +20,12 @@ const Styled = styled.div`
       margin-left: 1rem;
     }
   }
+
   main {
     display: flex;
     flex-direction: column;
     input,
-    .sign-up {
+    .login {
       margin: 0.5rem 0;
       width: 100%;
       border-radius: 0.5rem;
@@ -34,7 +34,7 @@ const Styled = styled.div`
       font-size: 0.9rem;
     }
 
-    .sign-up {
+    .login {
       background: rgb(33, 150, 243);
       color: #fff;
       border: none;
@@ -57,6 +57,4 @@ const Styled = styled.div`
       }
     }
   }
-`
-
-export default Styled
+}

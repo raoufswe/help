@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import useGoogleAuth from './useGoogleAuth'
-import Button from 'components/button.jsx'
+import Button from 'components/button'
 import { IonToast } from '@ionic/react'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
@@ -31,7 +31,6 @@ export default function GoogleAuth({ text }) {
   return (
     <>
       <Button text={text} onClick={googleAuth} Icon={GoogleIcon} />
-
       {status === 'loading' ? <Loader /> : null}
       <IonToast
         color="danger"

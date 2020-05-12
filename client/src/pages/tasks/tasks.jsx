@@ -29,7 +29,7 @@ const Tasks = () => {
     <>
       <HeaderMenu />
       <IonContent fullscreen={true}>
-        <div className="task-page-title" slot="fixed">
+        <div className="tasks-page-title" slot="fixed">
           Let’s get some things done today.
         </div>
         {inCompletedTasksStatus && completedTasksStatus === 'loading' ? (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { IonToast } from '@ionic/react'
-import Styled from './emailSignUp.styles'
+import './emailSignUp.scss'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
 import Back from 'components/back.jsx'
@@ -8,7 +8,7 @@ import ClosedEyeIcon from 'assets/closedEye.icon.jsx'
 import OpenEyeIcon from 'assets/openEye.icon.jsx'
 import useEmailSignUp from './useEmailSignUp'
 import Loader from 'assets/loader.jsx'
-import { IonPage, IonContent } from '@ionic/react'
+import { IonContent } from '@ionic/react'
 
 export default function EmailSignUp() {
   const history = useHistory()
@@ -70,58 +70,56 @@ export default function EmailSignUp() {
   }
 
   return (
-    <IonPage>
-      <IonContent scrollY={false}>
-        <Styled>
-          <div className="header">
-            <Back />
-            <span>Account Details</span>
+    <IonContent scrollY={false}>
+      <div className="sign-up-email">
+        <div className="header">
+          <Back />
+          <span>Account Details</span>
+        </div>
+
+        <main>
+          <input
+            type="text"
+            onChange={onChange}
+            name="name"
+            placeholder="Name"
+          />
+          <input
+            type="text"
+            onChange={onChange}
+            name="email"
+            placeholder="Email"
+          />
+          <div className="password">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              onChange={onChange}
+              name="password"
+              placeholder="Password"
+            />
+            <button
+              className="show-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <OpenEyeIcon /> : <ClosedEyeIcon />}
+            </button>
           </div>
 
-          <main>
-            <input
-              type="text"
-              onChange={onChange}
-              name="name"
-              placeholder="Name"
-            />
-            <input
-              type="text"
-              onChange={onChange}
-              name="email"
-              placeholder="Email"
-            />
-            <div className="password">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                onChange={onChange}
-                name="password"
-                placeholder="Password"
-              />
-              <button
-                className="show-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <OpenEyeIcon /> : <ClosedEyeIcon />}
-              </button>
-            </div>
+          <button className="sign-up" onClick={onEmailSignUp}>
+            Sign up
+          </button>
+        </main>
 
-            <button className="sign-up" onClick={onEmailSignUp}>
-              Sign up
-            </button>
-          </main>
+        {status === 'loading' ? <Loader /> : null}
 
-          {status === 'loading' ? <Loader /> : null}
-
-          <IonToast
-            color="danger"
-            isOpen={error.showErrorToast}
-            onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
-            message={error.message}
-            duration={2000}
-          />
-        </Styled>
-      </IonContent>
-    </IonPage>
+        <IonToast
+          color="danger"
+          isOpen={error.showErrorToast}
+          onDidDismiss={() => setError(() => ({ showErrorToast: false }))}
+          message={error.message}
+          duration={2000}
+        />
+      </div>
+    </IonContent>
   )
 }

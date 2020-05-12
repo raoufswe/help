@@ -21,13 +21,7 @@ import Task from 'pages/tasks/task'
 import Player from 'pages/player'
 import Exercises from 'pages/exercises'
 import { IonReactRouter } from '@ionic/react-router'
-import {
-  IonRouterOutlet,
-  IonApp,
-  IonButtons,
-  IonPage,
-  IonSplitPane
-} from '@ionic/react'
+import { IonApp, IonButtons, IonPage, IonSplitPane } from '@ionic/react'
 import Menu from 'components/menu'
 
 const App = () => {
