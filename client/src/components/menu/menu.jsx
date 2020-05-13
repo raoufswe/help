@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import BurgerIcon from 'assets/burger.icon.jsx'
 import CrossIcon from 'assets/cross.icon.jsx'
-import { useHistory, withRouter } from 'react-router-dom'
+import { useHistory, withRouter, useLocation } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import JournalIcon from 'assets/journals.icon.jsx'
 import DashboardIcon from 'assets/dashboard.icon.jsx'
@@ -23,6 +23,9 @@ import {
 } from '@ionic/react'
 import './menu.css'
 import { verifyToken } from 'utils/verifyToken.js'
+import MaleAvatar from './maleAvatar.icon.jsx'
+import Header from './header'
+import { getUserDetails } from 'utils/verifyToken.js'
 
 const routes = [
   { title: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
@@ -36,6 +39,8 @@ const routes = [
 
 function Menu() {
   let history = useHistory()
+  let location = useLocation()
+  const { name } = getUserDetails()
 
   const onLogout = async () => {
     Cookies.remove('token')
@@ -44,23 +49,38 @@ function Menu() {
 
   return (
     <IonMenu side="start" contentId="main" id="menu" disabled={!verifyToken()}>
-      <IonContent forceOverscroll={false}>
-        <div className="nav-items">
-          {routes.map(({ path, title, icon }) => (
-            <IonMenuToggle key={title} auto-hide="false">
-              <IonRouterLink routerLink={path} routerDirection="forward">
-                {icon}
-                <IonLabel>{title}</IonLabel>
-              </IonRouterLink>
-            </IonMenuToggle>
-          ))}
-          <div className="logout" onClick={onLogout}>
-            <IonMenuToggle key="logout" auto-hide="false">
-              <LogoutIcon />
-              Logout
-            </IonMenuToggle>
+      <IonContent forceOverscroll={false} scrollY={false}>
+        <div className="menu-header"></div>
+        <main className="menu-wrapper">
+          <div className="user-details">
+            <MaleAvatar className="avatar" />
+            <span className="menu-user-name">{name}</span>
           </div>
-        </div>
+          <div className="nav-items">
+            {routes.map(({ path, title, icon }) => {
+              console.log(location.pathname === path)
+
+              return (
+                <IonMenuToggle key={title} auto-hide="false">
+                  <IonRouterLink
+                    routerLink={path}
+                    routerDirection="forward"
+                    className={location.pathname === path ? 'active-link' : ''}
+                  >
+                    {icon}
+                    <IonLabel>{title}</IonLabel>
+                  </IonRouterLink>
+                </IonMenuToggle>
+              )
+            })}
+            <div className="logout" onClick={onLogout}>
+              <IonMenuToggle key="logout" auto-hide="false">
+                <LogoutIcon className="logout-icon" />
+                Logout
+              </IonMenuToggle>
+            </div>
+          </div>
+        </main>
       </IonContent>
     </IonMenu>
   )
