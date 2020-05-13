@@ -1,6 +1,6 @@
 import React from 'react'
 import Cookies from 'js-cookie'
-import { StyledGratefulThings } from './grateful.styles'
+import './grateful.scss'
 import Add from 'components/add.jsx'
 import useGratefulThings from './hooks/useGratefulThings'
 import ErrorUI from 'components/errorUI.jsx'
@@ -17,34 +17,34 @@ export default function GratefulThings({ history }) {
     <>
       <HeaderMenu />
       <IonContent>
-        <StyledGratefulThings>
-          <h3 className="page-title">Things I am grateful for.</h3>
+        <div className="grateful-things">
+          <h3 className="grateful-things-page-title">
+            Things I am grateful for.
+          </h3>
           {status === 'loading' ? (
             <Loader />
           ) : status === 'error' ? (
             <ErrorUI />
           ) : data?.length ? (
-            <IonContent>
-              <IonGrid>
+            <IonGrid>
+              {data?.map(({ content, _id }, key) => (
                 <IonRow>
-                  {data?.map(({ content, _id }, key) => (
-                    <IonCol className="gratefulThing" key={key}>
-                      <div className="title">{content}</div>
-                      <button
-                        onClick={() => history.push(`/gratefulThing/${_id}`)}
-                      >
-                        <PencilIcon className="pencilIcon" />
-                      </button>
-                    </IonCol>
-                  ))}
+                  <IonCol className="grateful-thing-item" key={key}>
+                    <div className="grateful-thing-title">{content}</div>
+                    <button
+                      onClick={() => history.push(`/gratefulThing/${_id}`)}
+                    >
+                      <PencilIcon className="pencil-icon" />
+                    </button>
+                  </IonCol>
                 </IonRow>
-              </IonGrid>
-            </IonContent>
+              ))}
+            </IonGrid>
           ) : (
             <NoData />
           )}
           <Add onClick={() => history.push('/addGratefulThing')} />
-        </StyledGratefulThings>
+        </div>
       </IonContent>
     </>
   )
