@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 export default function useEmailSignUp() {
   const handleEmailSignUp = async ({ userDetails }) => {
-    const { name, email, password } = userDetails
+    const { name, email, password, gender } = userDetails
 
     const requestOptions = {
       method: 'POST',
@@ -11,7 +11,8 @@ export default function useEmailSignUp() {
       body: JSON.stringify({
         name,
         email,
-        password
+        password,
+        gender
       })
     }
     const response = await fetch(

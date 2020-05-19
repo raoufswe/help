@@ -9,11 +9,14 @@ import OpenEyeIcon from 'assets/openEye.icon.jsx'
 import useEmailSignUp from './useEmailSignUp'
 import Loader from 'assets/loader.jsx'
 import { IonContent } from '@ionic/react'
+import MaleIcon from 'assets/male.icon.jsx'
+import FemaleIcon from 'assets/female.icon.jsx'
 
 export default function EmailSignUp() {
   const history = useHistory()
   const [emailSignUp, { status, data }] = useEmailSignUp()
   const [showPassword, setShowPassword] = useState(false)
+  const [activeGender, setActiveGender] = useState(null)
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -59,13 +62,18 @@ export default function EmailSignUp() {
         showErrorToast: true,
         message: 'Please fill up all fields'
       })
+    } else if (!activeGender) {
+      setError({
+        showErrorToast: true,
+        message: 'Please select your gender'
+      })
     } else if (!validEmail) {
       setError({
         showErrorToast: true,
         message: 'Please enter a valid email address'
       })
     } else {
-      emailSignUp(state)
+      emailSignUp({ ...state, gender: activeGender })
     }
   }
 
@@ -103,6 +111,21 @@ export default function EmailSignUp() {
             >
               {showPassword ? <OpenEyeIcon /> : <ClosedEyeIcon />}
             </button>
+          </div>
+
+          <div className="gender">
+            <div>
+              <MaleIcon
+                active={activeGender === 'male'}
+                onClick={() => setActiveGender('male')}
+              />
+            </div>
+            <div>
+              <FemaleIcon
+                active={activeGender === 'male'}
+                onClick={() => setActiveGender('male')}
+              />
+            </div>
           </div>
 
           <button className="sign-up" onClick={onEmailSignUp}>

@@ -23,9 +23,10 @@ import {
 } from '@ionic/react'
 import './menu.css'
 import { verifyToken } from 'utils/verifyToken.js'
-import MaleAvatar from './maleAvatar.icon.jsx'
 import Header from './header'
 import { getUserDetails } from 'utils/verifyToken.js'
+import MaleIcon from 'assets/male.icon.jsx'
+import FemaleIcon from 'assets/female.icon.jsx'
 
 const routes = [
   { title: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
@@ -40,7 +41,7 @@ const routes = [
 function Menu() {
   let history = useHistory()
   let location = useLocation()
-  const { name } = getUserDetails()
+  const { name, gender } = getUserDetails()
 
   const onLogout = async () => {
     Cookies.remove('token')
@@ -53,13 +54,17 @@ function Menu() {
         <div className="menu-header"></div>
         <main className="menu-wrapper">
           <div className="user-details">
-            <MaleAvatar className="avatar" />
+            <span className="avatar">
+              {gender === 'male' ? (
+                <MaleIcon active background="white" />
+              ) : gender === 'female' ? (
+                <FemaleIcon active background="white" />
+              ) : null}
+            </span>
             <span className="menu-user-name">{name}</span>
           </div>
           <div className="nav-items">
             {routes.map(({ path, title, icon }) => {
-              console.log(location.pathname === path)
-
               return (
                 <IonMenuToggle key={title} auto-hide="false">
                   <IonRouterLink

@@ -6,6 +6,8 @@ import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
 import GoogleIcon from 'assets/google.icon.jsx'
 import Loader from 'assets/loader.jsx'
+import '@codetrix-studio/capacitor-google-auth'
+import { Plugins } from '@capacitor/core'
 
 export default function GoogleAuth({ text }) {
   const history = useHistory()
@@ -13,8 +15,19 @@ export default function GoogleAuth({ text }) {
     showErrorToast: false,
     message: []
   })
-
   const [googleAuth, { status, token }] = useGoogleAuth()
+
+  const GoogleSignIn = async () => {
+    const result = await Plugins.GoogleAuth.signIn()
+    if (result?.authentication.idToken) {
+      googleAuth(result)
+    } else {
+      setError({
+        showErrorToast: true,
+        message: 'Something went wrong. Please try again'
+      })
+    }
+  }
 
   useEffect(() => {
     if (status === 'success') {
@@ -30,7 +43,7 @@ export default function GoogleAuth({ text }) {
 
   return (
     <>
-      <Button text={text} onClick={googleAuth} Icon={GoogleIcon} />
+      <Button text={text} onClick={GoogleSignIn} Icon={GoogleIcon} />
       {status === 'loading' ? <Loader /> : null}
       <IonToast
         color="danger"

@@ -17,9 +17,10 @@ export const verifyToken = () => {
 
 export const getUserDetails = () => {
   const decoded = jwt.decode(Cookies.get('token'))
-  const { name, id } = decoded
+  const { name, id, gender } = decoded ?? {}
   return {
     name,
-    id
+    id,
+    gender
   }
 }

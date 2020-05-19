@@ -1,12 +1,11 @@
 import { useMutation, queryCache } from 'react-query'
-import '@codetrix-studio/capacitor-google-auth'
-import { Plugins } from '@capacitor/core'
 
 export default function useGoogleAuth() {
   const handleGoogleAuth = async ({ result }) => {
     console.log(result)
     const requestOptions = {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         googleId: result.id,
         name: result.name,
@@ -22,14 +21,11 @@ export default function useGoogleAuth() {
 
   const [mutate, { status, data }] = useMutation(handleGoogleAuth)
 
-  const googleAuth = async () => {
-    const result = await Plugins.GoogleAuth.signIn()
-    if (result) {
-      try {
-        await mutate({ result })
-      } catch (error) {
-        console.log(error)
-      }
+  const googleAuth = async result => {
+    try {
+      await mutate({ result })
+    } catch (error) {
+      console.log(error)
     }
   }
 

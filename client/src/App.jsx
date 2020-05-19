@@ -23,13 +23,14 @@ import Exercises from 'pages/exercises'
 import { IonReactRouter } from '@ionic/react-router'
 import { IonApp, IonButtons, IonPage, IonSplitPane } from '@ionic/react'
 import Menu from 'components/menu'
+import { verifyToken } from 'utils/verifyToken.js'
 
 const App = () => {
   return (
     <Provider>
       <IonReactRouter>
         <IonApp>
-          <IonSplitPane contentId="main">
+          <IonSplitPane contentId="main" disabled={verifyToken()}>
             <Menu />
             <IonPage id="main">
               <Switch>

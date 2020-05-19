@@ -8,7 +8,8 @@ export default function useFacebookAuth() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         facebookId: userData.id,
-        name: userData.name
+        name: userData.name,
+        gender: userData.gender
       })
     }
     const data = await fetch(

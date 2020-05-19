@@ -18,13 +18,13 @@ export default function FacebookAuth({ text }) {
   const [facebookAuth, { status, data }] = useFacebookAuth()
 
   const FacebookSignIn = async () => {
-    const FACEBOOK_PERMISSIONS = ['public_profile', 'email']
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email', 'user_gender']
     const result = await Plugins.FacebookLogin.login({
       permissions: FACEBOOK_PERMISSIONS
     })
     if (result?.accessToken) {
       const fetchUserData = await fetch(
-        `https://graph.facebook.com/me?fields=id,name&access_token=${result.accessToken.token}`
+        `https://graph.facebook.com/me?fields=id,name,gender&access_token=${result.accessToken.token}`
       )
       const userData = await fetchUserData.json()
       if (userData?.id) {

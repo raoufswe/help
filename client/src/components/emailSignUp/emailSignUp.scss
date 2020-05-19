@@ -55,5 +55,15 @@
       }
     }
   }
-}
 
+  .gender {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    svg {
+      width: 5rem;
+      height: 5rem;
+      fill: grey;
+    }
+  }
+}
