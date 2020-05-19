@@ -10,6 +10,7 @@ const schema = new Schema(
     name: String,
     googleId: String,
     facebookId: String,
+    gender: String,
   },
   {timestamps: true},
 )

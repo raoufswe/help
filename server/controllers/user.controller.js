@@ -7,6 +7,7 @@ exports.register_user = function (req, res) {
     email: req.body.email,
     password: req.body.password,
     name: req.body.name,
+    gender: req.body.gender,
   }
   User.create(user)
     .then((User) => {
@@ -16,6 +17,7 @@ exports.register_user = function (req, res) {
           {
             id: User._id,
             name: User.name,
+            gender: User.gender,
           },
           req.app.get('secretKey'),
           {expiresIn: '24h'},
@@ -35,7 +37,7 @@ exports.google_user = function (req, res) {
         success: true,
         token: jwt.sign(
           {
-            id: currentUser.googleId,
+            id: currentUser._id,
             name: currentUser.name,
           },
           req.app.get('secretKey'),
@@ -79,6 +81,7 @@ exports.facebook_user = (req, res) => {
             {
               id: user._id,
               name: user.name,
+              gender: user.gender,
             },
             req.app.get('secretKey'),
             {expiresIn: '24h'},
@@ -89,6 +92,7 @@ exports.facebook_user = (req, res) => {
         new User({
           facebookId: req.body.facebookId,
           name: req.body.name,
+          gender: req.body.gender,
         })
           .save()
           .then((newUser) => {
@@ -98,6 +102,7 @@ exports.facebook_user = (req, res) => {
                 {
                   id: newUser._id,
                   name: newUser.name,
+                  gender: newUser.gender,
                 },
                 req.app.get('secretKey'),
                 {expiresIn: '24h'},
@@ -129,6 +134,7 @@ exports.auth_user = function (req, res, next) {
                 {
                   id: userInfo._id,
                   name: userInfo.name,
+                  gender: userInfo.gender,
                 },
                 req.app.get('secretKey'),
                 {expiresIn: '24h'},
