@@ -5,7 +5,6 @@ import axios from 'axios'
 
 const getFeelings = async () => {
   const { id } = getUserDetails()
-  const currentWeek = new Date().toLocaleDateString().replace(/\//g, '-')
   const requestOptions = {
     method: 'GET',
     headers: {
@@ -15,7 +14,7 @@ const getFeelings = async () => {
   }
 
   const { data } = await axios.get(
-    `https://help-mv.herokuapp.com/feeling/${id}/${currentWeek}`,
+    `https://help-mv.herokuapp.com/feeling/${id}`,
     requestOptions
   )
   return data

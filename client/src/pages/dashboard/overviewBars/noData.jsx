@@ -1,5 +1,26 @@
 import React from 'react'
-import './overviewBars.scss'
+import styled from 'styled-components'
+
+const Styled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  svg {
+    height: 200px;
+    width: 65%;
+  }
+  .message {
+    font-size: 18px;
+    text-align: center;
+
+    div:last-of-type {
+      color: #838486;
+      margin-top: 10px;
+    }
+  }
+`
 
 function NoDataSvg(props) {
   return (
@@ -374,12 +395,12 @@ function NoDataSvg(props) {
 
 export default function NoData() {
   return (
-    <div className="overview-bars-no-data">
+    <Styled>
       <NoDataSvg />
       <div className="message">
         <div>A fresh start</div>
         <div>Add your feelings to get some insights</div>
       </div>
-    </div>
+    </Styled>
   )
 }

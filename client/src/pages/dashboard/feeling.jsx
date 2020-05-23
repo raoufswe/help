@@ -14,19 +14,19 @@ export default function Feeling({ onChange }) {
     <div className="feeling">
       <span>How are you feeling today?</span>
       <div className="feelings-icons">
-        <button onClick={() => updateFeeling({ emoji: '😬', weight: 100 })}>
+        <button onClick={() => updateFeeling('superHappy')}>
           <SuperHappyIcon />
         </button>
-        <button onClick={() => updateFeeling({ emoji: '🙂', weight: 75 })}>
+        <button onClick={() => updateFeeling('happy')}>
           <Happy />
         </button>
-        <button onClick={() => updateFeeling({ emoji: '😐', weight: 50 })}>
+        <button onClick={() => updateFeeling('confused')}>
           <Confused />
         </button>
-        <button onClick={() => updateFeeling({ emoji: '😢', weight: 25 })}>
+        <button onClick={() => updateFeeling('unhappy')}>
           <Unhappy />
         </button>
-        <button onClick={() => updateFeeling({ emoji: '😠', weight: 0 })}>
+        <button onClick={() => updateFeeling('mad')}>
           <Mad />
         </button>
       </div>

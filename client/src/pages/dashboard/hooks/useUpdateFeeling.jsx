@@ -15,7 +15,7 @@ export default function useUpdateFeeling() {
         authorization: `Bearer ${Cookies.get('token')}`
       },
       body: JSON.stringify({
-        [currentDay]: feeling
+        feeling
       })
     }
     const data = await fetch(
