@@ -1,40 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const FeelingSchema = new Schema({
-  week: {
-    type: String,
-    default: new Date().toLocaleDateString().replace(/\//g, '-'),
+const FeelingSchema = new Schema(
+  {
+    feeling: String,
+    userID: {type: String, required: true},
   },
-  Sat: {
-    weight: Number,
-    emoji: String,
-  },
-  Sun: {
-    weight: Number,
-    emoji: String,
-  },
-  Mon: {
-    weight: Number,
-    emoji: String,
-  },
-  Tue: {
-    weight: Number,
-    emoji: String,
-  },
-  Wed: {
-    weight: Number,
-    emoji: String,
-  },
-  Thu: {
-    weight: Number,
-    emoji: String,
-  },
-  Fri: {
-    weight: Number,
-    emoji: String,
-  },
-  userID: {type: String},
-})
+  {timestamps: true},
+)
 
 module.exports = mongoose.model('Feeling', FeelingSchema)

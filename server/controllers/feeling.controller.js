@@ -1,8 +1,9 @@
 const Feeling = require('../schemas/feeling')
+const moment = require('moment')
 
 exports.get_feeling = (req, res) => {
   Feeling.findOne({
-    week: new Date().toLocaleDateString().replace(/\//g, '-'),
+    id: req.params.id,
     userID: req.params.userID,
   })
     .then((doc) => {
@@ -26,11 +27,13 @@ exports.get_feeling = (req, res) => {
 
 exports.update_feeling = (req, res) => {
   const options = {upsert: true, new: true, setDefaultsOnInsert: true}
+  const start = moment().startOf('day')
+  const end = moment().endOf('day')
 
   Feeling.findOneAndUpdate(
     {
-      week: new Date().toLocaleDateString().replace(/\//g, '-'),
       userID: req.params.userID,
+      createdAt: {$gte: start, $lt: end},
     },
     {$set: req.body},
     options,
@@ -54,7 +57,7 @@ exports.update_feeling = (req, res) => {
 }
 
 exports.delete_feeling = (req, res) => {
-  Feeling.findOneAndRemove({week: req.params.week, userID: req.params.userID})
+  Feeling.findOneAndRemove({id: req.params.id, userID: req.params.userID})
     .then((docs) => {
       if (docs) {
         res.send({success: 'success', data: [docs], errors: []})
@@ -75,6 +78,8 @@ exports.delete_feeling = (req, res) => {
 
 exports.get_feelings = (req, res) => {
   Feeling.find({userID: req.params.userID})
+    .sort({_id: -1})
+    .limit(7)
     .then((data) => {
       res.send({success: 'success', data: data, errors: []})
       console.log(data)
