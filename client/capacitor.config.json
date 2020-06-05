@@ -12,9 +12,5 @@
       ],
       "serverClientId": "890430186033-4vhvpqbsumujm39dq5js9ihsm32rc22l.apps.googleusercontent.com"
     }
-  },
-  "server": {
-    "url": "http://192.168.1.10:8100",
-    "cleartext": true
   }
 }
