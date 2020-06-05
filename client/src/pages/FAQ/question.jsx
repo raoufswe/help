@@ -10,12 +10,10 @@ export default function Question({
   onClick
 }) {
   return (
-    <div className="question">
-      <button onClick={() => onClick(id)}>
-        <span className="question-title">{title}</span>
-        <span className="question-subtitle">{subtitle}</span>
-        <p className={isOpen ? 'question-content' : ''}>{content}</p>
-      </button>
+    <div className="question" onClick={() => onClick(id)}>
+      <span className="question-title">{title}</span>
+      <span className="question-subtitle">{subtitle}</span>
+      <p className={isOpen ? 'question-content' : ''}>{content}</p>
     </div>
   )
 }

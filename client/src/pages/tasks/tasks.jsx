@@ -14,8 +14,15 @@ import useSaveTask from './hooks/useSaveTask'
 import NoData from './noData'
 import Loader from 'assets/loader.jsx'
 import ErrorUI from 'components/errorUI.jsx'
-import { IonContent, IonFooter, IonToolbar } from '@ionic/react'
+import {
+  IonContent,
+  IonFooter,
+  IonToolbar,
+  IonRefresher,
+  IonRefresherContent
+} from '@ionic/react'
 import HeaderMenu from 'components/menu/headerMenu'
+import { queryCache } from 'react-query'
 
 const Tasks = () => {
   const location = useLocation()
@@ -25,10 +32,20 @@ const Tasks = () => {
   const { completedTasksStatus, completedTasks } = useCompletedTasks()
   const [saveTask, { savingStatus }] = useSaveTask()
 
+  const doRefresh = event => {
+    queryCache.refetchQueries('tasks')
+    setTimeout(() => {
+      event.detail.complete()
+    }, 500)
+  }
+
   return (
     <>
       <HeaderMenu />
       <IonContent fullscreen={true}>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <div className="tasks-page-title" slot="fixed">
           Let’s get some things done today.
         </div>

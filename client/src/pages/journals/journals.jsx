@@ -15,8 +15,9 @@ import NoRecentData from './noRecentData'
 import NoData from './noData'
 import { getUserDetails } from 'utils/verifyToken.js'
 import AngleIcon from 'assets/angle.icon.jsx'
-import { IonContent } from '@ionic/react'
+import { IonContent, IonRefresher, IonRefresherContent } from '@ionic/react'
 import HeaderMenu from 'components/menu/headerMenu'
+import { queryCache } from 'react-query'
 
 const Journals = ({ history }) => {
   const { name } = getUserDetails()
@@ -29,10 +30,20 @@ const Journals = ({ history }) => {
     journal => getDate(journal?.createdAt) === getDate(selectedDate)
   )
 
+  const doRefresh = event => {
+    queryCache.refetchQueries('tasks')
+    setTimeout(() => {
+      event.detail.complete()
+    }, 500)
+  }
+
   return (
     <>
       <HeaderMenu />
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <StyledJournals showAll={showAll}>
           <div className="top-page">
             <span className="page-header">

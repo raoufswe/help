@@ -120,7 +120,7 @@ export const StyledJournal = styled.div`
 
 export const StyledJournalDetails = styled.div`
   height: 100vh;
-  padding: 50px 30px 30px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 

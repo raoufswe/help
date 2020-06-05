@@ -10,6 +10,7 @@ const FAQ = ({ history }) => {
   const onClick = id => {
     const isOpen = !!openQuestion[id]
     setOpenQuestion({
+      ...openQuestion,
       [id]: !isOpen
     })
   }

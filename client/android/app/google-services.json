@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "345778510255",
+    "firebase_url": "https://help-mv.firebaseio.com",
+    "project_id": "help-mv",
+    "storage_bucket": "help-mv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345778510255:android:9f5dcae8b1fceb242cf75a",
+        "android_client_info": {
+          "package_name": "help.mv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345778510255-65s2lqnsei7be2007b4g7uaj57uc3djc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuewTwNTZVSFhW-HPe5TI_LrRyH2bClI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345778510255-65s2lqnsei7be2007b4g7uaj57uc3djc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

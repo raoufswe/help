@@ -7,16 +7,35 @@ import ErrorUI from 'components/errorUI.jsx'
 import Loader from 'assets/loader.jsx'
 import NoData from './noData'
 import PencilIcon from 'assets/pencil.icon.jsx'
-import { IonContent, IonGrid, IonRow, IonCol } from '@ionic/react'
+import {
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonRefresher,
+  IonRefresherContent
+} from '@ionic/react'
 import HeaderMenu from 'components/menu/headerMenu'
+import { queryCache } from 'react-query'
 
 export default function GratefulThings({ history }) {
   const { status, data } = useGratefulThings()
+
+  const doRefresh = event => {
+    queryCache.refetchQueries('gratefulThings')
+    setTimeout(() => {
+      event.detail.complete()
+    }, 500)
+  }
 
   return (
     <>
       <HeaderMenu />
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
+
         <div className="grateful-things">
           <h3 className="grateful-things-page-title">
             Things I am grateful for.

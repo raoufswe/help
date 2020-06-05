@@ -15,6 +15,9 @@ export const GlobalStyle = createGlobalStyle`
   padding: 20px;
 }
 
+span:focus, span {
+  outline: none;
+}
 
 .modal-backdrop.reminder-backdrop.show {
   opacity: 0;

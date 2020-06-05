@@ -84,7 +84,10 @@ const Styled = styled.div`
 
   .task-input {
     display: block;
+    outline: none;
+    border: none;
   }
+
 `
 
 export default Styled

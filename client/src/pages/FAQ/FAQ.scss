@@ -11,6 +11,7 @@
   border-bottom: 1px solid #edecec;
   margin-bottom: 1rem;
   letter-spacing: 0.2px;
+  text-align: left;
 
   .question-title {
     display: block;
@@ -34,8 +35,5 @@
 
   p {
     display: none;
-  }
-  button {
-    text-align: left;
   }
 }
